@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .size-selection {
+            margin-bottom: 20px;
+        }
+        .size-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .grid {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .card {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .card:hover {
+            background-color: #e0e0e0;
+        }
+        .stats {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .custom-size {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .size-input {
+            width: 60px;
+            padding: 8px;
+            margin: 0 5px;
+            text-align: center;
+        }
+        #custom-size-btn {
+            padding: 8px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Matching Game</h1>
+    <div class="game-container">
+        <div class="size-selection">
+            <button class="size-btn" data-size="4">4x4</button>
+            <button class="size-btn" data-size="6">6x6</button>
+            <button class="size-btn" data-size="8">8x8</button>
+            
+            <div class="custom-size">
+                <input type="number" id="rows" min="2" max="10" placeholder="Rows" class="size-input">
+                <span>x</span>
+                <input type="number" id="cols" min="2" max="10" placeholder="Cols" class="size-input">
+                <button id="custom-size-btn">Start Custom</button>
+            </div>
+        </div>
+        <div id="grid" class="grid"></div>
+        <div class="stats">
+            <p>Attempts: <span id="attempts">0</span></p>
+            <p>Time: <span id="time">00:00</span></p>
+        </div>
+    </div>
+    <script src="dist/match_game.js"></script>
+</body>
+</html>
+

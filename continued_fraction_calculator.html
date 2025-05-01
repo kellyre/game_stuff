@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Continued Fraction Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin-top: 20px; }
+        table { border-collapse: collapse; margin-top: 10px; }
+        td, th { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #666;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Applications</a>
+    
+    <h1>Continued Fraction Calculator</h1>
+    
+    <form id="fractionForm">
+        <label for="inputNumber">Enter a decimal number:</label>
+        <input type="text" id="inputNumber" placeholder="e.g. 3.14159">
+        <button type="submit">Calculate</button>
+    </form>
+    
+    <div id="result" class="result"></div>
+    
+    <script src="dist/continued_fraction_calculator.js"></script>
+</body>
+</html>
