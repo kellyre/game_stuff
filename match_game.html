@@ -1,110 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .size-selection {
-            margin-bottom: 20px;
-        }
-        .size-btn {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .grid {
-            display: grid;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .card {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .card:hover {
-            background-color: #e0e0e0;
-        }
-        .stats {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .custom-size {
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .size-input {
-            width: 60px;
-            padding: 8px;
-            margin: 0 5px;
-            text-align: center;
-        }
-        #custom-size-btn {
-            padding: 8px 15px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: #666;
-        }
-        .back-link:hover { text-decoration: underline; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spanish Matching Game</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f7fb;
+    --panel: #ffffff;
+    --ink: #1b1b22;
+    --muted: #6b6b7b;
+    --line: #e3e3ec;
+    --es: #d94f2b;
+    --en: #2b6fd9;
+    --ok: #1f9d63;
+    --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f14; --panel: #191921; --ink: #f0f0f5; --muted: #9a9aab;
+      --line: #2c2c38; --es: #ff7d5c; --en: #6ea3ff; --ok: #3ad392;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1rem 4rem;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; }
+  a.back { color: var(--muted); text-decoration: none; font-size: .9rem; }
+  a.back:hover { text-decoration: underline; }
+  h1 { font-size: 1.9rem; letter-spacing: -.02em; margin: .75rem 0 .25rem; }
+  .sub { color: var(--muted); margin: 0 0 1.75rem; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: .9rem; padding: 1.25rem; box-shadow: var(--shadow);
+  }
+  fieldset { border: 0; margin: 0 0 1rem; padding: 0; }
+  legend { font-weight: 600; padding: 0; margin-bottom: .5rem; }
+  .opt { display: flex; gap: .6rem; align-items: flex-start; padding: .5rem 0; cursor: pointer; }
+  .opt input { margin-top: .35rem; }
+  .opt .hint { display: block; color: var(--muted); font-size: .875rem; }
+  textarea {
+    width: 100%; min-height: 9rem; margin-top: .75rem; padding: .75rem;
+    border: 1px solid var(--line); border-radius: .5rem;
+    background: var(--bg); color: var(--ink);
+    font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; resize: vertical;
+  }
+  button {
+    font: inherit; font-weight: 600; cursor: pointer;
+    border-radius: .55rem; padding: .6rem 1.15rem;
+    border: 1px solid transparent; background: var(--ink); color: var(--bg);
+  }
+  button:hover { opacity: .9; }
+  button.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .error { color: var(--es); font-size: .9rem; min-height: 1.2rem; margin-top: .6rem; }
+
+  .stats {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem;
+  }
+  .stat {
+    flex: 1 1 6rem; background: var(--panel); border: 1px solid var(--line);
+    border-radius: .6rem; padding: .55rem .75rem;
+  }
+  .stat b { display: block; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem;
+  }
+  .card {
+    position: relative; aspect-ratio: 1; padding: 0; border: 0; background: none;
+    perspective: 800px;
+  }
+  .face {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: .2rem;
+    align-items: center; justify-content: center;
+    border-radius: .7rem; border: 1px solid var(--line);
+    backface-visibility: hidden; transition: transform .35s ease;
+    padding: .3rem; text-align: center; overflow: hidden;
+  }
+  .back {
+    background: var(--panel); box-shadow: var(--shadow);
+    background-image: radial-gradient(circle at 50% 50%, var(--line) 1.5px, transparent 1.6px);
+    background-size: 12px 12px;
+  }
+  .front { background: var(--panel); transform: rotateY(180deg); box-shadow: var(--shadow); }
+  .card.flipped .back, .card.matched .back { transform: rotateY(180deg); }
+  .card.flipped .front, .card.matched .front { transform: rotateY(360deg); }
+  .word {
+    font-weight: 600; font-size: clamp(.7rem, 2.6vw, .95rem);
+    line-height: 1.2; overflow-wrap: anywhere;
+  }
+  .front.es .word { color: var(--es); }
+  .front.en .word { color: var(--en); }
+  .tag {
+    font-size: .6rem; font-weight: 700; letter-spacing: .06em;
+    color: var(--muted);
+  }
+  .card.matched .front { border-color: var(--ok); }
+  .card.matched { cursor: default; }
+  .card:not(.matched):not(.flipped):hover .back { transform: translateY(-2px); }
+
+  #results { margin-top: 1.5rem; border-color: var(--ok); }
+  #results h2 { margin: 0 0 .25rem; font-size: 1.3rem; }
+  .score { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 1rem 0; }
+  .score div b { display: block; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+  .score div span { color: var(--muted); font-size: .8rem; }
+  .row { display: flex; gap: .6rem; flex-wrap: wrap; }
+</style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← Back to Applications</a>
-    
-    <h1>Matching Game</h1>
-    <div class="game-container">
-        <div class="size-selection">
-            <button class="size-btn" data-size="4">4x4</button>
-            <button class="size-btn" data-size="6">6x6</button>
-            <button class="size-btn" data-size="8">8x8</button>
-            
-            <div class="custom-size">
-                <input type="number" id="rows" min="2" max="10" placeholder="Rows" class="size-input">
-                <span>x</span>
-                <input type="number" id="cols" min="2" max="10" placeholder="Cols" class="size-input">
-                <button id="custom-size-btn">Start Custom</button>
-            </div>
-        </div>
-        <div id="grid" class="grid"></div>
-        <div class="stats">
-            <p>Attempts: <span id="attempts">0</span></p>
-            <p>Time: <span id="time">00:00</span></p>
-        </div>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to the collection</a>
+  <h1>Spanish Matching Game</h1>
+  <p class="sub">Flip a card, then find its translation. Match all eight pairs.</p>
+
+  <!-- Setup -->
+  <section id="setup" class="panel">
+    <fieldset>
+      <legend>Word list</legend>
+      <label class="opt">
+        <input type="radio" name="source" value="default" checked>
+        <span>
+          <strong>Use the default words</strong>
+          <span class="hint">Eight pairs picked at random from ~60 common Spanish words.</span>
+        </span>
+      </label>
+      <label class="opt">
+        <input type="radio" name="source" value="custom">
+        <span>
+          <strong>Use my own words</strong>
+          <span class="hint">One pair per line, Spanish first: <code>hola, hello</code></span>
+        </span>
+      </label>
+    </fieldset>
+
+    <div id="custom-wrap" hidden>
+      <textarea id="custom-words" spellcheck="false" placeholder="hola, hello
+adiós, goodbye
+gracias, thank you
+agua, water
+casa, house
+perro, dog
+libro, book
+verde, green"></textarea>
+      <p class="hint" style="color:var(--muted);font-size:.85rem;margin:.5rem 0 0">
+        At least 8 pairs. If you give more, 8 are chosen at random each round.
+        Separate with a comma, <code>=</code>, tab, or <code> - </code>.
+      </p>
     </div>
-    <script src="dist/match_game.js"></script>
+
+    <p id="setup-error" class="error"></p>
+    <button id="start-btn">Start game</button>
+  </section>
+
+  <!-- Board -->
+  <section id="board" hidden>
+    <div class="stats">
+      <div class="stat"><b id="time">00:00</b><span>Time</span></div>
+      <div class="stat"><b id="tries">0</b><span>Tries</span></div>
+      <div class="stat"><b id="forgot">0</b><span>Forgotten</span></div>
+      <div class="stat"><b id="matched">0</b><span>of 8 matched</span></div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <p style="margin-top:1rem">
+      <button id="change-btn" class="ghost">Change word list</button>
+    </p>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="panel" hidden>
+    <h2>¡Muy bien! All pairs matched.</h2>
+    <div class="score">
+      <div><b id="final-time">00:00</b><span>Total time</span></div>
+      <div><b id="final-tries">0</b><span>Tries</span></div>
+      <div><b id="final-forgot">0</b><span>Forgotten matches</span></div>
+    </div>
+    <p class="hint" style="color:var(--muted);font-size:.85rem;margin-top:-.5rem">
+      A <em>forgotten match</em> is a miss where the translation of your first card
+      had already been shown earlier — you had seen it, but picked the wrong card.
+    </p>
+    <div class="row">
+      <button id="again-btn">Play again</button>
+    </div>
+  </section>
+</div>
+<script src="match_game.js"></script>
 </body>
 </html>
-
-

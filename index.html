@@ -1,45 +1,127 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Games and Stuff</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .app-list { margin: 20px 0; }
-        .app-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
-        }
-        .app-card h2 { margin-top: 0; }
-        .app-card a { 
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        .app-card a:hover { background-color: #45a049; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Games and Stuff</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f7fb;
+    --panel: #ffffff;
+    --ink: #1b1b22;
+    --muted: #6b6b7b;
+    --line: #e3e3ec;
+    --accent: #d94f2b;
+    --accent2: #2b6fd9;
+    --shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f14; --panel: #191921; --ink: #f0f0f5; --muted: #9a9aab;
+      --line: #2c2c38; --accent: #ff7d5c; --accent2: #6ea3ff;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 4rem 1.25rem 5rem;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  header { margin-bottom: 3rem; }
+  .mark {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-weight: 700; letter-spacing: -.01em; color: var(--muted);
+    font-size: .9rem; text-transform: uppercase;
+  }
+  h1 {
+    font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1;
+    letter-spacing: -.03em; margin: 1rem 0 .75rem;
+  }
+  .lede { font-size: 1.15rem; color: var(--muted); margin: 0; max-width: 34rem; }
+
+  .cards { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 1rem; padding: 1.5rem; box-shadow: var(--shadow);
+    text-decoration: none; color: inherit;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  a.card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .art { margin-bottom: 1.1rem; }
+  .card h2 { font-size: 1.2rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+  .card p { margin: 0 0 1rem; color: var(--muted); font-size: .95rem; flex: 1; }
+  .go { font-weight: 600; font-size: .9rem; color: var(--accent); }
+  a.card:hover .go { text-decoration: underline; }
+
+  .card.soon { border-style: dashed; box-shadow: none; background: transparent; }
+  .card.soon .go { color: var(--muted); }
+
+  footer {
+    margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: .85rem;
+  }
+</style>
 </head>
 <body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="9" height="9" rx="2" fill="var(--accent)"/>
+        <rect x="13" y="2" width="9" height="9" rx="2" fill="var(--accent2)" opacity=".65"/>
+        <rect x="2" y="13" width="9" height="9" rx="2" fill="var(--accent2)" opacity=".65"/>
+        <rect x="13" y="13" width="9" height="9" rx="2" fill="var(--accent)" opacity=".35"/>
+      </svg>
+      funtimes
+    </div>
     <h1>Games and Stuff</h1>
-        
-    <div class="app-card">
-        <h2>Matching Game</h2>
-        <p>A simple matchng game that has customizable grid sizes.</p>
-        <a href="match_game.html">Matching Game</a>
+    <p class="lede">Here is a collection of games and other stuff for your enjoyment.</p>
+  </header>
+
+  <main class="cards">
+
+    <a class="card" href="match_game.html">
+      <svg class="art" width="88" height="60" viewBox="0 0 88 60" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="40" height="58" rx="7" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="21" y="35" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif"
+              font-size="13" font-weight="700" fill="var(--accent)">hola</text>
+        <rect x="47" y="1" width="40" height="58" rx="7" fill="var(--panel)" stroke="var(--accent2)" stroke-width="2"/>
+        <text x="67" y="35" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif"
+              font-size="13" font-weight="700" fill="var(--accent2)">hello</text>
+      </svg>
+      <h2>Spanish Matching Game</h2>
+      <p>
+        Flip a card, then hunt for its translation. Eight pairs on a 4&times;4 grid,
+        drawn from ~60 common Spanish words &mdash; or paste in your own list.
+        You&rsquo;re scored on time, tries, and how many matches you forgot.
+      </p>
+      <span class="go">Play &rarr;</span>
+    </a>
+
+    <div class="card soon">
+      <svg class="art" width="88" height="60" viewBox="0 0 88 60" fill="none" aria-hidden="true">
+        <circle cx="16" cy="30" r="8" stroke="var(--line)" stroke-width="2"/>
+        <circle cx="44" cy="30" r="12" stroke="var(--line)" stroke-width="2"/>
+        <circle cx="72" cy="30" r="6" stroke="var(--line)" stroke-width="2"/>
+      </svg>
+      <h2>More to come</h2>
+      <p>This is a static site &mdash; anything dropped into the folder shows up here.</p>
+      <span class="go">Watch this space</span>
     </div>
 
-    <div class="app-list">
-        <div class="app-card">
-            <h2>Continued Fraction Calculator</h2>
-            <p>Calculate the continued fraction representation of any decimal number.</p>
-            <a href="continued_fraction_calculator.html">Open Calculator</a>
-        </div>
-    </div>
+  </main>
+
+  <footer>
+    Served over HTTPS by Caddy on funtimes.xobedistuo.com.
+  </footer>
+
+</div>
 </body>
 </html>
