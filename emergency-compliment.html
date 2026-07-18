@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emergency Compliment</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f7fb;
+    --panel: #ffffff;
+    --ink: #1b1b22;
+    --muted: #6b6b7b;
+    --line: #e3e3ec;
+    --accent: #d94f2b;
+    --accent2: #2b6fd9;
+    --shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.07);
+    --case-red: #b9291f;
+    --case-red-dark: #8f1c15;
+    --case-metal: #d8d8dc;
+    --glass: rgba(190, 220, 255, 0.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f14; --panel: #191921; --ink: #f0f0f5; --muted: #9a9aab;
+      --line: #2c2c38; --accent: #ff7d5c; --accent2: #6ea3ff;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+      --case-red: #a3251c; --case-red-dark: #6e150f; --case-metal: #3a3a44;
+      --glass: rgba(140, 180, 255, 0.16);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; padding: 2.5rem 1.25rem 3rem;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 26rem; width: 100%; text-align: center; }
+
+  .back {
+    display: inline-flex; align-items: center; gap: .4rem;
+    color: var(--muted); text-decoration: none; font-size: .85rem;
+    margin-bottom: 1.25rem;
+  }
+  .back:hover { color: var(--accent); }
+
+  .placard {
+    font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    font-size: .8rem; color: var(--muted); margin: 0 0 1.4rem;
+    line-height: 1.6;
+  }
+  .placard span { display: block; font-size: 1rem; color: var(--ink); }
+
+  .case {
+    position: relative;
+    width: min(80vw, 300px);
+    margin: 0 auto 1.5rem;
+    padding: 1.6rem 1.6rem 2.4rem;
+    background: linear-gradient(160deg, var(--case-red), var(--case-red-dark));
+    border-radius: 1rem;
+    box-shadow: var(--shadow), inset 0 0 0 2px rgba(0,0,0,.15);
+  }
+
+  .rivet {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff8, #0004);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+  }
+  .rivet.tl { top: 8px; left: 8px; }
+  .rivet.tr { top: 8px; right: 8px; }
+  .rivet.bl { bottom: 22px; left: 8px; }
+  .rivet.br { bottom: 22px; right: 8px; }
+
+  .light {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #6b3d10; box-shadow: inset 0 0 2px rgba(0,0,0,.5);
+  }
+  .light.flash { animation: alarm-flash .55s ease-out 1; }
+  @keyframes alarm-flash {
+    0%   { background: #6b3d10; box-shadow: inset 0 0 2px rgba(0,0,0,.5); }
+    15%  { background: #ffb020; box-shadow: 0 0 12px 4px rgba(255,176,32,.85); }
+    60%  { background: #ffb020; box-shadow: 0 0 8px 2px rgba(255,176,32,.6); }
+    100% { background: #6b3d10; box-shadow: inset 0 0 2px rgba(0,0,0,.5); }
+  }
+
+  .frame {
+    position: relative;
+    margin-top: 1.6rem;
+    aspect-ratio: 1 / 1;
+    background: var(--case-metal);
+    border-radius: .4rem;
+    padding: 8px;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.25);
+  }
+  .pane {
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: .15rem;
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  .card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .5rem; padding: .9rem;
+    background: var(--panel);
+    text-align: center;
+  }
+  .card .stamp {
+    font-size: .62rem; font-weight: 800; letter-spacing: .12em;
+    color: var(--accent); border: 1.5px solid var(--accent);
+    border-radius: .25rem; padding: .1rem .4rem; transform: rotate(-6deg);
+  }
+  .card p {
+    margin: 0; font-family: "Courier New", ui-monospace, monospace;
+    font-size: .98rem; line-height: 1.45; color: var(--ink);
+  }
+
+  .glass {
+    position: absolute; inset: 0; z-index: 3;
+    display: block; width: 100%; height: 100%;
+    padding: 0; margin: 0; border: none; cursor: pointer;
+    background: linear-gradient(155deg, var(--glass), rgba(255,255,255,.05) 40%, var(--glass) 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    transition: opacity .35s ease;
+  }
+  .glass::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.35) 48%, transparent 56%);
+  }
+  .glass:hover { filter: brightness(1.08); }
+  .glass:focus-visible { outline: 3px solid var(--accent2); outline-offset: 2px; }
+
+  .case.broken .glass { opacity: 0; pointer-events: none; }
+
+  .shards { position: absolute; inset: 0; z-index: 2; }
+  .shard {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(255,255,255,.4), rgba(180,210,255,.12));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+    opacity: 0;
+    transition: transform .65s cubic-bezier(.34,.02,.4,1), opacity .65s ease;
+    will-change: transform, opacity;
+  }
+  .shard:nth-child(1) { clip-path: polygon(50% 50%, 0% 0%, 50% 0%); }
+  .shard:nth-child(2) { clip-path: polygon(50% 50%, 50% 0%, 100% 0%); }
+  .shard:nth-child(3) { clip-path: polygon(50% 50%, 100% 0%, 100% 50%); }
+  .shard:nth-child(4) { clip-path: polygon(50% 50%, 100% 50%, 100% 100%); }
+  .shard:nth-child(5) { clip-path: polygon(50% 50%, 100% 100%, 50% 100%); }
+  .shard:nth-child(6) { clip-path: polygon(50% 50%, 50% 100%, 0% 100%); }
+  .shard:nth-child(7) { clip-path: polygon(50% 50%, 0% 100%, 0% 50%); }
+  .shard:nth-child(8) { clip-path: polygon(50% 50%, 0% 50%, 0% 0%); }
+  .case.broken .shard { opacity: 1; }
+
+  .hammer {
+    position: absolute; right: -6px; top: 34%;
+    font-size: 1.8rem; transform-origin: 70% 20%;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.35));
+    transition: transform .25s ease;
+    user-select: none; pointer-events: none;
+  }
+  .case.swing .hammer { animation: swing .5s ease; }
+  @keyframes swing {
+    0%   { transform: rotate(0deg); }
+    35%  { transform: rotate(-55deg); }
+    55%  { transform: rotate(18deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  .controls { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
+  button.reset, button.mute {
+    font: inherit; font-size: .9rem; font-weight: 600;
+    padding: .55rem 1.1rem; border-radius: .6rem;
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    cursor: pointer; transition: border-color .15s ease, transform .15s ease;
+  }
+  button.reset:hover, button.mute:hover { border-color: var(--accent); transform: translateY(-1px); }
+  button.reset[hidden] { display: none; }
+
+  footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">&larr; Games and Stuff</a>
+
+  <p class="placard">In case of low self-esteem<span>BREAK GLASS</span></p>
+
+  <div class="case" id="case">
+    <div class="rivet tl"></div>
+    <div class="rivet tr"></div>
+    <div class="rivet bl"></div>
+    <div class="rivet br"></div>
+    <div class="light" id="light"></div>
+
+    <div class="frame">
+      <div class="pane">
+        <div class="card" id="card">
+          <span class="stamp">CERTIFIED</span>
+          <p id="complimentText"></p>
+        </div>
+        <div class="shards" id="shards" aria-hidden="true">
+          <div class="shard"></div><div class="shard"></div><div class="shard"></div><div class="shard"></div>
+          <div class="shard"></div><div class="shard"></div><div class="shard"></div><div class="shard"></div>
+        </div>
+        <button class="glass" id="glassBtn" aria-label="Break glass to receive an emergency compliment"></button>
+      </div>
+    </div>
+
+    <div class="hammer" aria-hidden="true">&#128296;</div>
+  </div>
+
+  <div class="controls">
+    <button class="reset" id="resetBtn" hidden>Reset case</button>
+    <button class="mute" id="muteBtn" aria-pressed="false">&#128266; Sound on</button>
+  </div>
+
+  <footer>No data leaves your browser. Compliments cycle before repeating.</footer>
+</div>
+
+<script src="emergency-compliment.js"></script>
+</body>
+</html>
