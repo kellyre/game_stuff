@@ -44,12 +44,20 @@ sliding doors, and shuffled strange-but-mundane vignettes for floors B and
 1-12. The 13th floor has no visible button until a long-press on 12 briefly
 reveals it for one uneasy ride.
 
+### The Deliberator
+
+A stern institutional console for moments of indecision. Type an optional
+dilemma, press the big red button, watch twitching gauges and a bureaucratic
+status log deliberate too hard, then receive a printed mundane decision from a
+shuffle-bag of outcomes with rare long and deferred variants.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
 any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
 `match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`,
-`floor-thirteen.html` loads `floor-thirteen.js`, and so on.
+`floor-thirteen.html` loads `floor-thirteen.js`, `the-deliberator.html` loads
+`the-deliberator.js`, and so on.
 
 ## Deploying
 
