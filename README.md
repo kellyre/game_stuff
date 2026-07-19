@@ -37,12 +37,19 @@ persists in `localStorage` so a reload doesn't reset the cycle. A short
 synthesized crack sound plays on break via Web Audio (no audio files); a
 mute toggle turns it off.
 
+### Floor 13
+
+A single-page elevator simulator with a button panel, synthesized chimes,
+sliding doors, and shuffled strange-but-mundane vignettes for floors B and
+1-12. The 13th floor has no visible button until a long-press on 12 briefly
+reveals it for one uneasy ride.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
 any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
-`match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`, and
-so on.
+`match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`,
+`floor-thirteen.html` loads `floor-thirteen.js`, and so on.
 
 ## Deploying
 
