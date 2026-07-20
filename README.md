@@ -51,13 +51,29 @@ dilemma, press the big red button, watch twitching gauges and a bureaucratic
 status log deliberate too hard, then receive a printed mundane decision from a
 shuffle-bag of outcomes with rare long and deferred variants.
 
+### Chess Chase
+
+A Pac-Man-style maze chase, rendered on a `<canvas>` with Unicode chess glyphs
+(no image assets). The maze is larger than the screen; a dead-zone camera keeps
+your character in the middle 50% of the view as it scrolls. Collect every dot to
+clear the board while dodging the pieces, dropping bombs in their path, and
+zapping them with a short-range weapon.
+
+Each piece moves by its own rules: the pawn plods, the knight crawls on
+straights but gallops around corners, the rook rockets down straightaways, the
+bishop and queen slide fast along diagonal zig-zag staircases, and the king is
+slowest of all — he blocks his own pieces and defuses any bomb he steps on.
+Movement is grid-based with smooth tile interpolation; holding two directions
+walks a zig-zag staircase. Sound is synthesized via Web Audio (no files), with a
+mute toggle. On-screen thumb controls appear on touch/small screens.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
 any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
 `match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`,
 `floor-thirteen.html` loads `floor-thirteen.js`, `the-deliberator.html` loads
-`the-deliberator.js`, and so on.
+`the-deliberator.js`, `chess-chase.html` loads `chess-chase.js`, and so on.
 
 ## Deploying
 
@@ -65,5 +81,7 @@ The site is a plain static directory served by Caddy over HTTPS:
 
 ```sh
 scp index.html match_game.html match_game.js emergency-compliment.html \
-    emergency-compliment.js reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
+    emergency-compliment.js floor-thirteen.html floor-thirteen.js \
+    the-deliberator.html the-deliberator.js chess-chase.html chess-chase.js \
+    reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
 ```

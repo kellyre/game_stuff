@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Chess Chase</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ececf2;
+    --ink: #1b1b22;
+    --muted: #6b6b7b;
+    --panel: rgba(255,255,255,.82);
+    --line: rgba(0,0,0,.12);
+    --accent: #d94f2b;
+    --btn: rgba(255,255,255,.75);
+    --btn-active: rgba(217,79,43,.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f14; --ink: #f0f0f5; --muted: #9a9aab;
+      --panel: rgba(25,25,33,.82); --line: rgba(255,255,255,.14);
+      --accent: #ff7d5c; --btn: rgba(40,40,52,.72); --btn-active: rgba(255,125,92,.32);
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    touch-action: none; }
+  #game { display: block; position: fixed; inset: 0; }
+
+  #hud {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 5;
+    display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center;
+    padding: .55rem 1rem; background: var(--panel); border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px); font-size: .9rem;
+  }
+  #stats { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+  #hud b { font-weight: 700; }
+  #hud .spacer { flex: 1; }
+  #mute {
+    border: 1px solid var(--line); background: var(--btn); color: inherit;
+    border-radius: .5rem; padding: .2rem .5rem; font-size: 1rem; cursor: pointer;
+  }
+  .back { color: var(--muted); text-decoration: none; font-weight: 600; font-size: .85rem; }
+  .back:hover { color: var(--accent); }
+
+  /* On-screen controls (shown on touch / small screens) */
+  #controls { position: fixed; z-index: 5; inset: auto 0 0 0; padding: 0 1rem 1.1rem;
+    display: none; justify-content: space-between; align-items: flex-end; pointer-events: none; }
+  #controls .cluster { display: grid; pointer-events: auto; }
+  #dpad { grid-template-columns: repeat(3, 3.4rem); grid-template-rows: repeat(3, 3.4rem); gap: .35rem; }
+  #dpad #btn-up { grid-area: 1 / 2; } #dpad #btn-left { grid-area: 2 / 1; }
+  #dpad #btn-right { grid-area: 2 / 3; } #dpad #btn-down { grid-area: 3 / 2; }
+  #actions { grid-template-columns: repeat(2, 3.8rem); gap: .5rem; align-content: end; }
+  #controls button {
+    border: 1px solid var(--line); background: var(--btn); color: inherit;
+    border-radius: .8rem; font-size: 1.3rem; height: 100%; min-height: 3.4rem;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none;
+  }
+  #controls button:active { background: var(--btn-active); }
+  @media (hover: none), (max-width: 760px) { #controls { display: flex; } }
+
+  #overlay {
+    position: fixed; inset: 0; z-index: 10; display: none;
+    align-items: center; justify-content: center; padding: 1.5rem;
+    background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(4px);
+  }
+  #overlay.show { display: flex; }
+  .panel {
+    max-width: 30rem; width: 100%; text-align: center;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 1rem;
+    padding: 1.75rem; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .panel h1 { margin: 0 0 .5rem; font-size: 1.9rem; letter-spacing: -.02em; }
+  .panel .pieces { font-size: 1.7rem; letter-spacing: .3rem; margin: .25rem 0 1rem; }
+  .panel p { color: var(--muted); margin: 0 0 1.1rem; }
+  .keys { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; text-align: left;
+    max-width: 20rem; margin: 0 auto 1.3rem; font-size: .9rem; }
+  .keys kbd {
+    font: inherit; font-size: .8rem; background: var(--btn); border: 1px solid var(--line);
+    border-radius: .4rem; padding: .05rem .4rem; white-space: nowrap;
+  }
+  #overlay-btn {
+    border: 0; background: var(--accent); color: #fff; font-weight: 700; font-size: 1rem;
+    padding: .7rem 1.6rem; border-radius: .7rem; cursor: pointer;
+  }
+  #overlay-btn:hover { filter: brightness(1.05); }
+</style>
+</head>
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="hud">
+  <a class="back" href="index.html">&larr; Games</a>
+  <div id="stats"></div>
+  <span class="spacer"></span>
+  <button id="mute" title="Mute (M)">🔊</button>
+</div>
+
+<div id="controls">
+  <div class="cluster" id="dpad">
+    <button id="btn-up" aria-label="Up">▲</button>
+    <button id="btn-left" aria-label="Left">◀</button>
+    <button id="btn-right" aria-label="Right">▶</button>
+    <button id="btn-down" aria-label="Down">▼</button>
+  </div>
+  <div class="cluster" id="actions">
+    <button id="btn-bomb" aria-label="Drop bomb">💣</button>
+    <button id="btn-shoot" aria-label="Shoot">💥</button>
+  </div>
+</div>
+
+<div id="overlay" class="show">
+  <div class="panel">
+    <h1>Chess Chase</h1>
+    <div class="pieces">🙂 ♟ ♞ ♜ ♝ ♛ ♚</div>
+    <p id="overlay-text">Collect the dots, dodge the chess pieces.</p>
+    <div class="keys">
+      <span><kbd>← ↑ → ↓</kbd> / <kbd>WASD</kbd></span><span>Move (hold two for a zig-zag)</span>
+      <span><kbd>Space</kbd></span><span>Short-range weapon</span>
+      <span><kbd>B</kbd> / <kbd>Shift</kbd></span><span>Drop a bomb in their path</span>
+      <span><kbd>M</kbd></span><span>Mute</span>
+      <span>♜ ♝ ♛</span><span>Slide fast in straight lines &amp; diagonals</span>
+      <span>♞</span><span>Slow, but corners at a gallop</span>
+      <span>♚</span><span>Slowest — blocks his pieces &amp; defuses bombs</span>
+    </div>
+    <button id="overlay-btn">Start</button>
+  </div>
+</div>
+
+<script src="chess-chase.js"></script>
+</body>
+</html>
