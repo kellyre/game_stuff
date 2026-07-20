@@ -67,13 +67,26 @@ Movement is grid-based with smooth tile interpolation; holding two directions
 walks a zig-zag staircase. Sound is synthesized via Web Audio (no files), with a
 mute toggle. On-screen thumb controls appear on touch/small screens.
 
+### Tide Pool Radio
+
+A cozy-surreal generative toy: click, tap, or use the keyboard to drop pebbles
+into a moonlit tide pool and tune the nearest tiny station. Hermit crabs,
+anemones, limpets, kelp, bottle caps, bubbles, and other inhabitants each have
+their own shuffle-bag of short broadcasts.
+
+Ripple rings and pebble drops are animated in CSS. Rapid overlapping ripples can
+produce readable two-station interference lines, while idle transmissions surface
+when the pool is left alone. Sound is a soft synthesized Web Audio plunk with a
+mute toggle; no audio files, persistence, tracking, or network calls are used.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
 any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
 `match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`,
 `floor-thirteen.html` loads `floor-thirteen.js`, `the-deliberator.html` loads
-`the-deliberator.js`, `chess-chase.html` loads `chess-chase.js`, and so on.
+`the-deliberator.js`, `chess-chase.html` loads `chess-chase.js`,
+`tide-pool-radio.html` loads `tide-pool-radio.js`, and so on.
 
 ## Deploying
 
@@ -83,5 +96,6 @@ The site is a plain static directory served by Caddy over HTTPS:
 scp index.html match_game.html match_game.js emergency-compliment.html \
     emergency-compliment.js floor-thirteen.html floor-thirteen.js \
     the-deliberator.html the-deliberator.js chess-chase.html chess-chase.js \
+    tide-pool-radio.html tide-pool-radio.js \
     reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
 ```

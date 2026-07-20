@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tide Pool Radio</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #e8f3f3;
+    --panel: rgba(255,255,255,.82);
+    --ink: #132329;
+    --muted: #557079;
+    --line: rgba(20,60,72,.18);
+    --water-a: #7ecbd1;
+    --water-b: #2d8da4;
+    --water-c: #0f536c;
+    --rock-a: #d8d0bd;
+    --rock-b: #9c947f;
+    --accent: #e5a64c;
+    --signal: #166d6e;
+    --shadow: 0 24px 70px rgba(13,47,58,.18), 0 2px 10px rgba(13,47,58,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #07131d;
+      --panel: rgba(9,25,36,.76);
+      --ink: #e8f6f1;
+      --muted: #91adb2;
+      --line: rgba(197,231,226,.18);
+      --water-a: #1e9bb0;
+      --water-b: #0b607b;
+      --water-c: #062f4b;
+      --rock-a: #28323a;
+      --rock-b: #111923;
+      --accent: #f0b75d;
+      --signal: #91f1dc;
+      --shadow: 0 28px 80px rgba(0,0,0,.48), 0 2px 10px rgba(0,0,0,.3);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 12% 15%, rgba(229,166,76,.16), transparent 24rem),
+      radial-gradient(circle at 80% 10%, rgba(126,203,209,.18), transparent 26rem),
+      linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg), #000 10%));
+    color: var(--ink);
+    font: 16px/1.55 ui-rounded, "Trebuchet MS", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+  }
+  button { font: inherit; }
+  .page {
+    width: min(1180px, calc(100vw - 32px));
+    margin: 0 auto;
+    padding: clamp(22px, 4vw, 46px) 0 38px;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: clamp(18px, 3vw, 34px);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--muted);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-size: .76rem;
+    font-weight: 800;
+  }
+  .eyebrow::before {
+    content: "";
+    width: .75rem;
+    height: .75rem;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent), transparent 78%);
+  }
+  h1 {
+    margin: .45rem 0 .25rem;
+    font-size: clamp(2.1rem, 7vw, 5.2rem);
+    line-height: .9;
+    letter-spacing: -.065em;
+    text-wrap: balance;
+  }
+  .tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+  }
+  .top-actions { display: flex; gap: .7rem; flex-wrap: wrap; justify-content: flex-end; }
+  .pill-button {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    min-height: 44px;
+    padding: .62rem .9rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.06);
+    cursor: pointer;
+  }
+  .pill-button:hover, .pill-button:focus-visible {
+    outline: 0;
+    border-color: color-mix(in srgb, var(--signal), var(--line) 35%);
+    transform: translateY(-1px);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+    gap: clamp(18px, 3vw, 34px);
+    align-items: end;
+  }
+  .pool-wrap {
+    position: relative;
+    min-height: min(68vw, 690px);
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  .rock-ring {
+    position: absolute;
+    inset: 2% 0 0;
+    border-radius: 45% 55% 50% 48% / 55% 47% 53% 45%;
+    background:
+      radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--rock-a), white 14%) 0 7%, transparent 7.5%),
+      radial-gradient(circle at 80% 72%, color-mix(in srgb, var(--rock-a), black 10%) 0 8%, transparent 8.5%),
+      radial-gradient(circle at 68% 18%, var(--rock-a) 0 10%, transparent 10.5%),
+      radial-gradient(circle at 28% 76%, var(--rock-b) 0 11%, transparent 11.5%),
+      linear-gradient(140deg, var(--rock-a), var(--rock-b));
+    box-shadow: var(--shadow);
+    transform: rotate(-2deg);
+    z-index: 0;
+  }
+  .pool {
+    position: relative;
+    width: min(88vw, 760px);
+    aspect-ratio: 1.22;
+    border: 0;
+    padding: 0;
+    border-radius: 46% 54% 48% 52% / 50% 43% 57% 50%;
+    background:
+      radial-gradient(ellipse at 42% 16%, rgba(255,255,255,.7), transparent 6% 11%, rgba(255,255,255,.16) 12%, transparent 20%),
+      radial-gradient(circle at 64% 70%, rgba(255,255,255,.12), transparent 25%),
+      radial-gradient(circle at 28% 36%, rgba(255,255,255,.16), transparent 18%),
+      linear-gradient(140deg, var(--water-a), var(--water-b) 42%, var(--water-c));
+    box-shadow: inset 0 0 0 9px rgba(255,255,255,.09), inset 0 30px 90px rgba(255,255,255,.14), inset 0 -34px 80px rgba(0,0,0,.28), 0 18px 50px rgba(0,0,0,.16);
+    overflow: hidden;
+    cursor: crosshair;
+    z-index: 1;
+  }
+  .pool:focus-visible {
+    outline: 4px solid color-mix(in srgb, var(--accent), white 18%);
+    outline-offset: 10px;
+  }
+  .pool::before {
+    content: "";
+    position: absolute;
+    inset: 10% 12% auto auto;
+    width: 34%;
+    height: 18%;
+    border-radius: 50%;
+    border-top: 2px solid rgba(255,255,255,.34);
+    transform: rotate(-10deg);
+    opacity: .8;
+  }
+  .pool::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.22) 0 1px, transparent 1.5px);
+    background-size: 47px 35px;
+    opacity: .18;
+    animation: drift 16s linear infinite;
+    pointer-events: none;
+  }
+  .inhabitant {
+    --x: 50; --y: 50; --s: 1;
+    position: absolute;
+    left: calc(var(--x) * 1%);
+    top: calc(var(--y) * 1%);
+    translate: -50% -50%;
+    width: calc(56px * var(--s));
+    height: calc(56px * var(--s));
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    z-index: 3;
+    border-radius: 999px;
+    -webkit-tap-highlight-color: transparent;
+    animation: bob calc(3.2s + var(--s) * .9s) ease-in-out infinite;
+  }
+  .inhabitant svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 5px rgba(0,0,0,.22)); overflow: visible; }
+  .inhabitant:hover, .inhabitant:focus-visible, .inhabitant.tuned {
+    outline: 0;
+    filter: drop-shadow(0 0 12px rgba(255,235,164,.92));
+  }
+  .inhabitant:focus-visible::after, .inhabitant:hover::after {
+    content: attr(aria-label);
+    position: absolute;
+    top: calc(100% + 4px);
+    white-space: nowrap;
+    padding: .22rem .5rem;
+    border-radius: 999px;
+    background: rgba(0,0,0,.62);
+    color: white;
+    font-size: .74rem;
+    pointer-events: none;
+  }
+  .ripple, .pebble, .bubble {
+    position: absolute;
+    left: var(--rx);
+    top: var(--ry);
+    translate: -50% -50%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ripple {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    border: 2px solid rgba(232,255,248,.72);
+    animation: ripple var(--dur, 1100ms) ease-out forwards;
+  }
+  .pebble {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #243236;
+    box-shadow: inset -1px -1px 0 rgba(255,255,255,.25);
+    animation: sink 860ms ease-in forwards;
+  }
+  .bubble {
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(235,255,255,.76);
+    border-radius: 50%;
+    animation: rise 1800ms ease-out forwards;
+    opacity: .75;
+  }
+  .radio {
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--panel), white 8%), var(--panel)),
+      repeating-linear-gradient(0deg, transparent 0 17px, rgba(255,255,255,.04) 18px);
+    border-radius: 1.35rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+  }
+  .radio-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .8rem;
+    align-items: center;
+    padding: .25rem .25rem .85rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .radio-title {
+    margin: 0;
+    font-size: .84rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 900;
+  }
+  .meter {
+    display: inline-flex;
+    align-items: end;
+    gap: 3px;
+    height: 24px;
+    min-width: 54px;
+  }
+  .meter i {
+    display: block;
+    width: 6px;
+    height: 7px;
+    border-radius: 4px 4px 1px 1px;
+    background: color-mix(in srgb, var(--signal), transparent 18%);
+    opacity: .42;
+  }
+  .meter.active i { animation: meter .5s ease-in-out 2; opacity: 1; }
+  .meter i:nth-child(2) { height: 13px; animation-delay: .06s; }
+  .meter i:nth-child(3) { height: 20px; animation-delay: .12s; }
+  .meter i:nth-child(4) { height: 10px; animation-delay: .18s; }
+  .dial {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 4px;
+    margin: .85rem .25rem .95rem;
+    align-items: center;
+  }
+  .dial span { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--line), var(--signal) 22%); opacity: .55; }
+  .dial span:nth-child(5) { height: 15px; background: var(--accent); opacity: .9; }
+  .transcript {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    min-height: 360px;
+  }
+  .line {
+    padding: .68rem .76rem;
+    border: 1px solid var(--line);
+    border-radius: .9rem;
+    background: color-mix(in srgb, var(--panel), var(--signal) 5%);
+    color: var(--ink);
+    font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: .9rem;
+    line-height: 1.42;
+  }
+  .line.new { animation: tune .55s ease-out both; }
+  .line.idle { opacity: .76; }
+  .line.interference { border-color: color-mix(in srgb, var(--accent), var(--line) 30%); }
+  .station { color: var(--signal); font-weight: 900; }
+  .help {
+    margin: .9rem .25rem 0;
+    color: var(--muted);
+    font-size: .88rem;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  @keyframes drift { to { background-position: 94px 70px; } }
+  @keyframes bob { 0%, 100% { transform: translateY(-2px) rotate(-1deg); } 50% { transform: translateY(3px) rotate(1.5deg); } }
+  @keyframes ripple { to { width: var(--size, 230px); height: var(--size, 230px); opacity: 0; border-width: 1px; } }
+  @keyframes sink { to { transform: translateY(20px) scale(.45); opacity: 0; } }
+  @keyframes rise { to { transform: translateY(-54px) scale(1.8); opacity: 0; } }
+  @keyframes tune {
+    0% { filter: blur(5px); transform: translateY(7px) skewX(-7deg); opacity: .2; }
+    42% { filter: blur(2px); transform: translateY(0) skewX(3deg); opacity: .75; }
+    100% { filter: blur(0); transform: translateY(0) skewX(0); opacity: 1; }
+  }
+  @keyframes meter { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1.25); } }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .pool-wrap { min-height: auto; padding: 18px 0; }
+    .rock-ring { inset: 5% -3% 4%; }
+    .pool { width: min(92vw, 680px); }
+    .transcript { min-height: 280px; }
+    header { flex-direction: column; }
+    .top-actions { justify-content: flex-start; }
+  }
+  @media (max-width: 520px) {
+    .page { width: min(100vw - 20px, 1180px); }
+    .pool { width: 96vw; }
+    .inhabitant { width: calc(44px * var(--s)); height: calc(44px * var(--s)); }
+    .radio { border-radius: 1rem; padding: .75rem; }
+    .line { font-size: .82rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <div>
+      <div class="eyebrow">moonband 88.3</div>
+      <h1>Tide Pool Radio</h1>
+      <p class="tagline">Drop a pebble. Tune the barnacles.</p>
+    </div>
+    <div class="top-actions">
+      <button class="pill-button" type="button" id="muteButton" aria-pressed="false">Sound on</button>
+      <a class="pill-button" href="index.html">All funtimes</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="pool-wrap" aria-label="Interactive tide pool radio toy">
+      <div class="rock-ring" aria-hidden="true"></div>
+      <div class="pool" id="pool" role="application" tabindex="0" aria-label="Tide pool. Click, tap, or press Enter to drop a pebble and tune a station.">
+        <span class="visually-hidden" id="poolHelp">Drop pebbles near creatures to receive short radio broadcasts.</span>
+      </div>
+    </section>
+
+    <aside class="radio" aria-live="polite" aria-label="Radio transcript">
+      <div class="radio-top">
+        <p class="radio-title">Tide transcript</p>
+        <div class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="dial" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="transcript" id="transcript"></div>
+      <p class="help">Hint: tap around the pool, or tab to a creature and press Enter. Rapid ripples may cross the frequencies.</p>
+    </aside>
+  </div>
+</main>
+<script src="tide-pool-radio.js"></script>
+</body>
+</html>
