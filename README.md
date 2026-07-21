@@ -67,6 +67,14 @@ Movement is grid-based with smooth tile interpolation; holding two directions
 walks a zig-zag staircase. Sound is synthesized via Web Audio (no files), with a
 mute toggle. On-screen thumb controls appear on touch/small screens.
 
+### Parcel Panic
+
+A compact mouse-and-keyboard arcade sorter. Move the night-shift clerk with
+WASD/arrows, choose a route color with `1`/`2`/`3` (or the on-screen buttons),
+and aim/click to stamp falling parcels before they reach the deadline line.
+Clean stamps build combos and charge a Space-bar dash for escaping or smashing
+through delivery drones; three missed packages or drone collisions end the run.
+
 ### Tide Pool Radio
 
 A cozy-surreal generative toy: click, tap, or use the keyboard to drop pebbles
