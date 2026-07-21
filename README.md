@@ -75,6 +75,13 @@ and aim/click to stamp falling parcels before they reach the deadline line.
 Clean stamps build combos and charge a Space-bar dash for escaping or smashing
 through delivery drones; three missed packages or drone collisions end the run.
 
+### Lost & Found Weather
+
+A cozy-surreal lost-and-found counter that turns misplaced objects into tiny
+weather reports. Pick two or three hardcoded object buttons (umbrella, spare key,
+pocket moon, receipt cloud, and more), then file a forecast assembled from their
+traits with special hand-authored pair and trio discoveries.
+
 ### Tide Pool Radio
 
 A cozy-surreal generative toy: click, tap, or use the keyboard to drop pebbles
