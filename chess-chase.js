@@ -47,6 +47,8 @@
   const WEAPON_RANGE = 2;           // tiles the short-range weapon reaches
   const WEAPON_COOLDOWN = 0.28;     // seconds between shots
   const START_BOMBS = 2;
+  const START_GRACE = 2.0;          // seconds enemies hold still at level start
+  const RESPAWN_GRACE = 1.2;        // shorter breather after losing a life
 
   // ---- Directions -----------------------------------------------------------
   const UP    = { x: 0, y: -1 };
@@ -154,12 +156,15 @@
     e.tc = e.c + d.x;
     e.tr = e.r + d.y;
     e.moving = true;
-    e.moveSpeed = spd || e.speed;
+    // Enemies get a per-level speed bump; the player is never scaled.
+    e.moveSpeed = (spd || e.speed) * (e.isEnemy ? enemySpeedMul : 1);
   }
 
   // ---- Game state -----------------------------------------------------------
   let player, enemies, food, foodLeft, bombs, pickups, bombCount;
-  let score, lives, effects, camX, camY, running, message, won;
+  let score, lives, effects, camX, camY, running, message;
+  let level, enemySpeedMul = 1, graceTimer = 0, playerStart = [1, 1];
+  let overlayAction = null;
 
   const input = { up: false, down: false, left: false, right: false };
   let weaponTimer = 0;
@@ -173,12 +178,46 @@
     return h;
   }
 
-  function resetGame() {
+  const openNeighbors = (c, r) => DIRS.reduce((n, d) => n + (isOpen(c + d.x, r + d.y) ? 1 : 0), 0);
+
+  // Pick a well-connected tile near the top-left corner so the player always
+  // starts with more than one way out — never boxed into a dead end.
+  function chooseSpawn(tiles) {
+    const region = tiles.filter(([c, r]) => c <= 6 && r <= 6);
+    const pool = (region.length ? region : tiles).slice();
+    pool.sort((a, b) => {
+      const na = openNeighbors(a[0], a[1]), nb = openNeighbors(b[0], b[1]);
+      if (nb !== na) return nb - na;                 // most exits first
+      return (a[0] + a[1]) - (b[0] + b[1]);          // then closest to the corner
+    });
+    return pool[0];
+  }
+
+  // How many of each piece a given level fields, and how fast they move.
+  function roster(lvl) {
+    const list = [];
+    const add = (n, spd, glyph, color, kind) => {
+      for (let i = 0; i < n; i++) list.push([spd, glyph, color, kind]);
+    };
+    add(2 + Math.min(3, lvl - 1), PAWN_SPEED, "♟", "#ff7d5c", "pawn");
+    add(1 + (lvl >= 3 ? 1 : 0), KNIGHT_SPEED, "♞", "#8bd450", "knight");
+    add(1 + (lvl >= 4 ? 1 : 0), ROOK_SPEED, "♜", "#6ea3ff", "rook");
+    add(1 + (lvl >= 5 ? 1 : 0), BISHOP_SPEED, "♝", "#c78bff", "bishop");
+    add(1 + (lvl >= 6 ? 1 : 0), QUEEN_SPEED, "♛", "#ffcf5c", "queen");
+    add(1, KING_SPEED, "♚", "#ff5c8a", "king");
+    return list;
+  }
+
+  // Build the maze, player, food, pickups and enemies for one level. Enemies
+  // hold still for a grace period so the player is never run down at the start.
+  function startLevel(n) {
+    level = n;
+    enemySpeedMul = Math.min(1.4, 1 + (level - 1) * 0.06);
     generateMaze();
     const tiles = openTiles();
 
-    // Player spawns near the top-left open area.
-    const start = tiles.find(([c, r]) => c <= 3 && r <= 3) || tiles[0];
+    const start = chooseSpawn(tiles);
+    playerStart = start;
     player = makeEntity(start[0], start[1], PLAYER_SPEED, "🙂", "#ffd166");
 
     // Food on every open tile except the spawn.
@@ -187,14 +226,13 @@
       .map(([c, r]) => ({ c, r }));
     foodLeft = food.length;
 
-    // Bomb pickups scattered around.
+    // Bomb pickups scattered around, away from the spawn.
     pickups = [];
     const far = tiles.filter(([c, r]) => tileDist(c, r, start[0], start[1]) > 8);
     for (let i = 0; i < 10 && far.length; i++) {
       const idx = (Math.random() * far.length) | 0;
       const [c, r] = far.splice(idx, 1)[0];
       pickups.push({ c, r });
-      // Don't let a pickup tile also hold food (keeps the glyphs clean).
       const fi = food.findIndex((f) => f.c === c && f.r === r);
       if (fi >= 0) { food.splice(fi, 1); foodLeft--; }
     }
@@ -202,34 +240,33 @@
     // Enemies spawn far from the player.
     enemies = [];
     const spawnPool = tiles.filter(([c, r]) => tileDist(c, r, start[0], start[1]) > 14);
-    const spawnOne = (speed, glyph, color, kind) => {
+    for (const [speed, glyph, color, kind] of roster(level)) {
       const pool = spawnPool.length ? spawnPool : tiles;
       const idx = (Math.random() * pool.length) | 0;
       const [c, r] = pool.splice(idx, 1)[0];
       const e = makeEntity(c, r, speed, glyph, color);
       e.kind = kind;
+      e.isEnemy = true;
       enemies.push(e);
-    };
-    spawnOne(PAWN_SPEED, "♟", "#ff7d5c", "pawn");
-    spawnOne(PAWN_SPEED, "♟", "#ff7d5c", "pawn");
-    spawnOne(KNIGHT_SPEED, "♞", "#8bd450", "knight");
-    spawnOne(ROOK_SPEED, "♜", "#6ea3ff", "rook");
-    spawnOne(BISHOP_SPEED, "♝", "#c78bff", "bishop");
-    spawnOne(QUEEN_SPEED, "♛", "#ffcf5c", "queen");
-    spawnOne(KING_SPEED, "♚", "#ff5c8a", "king");
+    }
 
     bombs = [];
     bombCount = START_BOMBS;
     effects = [];
-    score = 0;
-    lives = 3;
     weaponTimer = 0;
-    won = false;
     message = "";
+    graceTimer = START_GRACE;
     camX = camY = 0;
     updateCamera();
     running = true;
     updateHud();
+  }
+
+  // A fresh game from level 1.
+  function newGame() {
+    score = 0;
+    lives = 3;
+    startLevel(1);
   }
 
   // ---- Decision logic -------------------------------------------------------
@@ -276,9 +313,12 @@
   function diagStep(e, slow, slide) {
     const vd = player.r < e.r ? UP : player.r > e.r ? DOWN : null;
     const hd = player.c < e.c ? LEFT : player.c > e.c ? RIGHT : null;
-    const cand = e.lastAxis === "h" ? [vd, hd] : [hd, vd];
+    // Never reverse here — a diagonal that backtracks just oscillates in place,
+    // which is what made the queen and bishop look stuck.
+    const cand = (e.lastAxis === "h" ? [vd, hd] : [hd, vd])
+      .filter((d) => d && d !== opposite(e.dir));
     for (const d of cand) {
-      if (d && canEnter(e, e.c + d.x, e.r + d.y)) {
+      if (canEnter(e, e.c + d.x, e.r + d.y)) {
         const onStair = e.dir && (d.x !== 0) !== (e.dir.x !== 0);
         e.lastAxis = d.x !== 0 ? "h" : "v";
         beginMove(e, d, onStair ? slide : slow);
@@ -409,17 +449,19 @@
     if (lives <= 0) {
       running = false;
       message = "Game over";
-      showOverlay(`Game over — you scored ${score}.`, "Play again");
+      showOverlay(`Game over — you reached level ${level} with ${score} points.`,
+                  "Play again", newGame);
     } else {
-      // Send the player back to a safe corner and nudge enemies away.
-      const tiles = openTiles();
-      const start = tiles.find(([c, r]) => c <= 3 && r <= 3) || tiles[0];
-      player.c = start[0]; player.r = start[1];
-      player.tc = start[0]; player.tr = start[1];
+      // Send the player back to the safe spawn, push nearby enemies away, and
+      // give a short grace so they aren't immediately on top of the player.
+      const [sc, sr] = playerStart;
+      player.c = sc; player.r = sr;
+      player.tc = sc; player.tr = sr;
       player.moving = false; player.progress = 0; player.dir = null;
       for (const e of enemies) {
-        if (tileDist(e.c, e.r, start[0], start[1]) < 10) respawnEnemy(e);
+        if (tileDist(e.c, e.r, sc, sr) < 10) respawnEnemy(e);
       }
+      graceTimer = RESPAWN_GRACE;
     }
     updateHud();
   }
@@ -429,6 +471,7 @@
     if (!running) return;
 
     if (weaponTimer > 0) weaponTimer = Math.max(0, weaponTimer - dt);
+    if (graceTimer > 0) graceTimer = Math.max(0, graceTimer - dt);
 
     // Instant reverse for crisp control: if the player holds the opposite of the
     // current direction, flip in place rather than waiting for the next tile.
@@ -445,26 +488,36 @@
     }
 
     stepEntity(player, dt, decidePlayer);
-    for (const e of enemies) {
-      if (e.dead) continue;
-      stepEntity(e, dt, BRAIN[e.kind] || decidePawn);
+    // Enemies stay frozen during the start-of-level grace period.
+    if (graceTimer <= 0) {
+      for (const e of enemies) {
+        if (e.dead) continue;
+        stepEntity(e, dt, BRAIN[e.kind] || decidePawn);
+      }
     }
 
     handlePickups();
     handleBombs();
-    checkCollisions();
+    if (graceTimer <= 0) checkCollisions();
 
     for (const fx of effects) fx.t -= dt;
     effects = effects.filter((fx) => fx.t > 0);
 
     updateCamera();
 
-    if (foodLeft <= 0 && !won) {
-      won = true;
-      running = false;
-      sfx.win();
-      showOverlay(`You cleared the board! Final score ${score}.`, "Play again");
-    }
+    if (foodLeft <= 0 && running) advanceLevel();
+  }
+
+  function advanceLevel() {
+    const bonus = 250 + bombCount * 25;
+    score += bonus;
+    running = false;
+    sfx.win();
+    showOverlay(
+      `Board cleared! +${bonus} bonus. Ready for level ${level + 1}?`,
+      `Start level ${level + 1}`,
+      () => startLevel(level + 1)
+    );
   }
 
   function handlePickups() {
@@ -665,6 +718,15 @@
     }
 
     ctx.restore();
+
+    // "Get ready!" cue while the enemies are still frozen at level start.
+    if (running && graceTimer > 0) {
+      ctx.fillStyle = t.food;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "600 24px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText("Get ready!", view.w / 2, view.h * 0.28);
+    }
   }
 
   function roundRect(x, y, w, h, r) {
@@ -685,15 +747,17 @@
 
   function updateHud() {
     hud.innerHTML =
+      `<span>Level <b>${level}</b></span>` +
       `<span>Score <b>${score}</b></span>` +
       `<span>Lives <b>${"🙂".repeat(Math.max(0, lives)) || "—"}</b></span>` +
       `<span>Bombs <b>${bombCount}</b></span>` +
       `<span>Food left <b>${foodLeft}</b></span>`;
   }
 
-  function showOverlay(text, btn) {
+  function showOverlay(text, btn, action) {
     overlayText.textContent = text;
     overlayBtn.textContent = btn;
+    overlayAction = action || null;
     overlay.classList.add("show");
   }
   function hideOverlay() { overlay.classList.remove("show"); }
@@ -790,7 +854,7 @@
   overlayBtn.addEventListener("click", () => {
     sfx.resume();
     hideOverlay();
-    resetGame();
+    if (overlayAction) overlayAction();
   });
 
   // ---- Main loop ------------------------------------------------------------
@@ -805,11 +869,12 @@
 
   window.addEventListener("resize", resize);
   resize();
-  resetGame();
-  running = false;            // wait for the player to start
+  newGame();
+  running = false;            // wait for the player to press Start
   showOverlay(
     "Collect the dots, dodge the chess pieces. Drop bombs in their path and blast them with your weapon.",
-    "Start"
+    "Start",
+    () => { running = true; }
   );
   requestAnimationFrame(frame);
 })();
