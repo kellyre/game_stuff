@@ -75,6 +75,13 @@ and aim/click to stamp falling parcels before they reach the deadline line.
 Clean stamps build combos and charge a Space-bar dash for escaping or smashing
 through delivery drones; three missed packages or drone collisions end the run.
 
+### Lamp Moth Rodeo
+
+A floaty porch-light arcade run about stealing glow without becoming dust. Steer
+a moth with WASD/arrows, brake with Shift/Z, dash with Space, graze active lamp
+rings for combo score, and bail out for blue moon pollen before heat, webs,
+spiders, or swatter shadows end the rodeo.
+
 ### Lost & Found Weather
 
 A cozy-surreal lost-and-found counter that turns misplaced objects into tiny
