@@ -101,6 +101,13 @@ produce readable two-station interference lines, while idle transmissions surfac
 when the pool is left alone. Sound is a soft synthesized Web Audio plunk with a
 mute toggle; no audio files, persistence, tracking, or network calls are used.
 
+### Switchboard Sprint
+
+A one-screen arcade switchboard game. Move the operator cursor with WASD/arrows,
+pick up ringing callers with Space, route them to the matching municipal desk,
+tap X for a brief “please hold,” and avoid wrong transfers, expired patience, and
+sparking cord spaghetti.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
