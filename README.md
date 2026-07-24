@@ -108,6 +108,14 @@ pick up ringing callers with Space, route them to the matching municipal desk,
 tap X for a brief “please hold,” and avoid wrong transfers, expired patience, and
 sparking cord spaghetti.
 
+### Bellhop Bounce
+
+A one-screen hotel-lobby arcade game. Move the bellhop cart with A/D or arrows,
+tilt rebound angles with W/S, dash with Space, rotate the active elevator labels
+with Z, and bounce color-tagged luggage into matching elevator doors before three
+bags hit the floor too many times. Later luggage adds heavy trunks, wobbling
+hatboxes, fragile bags, and VIP cases whose target floor changes midair.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
