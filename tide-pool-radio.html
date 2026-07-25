@@ -178,6 +178,14 @@
     animation: drift 16s linear infinite;
     pointer-events: none;
   }
+  .pool.low-tide {
+    background:
+      radial-gradient(ellipse at 42% 16%, rgba(255,255,255,.34), transparent 6% 11%, rgba(255,255,255,.1) 12%, transparent 20%),
+      radial-gradient(circle at 58% 64%, rgba(240,183,93,.2), transparent 22%),
+      linear-gradient(140deg, color-mix(in srgb, var(--rock-a), var(--water-a) 38%), color-mix(in srgb, var(--rock-b), var(--water-b) 34%) 50%, var(--water-c));
+    cursor: help;
+  }
+  .pool.low-tide .inhabitant { opacity: .55; }
   .inhabitant {
     --x: 50; --y: 50; --s: 1;
     position: absolute;
@@ -198,6 +206,32 @@
     animation: bob calc(3.2s + var(--s) * .9s) ease-in-out infinite;
   }
   .inhabitant svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 5px rgba(0,0,0,.22)); overflow: visible; }
+  .tide-relic {
+    --x: 50; --y: 50;
+    position: absolute;
+    left: calc(var(--x) * 1%);
+    top: calc(var(--y) * 1%);
+    translate: -50% -50%;
+    min-width: 48px;
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,.38);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--panel), var(--accent) 16%);
+    color: var(--ink);
+    box-shadow: 0 7px 18px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.28);
+    cursor: pointer;
+    z-index: 4;
+    opacity: 0;
+    transform: scale(.76) rotate(var(--r, -4deg));
+    transition: opacity .28s ease, transform .28s ease, border-color .18s ease;
+  }
+  .pool.low-tide .tide-relic { opacity: .94; transform: scale(1) rotate(var(--r, -4deg)); }
+  .tide-relic:disabled { pointer-events: none; }
+  .tide-relic:hover, .tide-relic:focus-visible {
+    outline: 0;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent), transparent 70%), 0 10px 22px rgba(0,0,0,.2);
+  }
   .inhabitant:hover, .inhabitant:focus-visible, .inhabitant.tuned {
     outline: 0;
     filter: drop-shadow(0 0 12px rgba(255,235,164,.92));
@@ -376,6 +410,7 @@
       <p class="tagline">Drop a pebble. Tune the barnacles.</p>
     </div>
     <div class="top-actions">
+      <button class="pill-button" type="button" id="tideButton" aria-pressed="false">Low tide</button>
       <button class="pill-button" type="button" id="muteButton" aria-pressed="false">Sound on</button>
       <a class="pill-button" href="index.html">All funtimes</a>
     </div>
@@ -384,8 +419,8 @@
   <div class="layout">
     <section class="pool-wrap" aria-label="Interactive tide pool radio toy">
       <div class="rock-ring" aria-hidden="true"></div>
-      <div class="pool" id="pool" role="application" tabindex="0" aria-label="Tide pool. Click, tap, or press Enter to drop a pebble and tune a station.">
-        <span class="visually-hidden" id="poolHelp">Drop pebbles near creatures to receive short radio broadcasts.</span>
+      <div class="pool" id="pool" role="application" tabindex="0" aria-label="Tide pool. Click, tap, press Enter to drop a pebble, or use Low tide to inspect revealed relics.">
+        <span class="visually-hidden" id="poolHelp">Drop pebbles near creatures to receive short radio broadcasts. Low tide reveals clickable relics with archived transmissions.</span>
       </div>
     </section>
 
@@ -396,7 +431,7 @@
       </div>
       <div class="dial" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       <div class="transcript" id="transcript"></div>
-      <p class="help">Hint: tap around the pool, or tab to a creature and press Enter. Rapid ripples may cross the frequencies.</p>
+      <p class="help">Hint: tap around the pool, or tab to a creature and press Enter. Low tide reveals archived objects; rapid ripples may cross the frequencies.</p>
     </aside>
   </div>
 </main>

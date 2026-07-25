@@ -98,8 +98,9 @@ their own shuffle-bag of short broadcasts.
 
 Ripple rings and pebble drops are animated in CSS. Rapid overlapping ripples can
 produce readable two-station interference lines, while idle transmissions surface
-when the pool is left alone. Sound is a soft synthesized Web Audio plunk with a
-mute toggle; no audio files, persistence, tracking, or network calls are used.
+when the pool is left alone. A Low tide mode briefly reveals clickable relics
+with archived object broadcasts. Sound is a soft synthesized Web Audio plunk with
+a mute toggle; no audio files, persistence, tracking, or network calls are used.
 
 ### Switchboard Sprint
 

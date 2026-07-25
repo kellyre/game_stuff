@@ -5,6 +5,7 @@
   const transcript = document.querySelector('#transcript');
   const meter = document.querySelector('#meter');
   const muteButton = document.querySelector('#muteButton');
+  const tideButton = document.querySelector('#tideButton');
 
   const svg = {
     crab: '<svg viewBox="0 0 80 80" aria-hidden="true"><path d="M21 47c-8 0-13-5-16-10" fill="none" stroke="#ef8d4b" stroke-width="5" stroke-linecap="round"/><path d="M59 47c8 0 13-5 16-10" fill="none" stroke="#ef8d4b" stroke-width="5" stroke-linecap="round"/><ellipse cx="40" cy="45" rx="21" ry="15" fill="#e76f51"/><circle cx="31" cy="31" r="5" fill="#17252b"/><circle cx="49" cy="31" r="5" fill="#17252b"/><path d="M18 39l-10-9M62 39l10-9" stroke="#ef8d4b" stroke-width="6" stroke-linecap="round"/></svg>',
@@ -66,11 +67,20 @@
     fragments: ['moonlight answers', 'static over sandbar', 'quieter pebble', 'gap between opinions']
   };
 
+  const relics = [
+    { id: 'key', label: 'tiny brass key', x: 29, y: 44, r: '-12deg', tag: 'ARCH-KEY', messages: ['Key found under low tide. Opens one drawer in a house that has not been built.', 'The key says it was only visiting the concept of a lock.', 'Please return to the gull with the suspiciously specific pocket.'], glyph: '⚿' },
+    { id: 'receipt', label: 'waterlogged receipt', x: 66, y: 71, r: '7deg', tag: 'ARCH-RCPT', messages: ['Receipt total: three mussels, one apology, tax pending.', 'Ink has run into the margins and formed a tiny estuary.', 'Customer copy retained by the ocean for accounting reasons.'], glyph: '▤' },
+    { id: 'coin', label: 'moon-bitten coin', x: 54, y: 52, r: '-3deg', tag: 'ARCH-COIN', messages: ['Coin toss result: edge, but politely.', 'This coin is legal tender in vending machines that sell low tide.', 'Obverse: moon. Reverse: moon denying everything.'], glyph: '◍' },
+    { id: 'fork', label: 'ceremonial fork', x: 19, y: 73, r: '14deg', tag: 'ARCH-FORK', messages: ['Fork recovered from a formal dinner for four anemones.', 'Tines calibrated for noodles, kelp, and difficult silences.', 'The spoon delegation remains missing but optimistic.'], glyph: '♆' }
+  ];
+
   const bags = new Map();
   let activeRipples = [];
   let muted = false;
   let audioContext = null;
   let idleTimer = 0;
+  let lowTide = false;
+  let lowTideTimer = 0;
   let lastPoint = { x: 50, y: 50 };
 
   function makeBag(items) {
@@ -115,6 +125,26 @@
           event.preventDefault();
           tuneStation(station, station.x, station.y, true);
         }
+      });
+      pool.appendChild(button);
+    });
+  }
+
+  function placeRelics() {
+    relics.forEach((relic) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'tide-relic';
+      button.dataset.relic = relic.id;
+      button.style.setProperty('--x', relic.x);
+      button.style.setProperty('--y', relic.y);
+      button.style.setProperty('--r', relic.r);
+      button.setAttribute('aria-label', `Low-tide relic: ${relic.label}`);
+      button.textContent = relic.glyph;
+      button.disabled = true;
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        inspectRelic(relic);
       });
       pool.appendChild(button);
     });
@@ -178,7 +208,7 @@
   }
 
   function addBubble() {
-    if (document.hidden) return;
+    if (document.hidden || lowTide) return;
     const bubble = document.createElement('span');
     bubble.className = 'bubble';
     bubble.style.setProperty('--rx', `${20 + Math.random() * 60}%`);
@@ -195,17 +225,28 @@
     playPlunk();
     lastPoint = { x, y };
 
-    const eligible = hadOverlap && Math.random() < 0.35;
+    const eligible = !lowTide && hadOverlap && Math.random() < 0.35;
     if (eligible) {
       const other = pickOtherStation(station);
       emitInterference(station || other, other);
     } else if (station) {
       emitLine(station.tag, drawFromBag(station.id, station.messages));
       markTuned(station.id);
+    } else if (lowTide) {
+      emitLine('LOW-TIDE', drawFromBag('low-open', ['Wet sand reports excellent archival conditions.', 'The pool is briefly a filing cabinet with gulls.', 'Small objects glint with the confidence of evidence.', 'Every puddle left behind is broadcasting in cursive.']));
+      markTuned(null);
     } else {
       emitLine(openWater.tag, drawFromBag('open', openWater.messages));
       markTuned(null);
     }
+    scheduleIdle();
+  }
+
+  function inspectRelic(relic) {
+    addRipple(relic.x, relic.y, 2);
+    playPlunk();
+    emitLine(relic.tag, drawFromBag(`relic-${relic.id}`, relic.messages), { interference: true });
+    markTuned(null);
     scheduleIdle();
   }
 
@@ -309,6 +350,24 @@
     osc.stop(now + 0.23);
   }
 
+  function toggleLowTide() {
+    lowTide = !lowTide;
+    pool.classList.toggle('low-tide', lowTide);
+    pool.querySelectorAll('.tide-relic').forEach((button) => { button.disabled = !lowTide; });
+    tideButton.setAttribute('aria-pressed', String(lowTide));
+    tideButton.textContent = lowTide ? 'Refill tide' : 'Low tide';
+    window.clearTimeout(lowTideTimer);
+    if (lowTide) {
+      emitLine('LOW-TIDE', 'The water steps out for a minute. Please inspect its pockets.');
+      lowTideTimer = window.setTimeout(() => {
+        if (lowTide) toggleLowTide();
+      }, 30000);
+    } else {
+      emitLine('TIDE-IN', 'The pool refills and politely declines further inventory.');
+    }
+    scheduleIdle();
+  }
+
   function toggleMute() {
     muted = !muted;
     muteButton.setAttribute('aria-pressed', String(muted));
@@ -329,6 +388,7 @@
     }
   });
 
+  tideButton.addEventListener('click', toggleLowTide);
   muteButton.addEventListener('click', toggleMute);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -339,6 +399,7 @@
   });
 
   placeStations();
+  placeRelics();
   emitLine('POOL-HINT', 'Drop pebbles to tune the tide pool. The barnacles are already listening.');
   scheduleIdle();
   window.setInterval(addBubble, 1800);
