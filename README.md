@@ -117,6 +117,13 @@ with Z, and bounce color-tagged luggage into matching elevator doors before thre
 bags hit the floor too many times. Later luggage adds heavy trunks, wobbling
 hatboxes, fragile bags, and VIP cases whose target floor changes midair.
 
+### Trash Moon Tugboat
+
+A floaty one-screen lunar sanitation arcade game. Thrust a tiny tug with
+WASD/arrows, aim and fire a grappling hook with the pointer or Space, reel tethered
+junk into a dangerous sling, cut loose with Z, and fling debris into the chomping
+compactor before it bonks the glass-domed town.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
