@@ -124,6 +124,13 @@ WASD/arrows, aim and fire a grappling hook with the pointer or Space, reel tethe
 junk into a dangerous sling, cut loose with Z, and fling debris into the chomping
 compactor before it bonks the glass-domed town.
 
+### Pancake Seismograph
+
+A keyboard-first one-screen arcade balancing game. Slide a plate with A/D or
+arrows, lean the swaying pancake stack with Q/E or up/down, hit Space for a
+cooldown spatula flip, and press Z to deliberately shed the top pancake before
+quakes, syrup, butter slides, and mess end the run.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
@@ -131,7 +138,8 @@ any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
 `match_game.js`, `emergency-compliment.html` loads `emergency-compliment.js`,
 `floor-thirteen.html` loads `floor-thirteen.js`, `the-deliberator.html` loads
 `the-deliberator.js`, `chess-chase.html` loads `chess-chase.js`,
-`tide-pool-radio.html` loads `tide-pool-radio.js`, and so on.
+`tide-pool-radio.html` loads `tide-pool-radio.js`, `pancake-seismograph.html`
+loads `pancake-seismograph.js`, and so on.
 
 ## Deploying
 
