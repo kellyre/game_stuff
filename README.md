@@ -131,6 +131,13 @@ arrows, lean the swaying pancake stack with Q/E or up/down, hit Space for a
 cooldown spatula flip, and press Z to deliberately shed the top pancake before
 quakes, syrup, butter slides, and mess end the run.
 
+### Duckling Crossing Guard
+
+A keyboard-first one-screen arcade escort game. Move the crossing guard with
+WASD/arrows, hold Space to project a stamina-limited stop-sign zone, press Z to
+whistle ducklings back into formation, and hop with X/Shift while trying to get
+the whole nervous parade across the crosswalk before the bell.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
