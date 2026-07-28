@@ -138,6 +138,14 @@ WASD/arrows, hold Space to project a stamina-limited stop-sign zone, press Z to
 whistle ducklings back into formation, and hop with X/Shift while trying to get
 the whole nervous parade across the crosswalk before the bell.
 
+### Grocery Cart Downhill
+
+A one-screen downhill arcade racer. Steer a runaway grocery cart with A/D or
+arrows, boost and brake with W/S, hold Space to skid around shelf islands, and
+press Z to spend a charged honk that shoves small hazards aside before the
+checkout finish line. Groceries, coupons, drift distance, and near-misses build
+score and combo; hard crashes spend three damage pips.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
