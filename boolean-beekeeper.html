@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boolean Beekeeper</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fbf7e8;
+    --panel: #fffdf5;
+    --panel-2: #f6edc9;
+    --ink: #282115;
+    --muted: #74664f;
+    --line: #d7c79b;
+    --accent: #d88a14;
+    --accent-2: #427b58;
+    --accent-3: #9d6538;
+    --honey: #f4b72d;
+    --cloud: #d8d8c9;
+    --bad: #a34f3f;
+    --good: #2f7d55;
+    --shadow: 0 1px 2px rgba(67, 43, 8, .08), 0 16px 35px rgba(83, 57, 16, .14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15130d;
+      --panel: #201c13;
+      --panel-2: #2a2315;
+      --ink: #f5ecd8;
+      --muted: #c1ae87;
+      --line: #4a3d25;
+      --accent: #f0a72f;
+      --accent-2: #76b78d;
+      --accent-3: #d0975a;
+      --honey: #ffca45;
+      --cloud: #68665b;
+      --bad: #df806e;
+      --good: #83d19d;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 16px 35px rgba(0,0,0,.28);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, color-mix(in srgb, var(--honey), transparent 76%), transparent 35rem),
+      linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg), var(--panel-2) 26%));
+    color: var(--ink);
+    font: 16px/1.5 ui-rounded, "Trebuchet MS", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  a { color: inherit; }
+  .wrap { width: min(1180px, calc(100% - 24px)); margin: 0 auto; padding: 22px 0 42px; }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 18px;
+    margin-bottom: 18px;
+  }
+  .crumb { display: inline-block; color: var(--muted); font-size: .92rem; margin-bottom: 8px; text-decoration: none; }
+  .crumb:hover { color: var(--accent); }
+  h1 { margin: 0; font-size: clamp(2rem, 6vw, 4rem); line-height: .96; letter-spacing: -.06em; }
+  .lede { margin: 10px 0 0; max-width: 46rem; color: var(--muted); font-size: clamp(1rem, 2vw, 1.15rem); }
+  .sound-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  button {
+    font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+    border-radius: 999px; padding: .66rem .9rem; box-shadow: 0 1px 0 rgba(0,0,0,.03);
+    cursor: pointer; min-height: 44px;
+  }
+  button:hover { border-color: var(--accent); }
+  button:focus-visible, .tile:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent), white 25%); outline-offset: 3px; }
+  button.primary { background: var(--accent); color: #211300; border-color: transparent; font-weight: 800; }
+  button.ghost { background: transparent; }
+  .game { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 18px; align-items: start; }
+  .board-panel, .hud, .lesson {
+    background: color-mix(in srgb, var(--panel), transparent 4%); border: 1px solid var(--line);
+    border-radius: 24px; box-shadow: var(--shadow);
+  }
+  .board-panel { padding: clamp(10px, 2vw, 18px); position: relative; overflow: hidden; }
+  .topbar { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; }
+  .badge { border: 1px solid var(--line); border-radius: 999px; padding: .38rem .65rem; color: var(--muted); background: color-mix(in srgb, var(--panel-2), transparent 35%); font-weight: 700; }
+  .board-wrap { position: relative; max-width: 720px; margin: 0 auto; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(38px, 1fr));
+    gap: clamp(5px, .85vw, 9px);
+    touch-action: manipulation;
+  }
+  .tile {
+    aspect-ratio: 1; min-width: 0; border-radius: 17%; border: 2px solid var(--line);
+    background: var(--panel-2); position: relative; display: grid; place-items: center; padding: 0;
+    color: var(--ink); overflow: hidden; transition: border-color .16s ease, transform .16s ease, background-color .25s ease;
+  }
+  .tile.empty { background: color-mix(in srgb, var(--panel), transparent 45%); border-style: dashed; opacity: .62; }
+  .tile.rotatable { cursor: pointer; }
+  .tile.selected { border-color: var(--accent); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent), transparent 72%); }
+  .tile.locked { cursor: wait; }
+  .tile.solved { background: color-mix(in srgb, var(--honey), var(--panel) 35%); }
+  .tile.wrong { background: color-mix(in srgb, var(--bad), var(--panel) 76%); }
+  .tile .label { position: relative; z-index: 2; font-weight: 900; font-size: clamp(.65rem, 1.9vw, 1.05rem); text-align: center; line-height: 1; letter-spacing: -.04em; }
+  .tile .sub { display: block; font-size: .62em; font-weight: 800; color: var(--muted); letter-spacing: 0; margin-top: 2px; }
+  .tile .stem { position: absolute; background: var(--accent-2); opacity: .78; border-radius: 99px; z-index: 0; }
+  .tile .stem.n, .tile .stem.s { width: 14%; height: 50%; left: 43%; }
+  .tile .stem.n { top: 0; } .tile .stem.s { bottom: 0; }
+  .tile .stem.e, .tile .stem.w { height: 14%; width: 50%; top: 43%; }
+  .tile .stem.e { right: 0; } .tile .stem.w { left: 0; }
+  .flower { position: absolute; width: 68%; height: 68%; border-radius: 50%; background: var(--panel); border: 2px solid var(--accent); z-index: 1; }
+  .flower::before, .flower::after { content: ""; position: absolute; inset: -10%; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--accent), transparent 35%); }
+  .flower::after { inset: 12%; background: color-mix(in srgb, var(--honey), var(--panel) 30%); border: 0; }
+  .hive .label, .jar .label { font-size: clamp(.85rem, 2.3vw, 1.3rem); }
+  .hive { background: repeating-linear-gradient(0deg, color-mix(in srgb, var(--honey), var(--panel) 20%), color-mix(in srgb, var(--honey), var(--panel) 20%) 8px, var(--panel-2) 8px, var(--panel-2) 16px); }
+  .jar { background: linear-gradient(180deg, var(--panel), var(--cloud)); }
+  .jar.lit { background: linear-gradient(180deg, #fff6bf, var(--honey)); }
+  .bee {
+    position: absolute; width: 12px; height: 9px; border-radius: 50%; background: #f4c233; border: 1px solid #3a2600;
+    z-index: 10; pointer-events: none; transform: translate(-50%, -50%); transition: left .55s ease, top .55s ease, opacity .35s ease;
+  }
+  .bee::after { content: ""; position: absolute; inset: 2px 4px; border-left: 2px solid #3a2600; border-right: 2px solid #3a2600; opacity: .8; }
+  .puff { position: absolute; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--cloud); opacity: .75; pointer-events: none; z-index: 9; animation: puff 1.2s ease forwards; }
+  @keyframes puff { to { transform: scale(1.7); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; } }
+  .hud { padding: 18px; display: grid; gap: 14px; }
+  .hud h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.03em; }
+  .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat { border: 1px solid var(--line); border-radius: 16px; padding: .65rem; background: color-mix(in srgb, var(--panel-2), transparent 35%); }
+  .stat b { display: block; font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .stat span { font-weight: 900; font-size: 1.08rem; }
+  .targets { display: flex; gap: 8px; flex-wrap: wrap; }
+  .jar-chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: .45rem .65rem; background: var(--panel); font-weight: 800; }
+  .lamp { width: 18px; height: 18px; border-radius: 6px 6px 8px 8px; background: var(--cloud); border: 1px solid var(--line); }
+  .lamp.on { background: var(--honey); box-shadow: 0 0 0 3px color-mix(in srgb, var(--honey), transparent 70%); }
+  .message { border-radius: 18px; padding: .8rem; background: color-mix(in srgb, var(--panel-2), transparent 32%); color: var(--muted); min-height: 4.6rem; }
+  .message strong { color: var(--ink); }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; }
+  .selected-help { font-size: .93rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+  .lesson { margin-bottom: 18px; padding: 16px; display: grid; gap: 10px; }
+  .lesson.hidden { display: none; }
+  .lesson h2 { margin: 0; }
+  .lesson ol { margin: 0; padding-left: 1.25rem; color: var(--muted); }
+  .mobile-pad { display: none; grid-template-columns: repeat(3, 54px); gap: 6px; justify-content: center; margin-top: 12px; }
+  .mobile-pad button { border-radius: 15px; padding: .2rem; }
+  @media (max-width: 880px) {
+    .game { grid-template-columns: 1fr; }
+    header { display: block; }
+    .sound-row { justify-content: flex-start; margin-top: 12px; }
+    .hud { order: -1; }
+  }
+  @media (max-width: 620px) { .mobile-pad { display: grid; } .tile { border-width: 1px; } .wrap { width: min(100% - 12px, 1180px); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <a class="crumb" href="index.html">&larr; funtimes</a>
+      <h1>Boolean Beekeeper</h1>
+      <p class="lede">Rotate logic flowers, release the bees, and make the honey jars compute the right answer.</p>
+    </div>
+    <div class="sound-row" aria-label="Game options">
+      <button id="muteBtn" type="button">Sound: on</button>
+      <button id="lessonToggle" type="button" class="ghost">Show learning</button>
+    </div>
+  </header>
+
+  <section id="lesson" class="lesson" aria-label="Learning mode">
+    <h2>Learning mode: three calm steps before the honey math.</h2>
+    <ol>
+      <li>Move the orange beekeeper cursor with arrows or WASD.</li>
+      <li>Press Space/Z to rotate the selected lane or flower clockwise. X rotates backward.</li>
+      <li>Press Enter or the Run swarm button. Yellow bees mean 1; cloudy jars mean 0.</li>
+    </ol>
+    <div class="controls">
+      <button id="lessonNext" class="primary" type="button">I can rotate flowers</button>
+      <button id="skipLesson" type="button">Skip learning</button>
+    </div>
+  </section>
+
+  <main class="game">
+    <section class="board-panel" aria-label="Logic gate apiary board">
+      <div class="topbar">
+        <span class="badge" id="levelBadge">Puzzle 1 of 8</span>
+        <span class="badge" id="parBadge">Par: 3 edits</span>
+      </div>
+      <div class="board-wrap">
+        <div id="grid" class="grid" role="grid" aria-label="Rotatable bee logic grid"></div>
+      </div>
+      <div class="mobile-pad" aria-label="Touch cursor controls">
+        <span></span><button type="button" data-pad="up">↑</button><span></span>
+        <button type="button" data-pad="left">←</button><button type="button" data-pad="rot">⟳</button><button type="button" data-pad="right">→</button>
+        <span></span><button type="button" data-pad="down">↓</button><span></span>
+      </div>
+    </section>
+
+    <aside class="hud" aria-label="Puzzle status">
+      <h2 id="levelTitle">Honey AND inspection</h2>
+      <div class="targets" id="targetRow"></div>
+      <div class="stat-grid">
+        <div class="stat"><b>Inputs</b><span id="inputStat">A=1 B=1</span></div>
+        <div class="stat"><b>Attempts</b><span id="attemptStat">0</span></div>
+        <div class="stat"><b>Edits</b><span id="editStat">0</span></div>
+        <div class="stat"><b>Badges</b><span id="badgeStat">0 crowns</span></div>
+      </div>
+      <div class="message" id="message"><strong>Welcome.</strong> Rotate the flowers so the lit bees match the target jars.</div>
+      <div class="controls">
+        <button id="runBtn" class="primary" type="button">Run swarm</button>
+        <button id="undoBtn" type="button">Undo</button>
+        <button id="restartBtn" type="button">Restart</button>
+      </div>
+      <div class="selected-help" id="selectedHelp">Select a tile to read its bee rules.</div>
+    </aside>
+  </main>
+</div>
+<script src="boolean-beekeeper.js"></script>
+</body>
+</html>
