@@ -210,7 +210,7 @@ function drawBag(b, now) {
   ctx.restore();
 }
 function draw(now) {
-  ctx.clearRect(0, 0, W, H); const s = state.shake * 11; ctx.save(); ctx.translate(rand(-s, s), rand(-s, s));
+  ctx.clearRect(0, 0, W, H); const s = 0; /* screen-shake removed: photosensitive safety */ ctx.save(); ctx.translate(rand(-s, s), rand(-s, s));
   ctx.fillStyle = '#141923'; ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = '#2a1f25'; ctx.fillRect(0, 0, W, 154); ctx.fillStyle = '#20181d'; ctx.fillRect(0, H - 54, W, 54);
   for (let x = 0; x < W; x += 70) { ctx.fillStyle = x % 140 ? '#fff2' : '#0002'; ctx.fillRect(x, 154, 35, H - 208); }

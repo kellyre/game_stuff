@@ -79,11 +79,10 @@
     position: relative;
     overflow: hidden;
   }
-  .panel.flicker { animation: flicker .8s steps(2, jump-none); }
+  .panel.flicker { animation: flicker 1.4s ease-in-out; }
   @keyframes flicker {
-    0%, 12%, 28%, 44%, 100% { filter: brightness(1); }
-    8%, 22%, 39% { filter: brightness(.48); }
-    55% { filter: brightness(1.35); }
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(.82); }
   }
   .back { color: var(--muted); text-decoration: none; font-size: .88rem; width: fit-content; }
   .back:hover { color: var(--accent); }
@@ -145,7 +144,7 @@
     min-height: 2.85rem;
   }
   .service-btn.noop { animation: none; }
-  .service-btn.noop.flash { animation: noop .32s ease; }
+  .service-btn.noop.flash { animation: noop .6s ease; }
   @keyframes noop { 50% { box-shadow: 0 0 14px rgba(255,255,255,.35), inset 0 -4px 8px rgba(0,0,0,.2); } }
   .mute {
     margin-top: .2rem;
@@ -244,8 +243,8 @@
   .door.right { right: 0; border-left: 2px solid var(--door-edge); }
   .doorway.open .door.left { transform: translateX(-100%); }
   .doorway.open .door.right { transform: translateX(100%); }
-  .doorway.shudder .door { animation: shudder .45s ease; }
-  @keyframes shudder { 25% { filter: brightness(.9); } 45% { transform: translateX(var(--jitter, 0)); } 75% { filter: brightness(1.05); } }
+  .doorway.shudder .door { animation: shudder .9s ease; }
+  @keyframes shudder { 50% { filter: brightness(.92); } }
   .doorway.open .door.left { --jitter: -1%; }
   .doorway.open .door.right { --jitter: 1%; }
   .threshold {
@@ -253,8 +252,8 @@
     text-align: center;
     font-size: .84rem;
   }
-  .glitch #floorDisplay { animation: glitch .18s steps(2) infinite; }
-  @keyframes glitch { 50% { opacity: .5; transform: translateX(1px); } }
+  .glitch #floorDisplay { animation: glitch 2.4s ease-in-out infinite; }
+  @keyframes glitch { 50% { opacity: .68; } }
   @media (max-width: 760px) {
     .elevator { grid-template-columns: 1fr; padding: .75rem; }
     .panel { order: 2; }

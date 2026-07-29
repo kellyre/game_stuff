@@ -503,7 +503,7 @@ function drawOverlay(now) {
   }
 }
 function draw(now) {
-  const shake = state.shake * 14;
+  const shake = 0; /* screen-shake removed: photosensitive safety */
   ctx.save(); ctx.translate(rand(-shake, shake), rand(-shake, shake));
   drawPorch(now);
   for (const lamp of lamps) drawLamp(lamp, now);

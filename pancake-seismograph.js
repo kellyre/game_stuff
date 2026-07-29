@@ -162,7 +162,7 @@ function update(dt, now) {
   if (state.quakeWarn > 0) { state.quakeWarn -= dt; if (state.quakeWarn <= 0) { state.quakePulse = .72; state.quakeTimer = rand(8.5, Math.max(5.2, 13 - elapsed * .04)); state.shake = .46; state.leanVel += rand(-1.8, 1.8); state.plate.vx += rand(-190, 190); beep('quake'); } }
   if (state.quakePulse > 0) state.quakePulse -= dt;
   const comBefore = centerOfMass();
-  const desired = state.plate.tilt * 1.35 + state.plate.vx * .0019 + state.wind + (state.quakePulse > 0 ? Math.sin(now / 45) * 1.55 : 0) + comBefore * .0035;
+  const desired = state.plate.tilt * 1.35 + state.plate.vx * .0019 + state.wind + (state.quakePulse > 0 ? Math.sin(now / 300) * 1.55 : 0) + comBefore * .0035;
   const height = Math.max(1, state.layers.length);
   const stiffness = 3.8 / (1 + height * .055), damping = Math.pow(clamp(.07 + height * .018, .1, .72), dt);
   state.leanVel += (desired - state.lean) * stiffness * dt; state.leanVel *= damping; state.lean += state.leanVel * dt;
@@ -203,12 +203,12 @@ function drawPancake(x, y, r, kind, wobble = 0, alpha = 1) {
   ctx.restore();
 }
 function draw(now) {
-  ctx.clearRect(0, 0, W, H); const s = (state.shake || 0) * 14 + (state.quakePulse > 0 ? 8 : 0); ctx.save(); ctx.translate(rand(-s, s), rand(-s, s));
+  ctx.clearRect(0, 0, W, H); const s = 0; /* screen-shake removed: photosensitive safety */ ctx.save(); ctx.translate(rand(-s, s), rand(-s, s));
   ctx.fillStyle = '#2b1a12'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#483125'; ctx.fillRect(0, H - 116, W, 116);
   for (let x = -20; x < W; x += 82) { ctx.fillStyle = x % 164 ? '#ffffff0d' : '#00000012'; ctx.fillRect(x, H - 116, 42, 116); }
   ctx.fillStyle = '#1b2b2d'; ctx.fillRect(24, 34, 120, H - 176); ctx.strokeStyle = '#6acbc0'; ctx.lineWidth = 2; ctx.strokeRect(24, 34, 120, H - 176);
   ctx.fillStyle = '#9af0e6'; ctx.font = '900 14px ui-monospace,monospace'; ctx.textAlign = 'center'; ctx.fillText('SEISMO', 84, 58);
-  ctx.strokeStyle = '#9af0e6'; ctx.lineWidth = 3; ctx.beginPath(); for (let y = 78; y < H - 158; y += 8) { const amp = state.quakeWarn > 0 ? 30 : state.quakePulse > 0 ? 43 : 10; const x = 84 + Math.sin(y * .08 + now / 90) * amp * (state.quakeWarn > 0 ? (1 + Math.sin(now / 70)) : 1); y === 78 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke();
+  ctx.strokeStyle = '#9af0e6'; ctx.lineWidth = 3; ctx.beginPath(); for (let y = 78; y < H - 158; y += 8) { const amp = state.quakeWarn > 0 ? 30 : state.quakePulse > 0 ? 43 : 10; const x = 84 + Math.sin(y * .08 + now / 90) * amp * (state.quakeWarn > 0 ? (1 + Math.sin(now / 420)) : 1); y === 78 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke();
   ctx.fillStyle = '#120f0d88'; ctx.fillRect(170, 34, W - 194, 38); ctx.fillStyle = '#f7df9e'; ctx.font = '900 15px system-ui'; ctx.textAlign = 'left'; ctx.fillText(state.captionTill > now ? state.caption : choice(tickets), 188, 59);
   ctx.fillStyle = '#3b2620'; ctx.fillRect(W - 142, 130, 92, 92); ctx.fillStyle = '#d95835'; ctx.fillRect(W - 136, 142, 80, 18); ctx.fillStyle = '#f4c175'; ctx.font = '900 12px system-ui'; ctx.textAlign = 'center'; ctx.fillText('TOAST', W - 96, 157); ctx.strokeStyle = '#f6dba0'; ctx.beginPath(); ctx.arc(W - 96, 207, 42, Math.PI * 1.13, Math.PI * 1.87); ctx.stroke();
   for (const f of state.falling) { ctx.fillStyle = '#0005'; ctx.beginPath(); ctx.ellipse(f.x, state.plate.y + 10, f.r * f.shadow, f.r * .12 * f.shadow, 0, 0, Math.PI * 2); ctx.fill(); drawPancake(f.x, f.y, f.r, f.kind, f.rot); }

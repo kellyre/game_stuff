@@ -287,12 +287,12 @@
   .forecast-card h2 { margin: .1rem 0 .65rem; font-size: 1.45rem; line-height: 1.05; letter-spacing: -.035em; }
   .forecast-card p { margin: 0 0 .8rem; }
   .advisory { display: inline-block; padding: .38rem .55rem; border-radius: 999px; background: color-mix(in srgb, var(--ticket), transparent 18%); color: color-mix(in srgb, var(--ink), #5e3c09 20%); font-weight: 900; font-size: .86rem; }
-  .desk.shake, .counter.shake { animation: shake .28s ease; }
+  .desk.shake, .counter.shake { animation: shake .7s ease; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   @keyframes slot-pop { 0% { transform: scale(.86) rotate(-4deg); opacity: .2; } 100% { transform: scale(1); opacity: 1; } }
   @keyframes print { 0% { transform: translateY(9px) rotate(.8deg); opacity: .15; filter: blur(2px); } 100% { transform: translateY(0); opacity: 1; filter: blur(0); } }
-  @keyframes bump { 0%,100% { transform: translateX(0); } 35% { transform: translateX(4px); } 70% { transform: translateX(-3px); } }
-  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+  @keyframes bump { 50% { transform: translateX(3px); } }
+  @keyframes shake { 50% { transform: translateY(3px); } }
   @media (max-width: 880px) {
     header { flex-direction: column; }
     .layout { grid-template-columns: 1fr; }

@@ -91,7 +91,7 @@ function update(dt, now) {
   state.shake=Math.max(0,state.shake-dt);
 }
 function draw(now) {
-  ctx.clearRect(0,0,W,H); const shake=state.shake?state.shake*10:0; ctx.save();ctx.translate(rand(-shake,shake),rand(-shake,shake));
+  ctx.clearRect(0,0,W,H); const shake=0; /* screen-shake removed: photosensitive safety */ ctx.save();ctx.translate(rand(-shake,shake),rand(-shake,shake));
   ctx.fillStyle='#121a2b';ctx.fillRect(0,0,W,H); // depot stripes
   for(let y=70;y<H;y+=80){ctx.fillStyle='#18253a';ctx.fillRect(0,y,W,2)}
   ctx.fillStyle='#273751';ctx.fillRect(0,0,W,57);ctx.fillStyle='#ef5161';ctx.fillRect(0,H-51,W,6);
