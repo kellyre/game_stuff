@@ -31,7 +31,7 @@
   // Most pieces have a slow "base" pace and a fast pace for their signature
   // move — the rook's straight slide, the knight's corner, the bishop's and
   // queen's diagonal staircase. The king is slower than everyone.
-  const SLOW = 2.6;                 // baseline "slow" enemy speed
+  const SLOW = 1.05;                // baseline slow enemy speed; opening should be very survivable
   const PLAYER_SPEED = SLOW * 3;    // player is 3x as fast
   const PAWN_SPEED = SLOW;          // plodding, one step at a time
   const KNIGHT_SPEED = SLOW;        // crawls on straights...
@@ -45,10 +45,10 @@
   const KING_SPEED = SLOW * 0.6;    // even slower than the slow pieces
 
   const WEAPON_RANGE = 2;           // tiles the short-range weapon reaches
-  const WEAPON_COOLDOWN = 0.28;     // seconds between shots
+  const WEAPON_COOLDOWN = 0.55;     // seconds between shots
   const START_BOMBS = 2;
-  const START_GRACE = 2.0;          // seconds enemies hold still at level start
-  const RESPAWN_GRACE = 1.2;        // shorter breather after losing a life
+  const START_GRACE = 8.0;          // seconds enemies hold still at level start
+  const RESPAWN_GRACE = 4.0;        // shorter breather after losing a life
 
   // ---- Directions -----------------------------------------------------------
   const UP    = { x: 0, y: -1 };
@@ -199,12 +199,12 @@
     const add = (n, spd, glyph, color, kind) => {
       for (let i = 0; i < n; i++) list.push([spd, glyph, color, kind]);
     };
-    add(2 + Math.min(3, lvl - 1), PAWN_SPEED, "♟", "#ff7d5c", "pawn");
-    add(1 + (lvl >= 3 ? 1 : 0), KNIGHT_SPEED, "♞", "#8bd450", "knight");
-    add(1 + (lvl >= 4 ? 1 : 0), ROOK_SPEED, "♜", "#6ea3ff", "rook");
-    add(1 + (lvl >= 5 ? 1 : 0), BISHOP_SPEED, "♝", "#c78bff", "bishop");
-    add(1 + (lvl >= 6 ? 1 : 0), QUEEN_SPEED, "♛", "#ffcf5c", "queen");
-    add(1, KING_SPEED, "♚", "#ff5c8a", "king");
+    add(1 + Math.min(2, Math.floor((lvl - 1) / 3)), PAWN_SPEED, "♟", "#ff7d5c", "pawn");
+    add(lvl >= 2 ? 1 : 0, KNIGHT_SPEED, "♞", "#8bd450", "knight");
+    add(lvl >= 4 ? 1 : 0, ROOK_SPEED, "♜", "#6ea3ff", "rook");
+    add(lvl >= 6 ? 1 : 0, BISHOP_SPEED, "♝", "#c78bff", "bishop");
+    add(lvl >= 9 ? 1 : 0, QUEEN_SPEED, "♛", "#ffcf5c", "queen");
+    add(lvl >= 3 ? 1 : 0, KING_SPEED, "♚", "#ff5c8a", "king");
     return list;
   }
 
@@ -212,7 +212,7 @@
   // hold still for a grace period so the player is never run down at the start.
   function startLevel(n) {
     level = n;
-    enemySpeedMul = Math.min(1.4, 1 + (level - 1) * 0.06);
+    enemySpeedMul = Math.min(1.35, 1 + (level - 1) * 0.018);
     generateMaze();
     const tiles = openTiles();
 
@@ -265,7 +265,7 @@
   // A fresh game from level 1.
   function newGame() {
     score = 0;
-    lives = 3;
+    lives = 5;
     startLevel(1);
   }
 
@@ -418,7 +418,7 @@
         if (ec === c && er === r) { killEnemy(e); }
       }
     }
-    effects.push({ type: "shot", tiles: hitTiles, from: [pc, pr], t: 0.14 });
+    effects.push({ type: "shot", tiles: hitTiles, from: [pc, pr], t: 0.55 });
     sfx.shoot();
   }
 
@@ -426,7 +426,7 @@
     e.dead = true;
     score += 100;
     const ctr = entityCenter(e);
-    effects.push({ type: "boom", x: ctr.x, y: ctr.y, t: 0.4, r: TILE * 0.4 });
+    effects.push({ type: "boom", x: ctr.x, y: ctr.y, t: 0.8, r: TILE * 0.4 });
     sfx.explode();
     updateHud();
     // Respawn the piece after a short delay, far from the player.
@@ -556,11 +556,11 @@
           b.gone = true;
           if (e.kind === "king") {
             // The king defuses bombs he steps on — no boom, no kill.
-            effects.push({ type: "defuse", x: bx, y: by, t: 0.4, r: TILE * 0.4 });
+            effects.push({ type: "defuse", x: bx, y: by, t: 0.8, r: TILE * 0.4 });
             sfx.defuse();
           } else {
             killEnemy(e);
-            effects.push({ type: "boom", x: bx, y: by, t: 0.4, r: TILE * 0.55 });
+            effects.push({ type: "boom", x: bx, y: by, t: 0.8, r: TILE * 0.55 });
           }
           break;
         }
@@ -701,14 +701,14 @@
     // Explosions and bomb defusals
     for (const fx of effects) {
       if (fx.type === "boom") {
-        const a = fx.t / 0.4;
+        const a = fx.t / 0.8;
         ctx.fillStyle = `rgba(255,${Math.round(120 + 100 * a)},60,${a})`;
         ctx.beginPath();
         ctx.arc(fx.x, fx.y, fx.r * (1.6 - a), 0, Math.PI * 2);
         ctx.fill();
       } else if (fx.type === "defuse") {
         // A calm blue ring collapsing inward — the king snuffs the fuse.
-        const a = fx.t / 0.4;
+        const a = fx.t / 0.8;
         ctx.strokeStyle = `rgba(110,163,255,${a})`;
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -744,6 +744,7 @@
   const overlay = document.getElementById("overlay");
   const overlayText = document.getElementById("overlay-text");
   const overlayBtn = document.getElementById("overlay-btn");
+  const overlaySkip = document.getElementById("overlay-skip");
 
   function updateHud() {
     hud.innerHTML =
@@ -755,6 +756,7 @@
   }
 
   function showOverlay(text, btn, action) {
+    overlaySkip.style.display = "none";
     overlayText.textContent = text;
     overlayBtn.textContent = btn;
     overlayAction = action || null;
@@ -856,6 +858,12 @@
     hideOverlay();
     if (overlayAction) overlayAction();
   });
+  overlaySkip.addEventListener("click", () => {
+    sfx.resume();
+    hideOverlay();
+    graceTimer = START_GRACE;
+    running = true;
+  });
 
   // ---- Main loop ------------------------------------------------------------
   let last = 0;
@@ -872,9 +880,10 @@
   newGame();
   running = false;            // wait for the player to press Start
   showOverlay(
-    "Collect the dots, dodge the chess pieces. Drop bombs in their path and blast them with your weapon.",
-    "Start",
-    () => { running = true; }
+    "Learning mode: enemies begin frozen. Try moving, then Space to zap, then B or Shift to place a bomb — or use Skip learning to jump straight in.",
+    "Start gentle learning",
+    () => { graceTimer = 30; running = true; }
   );
+  overlaySkip.style.display = "inline-block";
   requestAnimationFrame(frame);
 })();

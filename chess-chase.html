@@ -81,11 +81,12 @@
     font: inherit; font-size: .8rem; background: var(--btn); border: 1px solid var(--line);
     border-radius: .4rem; padding: .05rem .4rem; white-space: nowrap;
   }
-  #overlay-btn {
+  #overlay-btn, #overlay-skip {
     border: 0; background: var(--accent); color: #fff; font-weight: 700; font-size: 1rem;
     padding: .7rem 1.6rem; border-radius: .7rem; cursor: pointer;
   }
-  #overlay-btn:hover { filter: brightness(1.05); }
+  #overlay-btn:hover, #overlay-skip:hover { filter: brightness(1.05); }
+  #overlay-skip { margin-left: .6rem; background: var(--btn); color: var(--ink); border: 1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -126,7 +127,7 @@
       <span>♞</span><span>Slow, but corners at a gallop</span>
       <span>♚</span><span>Slowest — blocks his pieces &amp; defuses bombs</span>
     </div>
-    <button id="overlay-btn">Start</button>
+    <button id="overlay-btn">Start</button><button id="overlay-skip">Skip learning</button>
   </div>
 </div>
 
