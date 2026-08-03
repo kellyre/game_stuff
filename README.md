@@ -153,6 +153,13 @@ beekeeper cursor with WASD/arrows, rotate lanes and AND/OR/XOR/NOT/splitter
 flowers with Space/Z/X, then release a calm swarm with Enter to see whether the
 honey jars match the requested 0/1 targets across eight handcrafted puzzles.
 
+### Gear Garden Almanac
+
+A calm clockwork-greenhouse gear-ratio puzzle. Move a cursor with WASD/arrows,
+pick up and place tooth-counted gears with Z/Enter, then press Space or the Test
+button to crank the train and compare every flower's actual speed/direction with
+its almanac target across ten handcrafted puzzles.
+
 ## Running it
 
 There is no build step. Open `index.html` in a browser, or serve the directory with
