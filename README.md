@@ -170,14 +170,44 @@ any static file server. Every game is plain HTML/CSS/JS: `match_game.html` loads
 `tide-pool-radio.html` loads `tide-pool-radio.js`, `pancake-seismograph.html`
 loads `pancake-seismograph.js`, and so on.
 
-## Deploying
+### Tessellarium
 
-The site is a plain static directory served by Caddy over HTTPS:
+The one non-static-HTML entry: a planar tiling design tool built with
+React/Vite/PixiJS, source at <https://github.com/kellyre/tessellarium>
+(separate repo — it has its own build step, tests, etc.). It's deployed as
+a *built* app into a `tessellarium/` subdirectory of this site, so it's
+reachable at `/tessellarium/` without needing any Caddy config beyond the
+existing `file_server` (which already serves `index.html` for directory
+requests).
+
+Building it for this deployment needs the subpath base set explicitly, so
+its asset URLs and PWA manifest resolve under `/tessellarium/` and not the
+site root:
 
 ```sh
-scp index.html match_game.html match_game.js emergency-compliment.html \
-    emergency-compliment.js floor-thirteen.html floor-thirteen.js \
-    the-deliberator.html the-deliberator.js chess-chase.html chess-chase.js \
-    tide-pool-radio.html tide-pool-radio.js \
-    reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
+cd path/to/tessellarium
+VITE_BASE_PATH=/tessellarium/ npm run build
+```
+
+(On Windows/Git Bash, MSYS mangles a leading-slash env var into a Windows
+path — prefix with `MSYS_NO_PATHCONV=1` too.)
+
+Then rsync `dist/` into place alongside the rest of the site (see
+"Deploying" below) — `rsync -a --delete` so removed files (a stale asset
+hash from a previous build) don't linger.
+
+## Deploying
+
+The site is a plain static directory served by Caddy over HTTPS. `rsync`
+(not a hand-maintained `scp` file list) so nothing added to the folder is
+ever silently left off a deploy:
+
+```sh
+# The hand-authored games/tools at the site root:
+rsync -a --delete --exclude .git --exclude .gitignore --exclude tessellarium \
+    ./ reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
+
+# Tessellarium's build output, into its own subdirectory:
+rsync -a --delete path/to/tessellarium/dist/ \
+    reed@funtimes.xobedistuo.com:/opt/sites/funtimes/tessellarium/
 ```
