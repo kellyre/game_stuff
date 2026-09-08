@@ -1,0 +1,31 @@
+# Numbers & time — one pair per line, Spanish first: "spanish, english"
+uno, one
+dos, two
+tres, three
+cuatro, four
+cinco, five
+seis, six
+siete, seven
+ocho, eight
+nueve, nine
+diez, ten
+veinte, twenty
+cien, one hundred
+mil, one thousand
+hoy, today
+mañana, tomorrow
+ayer, yesterday
+ahora, now
+semana, week
+mes, month
+año, year
+hora, hour
+minuto, minute
+lunes, Monday
+viernes, Friday
+sábado, Saturday
+domingo, Sunday
+once, eleven
+doce, twelve
+mediodía, noon
+medianoche, midnight

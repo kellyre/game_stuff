@@ -22,7 +22,25 @@ const DEFAULT_PAIRS = [
   ['feliz', 'happy'], ['triste', 'sad'],
 ];
 
-const PAIRS_PER_GAME = 8; // 8 pairs -> 16 cards -> 4x4
+const PAIRS_PER_GAME = 8; // default deal: 8 pairs -> 16 cards -> 4x4
+
+// Grid limits: rows <= 6, cols <= 9, and at least one side even so the cells
+// split cleanly into pairs. Largest board is 6 x 9 = 54 cards = 27 pairs.
+const MAX_ROWS = 6;
+const MAX_COLS = 9;
+const DEFAULT_ROWS = 4;
+const DEFAULT_COLS = 4;
+
+function isPairableGrid(rows, cols) {
+  return Number.isInteger(rows) && Number.isInteger(cols)
+    && rows >= 2 && cols >= 2
+    && rows <= MAX_ROWS && cols <= MAX_COLS
+    && (rows * cols) % 2 === 0;
+}
+
+function gridPairCount(rows, cols) {
+  return (rows * cols) / 2;
+}
 
 function shuffle(items, rng = Math.random) {
   const out = items.slice();
@@ -104,11 +122,18 @@ if (typeof document !== 'undefined') {
     const results = $('results');
     const customWrap = $('custom-wrap');
     const customWords = $('custom-words');
+    const themedOpt = $('themed-opt');
+    const themedWrap = $('themed-wrap');
+    const themedSelect = $('themed-set');
     const setupError = $('setup-error');
     const elTries = $('tries');
     const elForgot = $('forgot');
     const elTime = $('time');
     const elMatched = $('matched');
+    const matchedLabel = $('matched-label');
+    const gridRows = $('grid-rows');
+    const gridCols = $('grid-cols');
+    const gridNote = $('grid-note');
 
     let deck = [];
     let first = null;
@@ -121,14 +146,75 @@ if (typeof document !== 'undefined') {
     let startedAt = null;
     let ticker = null;
 
-    const usingCustom = () => document.querySelector('input[name="source"]:checked').value === 'custom';
+    let lastPairs = DEFAULT_PAIRS; // the pool the current game was dealt from, for "Play again"
+    let lastRows = DEFAULT_ROWS;
+    let lastCols = DEFAULT_COLS;
+    let totalPairs = PAIRS_PER_GAME; // pairs in the current deal; the win condition
+
+    const currentSource = () => document.querySelector('input[name="source"]:checked').value;
 
     document.querySelectorAll('input[name="source"]').forEach((radio) => {
       radio.addEventListener('change', () => {
-        customWrap.hidden = !usingCustom();
+        const src = currentSource();
+        customWrap.hidden = src !== 'custom';
+        themedWrap.hidden = src !== 'themed';
         setupError.textContent = '';
       });
     });
+
+    for (let r = 2; r <= MAX_ROWS; r += 1) gridRows.add(new Option(String(r), String(r)));
+    for (let c = 2; c <= MAX_COLS; c += 1) gridCols.add(new Option(String(c), String(c)));
+    gridRows.value = String(DEFAULT_ROWS);
+    gridCols.value = String(DEFAULT_COLS);
+
+    const readGrid = () => ({
+      rows: parseInt(gridRows.value, 10),
+      cols: parseInt(gridCols.value, 10),
+    });
+
+    function refreshGridNote() {
+      const { rows, cols } = readGrid();
+      const ok = isPairableGrid(rows, cols);
+      gridNote.classList.toggle('bad', !ok);
+      gridNote.textContent = ok
+        ? `${rows} × ${cols} — ${gridPairCount(rows, cols)} pairs, ${rows * cols} cards`
+        : `${rows} × ${cols} — one side must be even`;
+      return ok;
+    }
+    [gridRows, gridCols].forEach((sel) => sel.addEventListener('change', () => {
+      refreshGridNote();
+      setupError.textContent = '';
+    }));
+    refreshGridNote();
+
+    // Themed sets come from vocab/manifest.json, fetched at runtime. This needs the
+    // page served over http(s); opened straight from disk (file://) the fetch fails
+    // and the "themed set" option just stays hidden, leaving default + custom intact.
+    fetch('vocab/manifest.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((list) => {
+        const entries = Array.isArray(list) ? list.filter((e) => e && e.file && e.name) : [];
+        if (!entries.length) return;
+        entries.forEach((entry) => {
+          const opt = document.createElement('option');
+          opt.value = entry.file;
+          opt.textContent = entry.name;
+          themedSelect.appendChild(opt);
+        });
+        themedOpt.hidden = false;
+      })
+      .catch(() => { /* themed sets unavailable here — leave the option hidden */ });
+
+    function loadThemedPairs(file) {
+      return fetch(file, { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
+        .then((text) => {
+          const { pairs, errors } = parsePairs(text);
+          if (errors.length) throw new Error(errors[0]);
+          if (!pairs.length) throw new Error('that set is empty');
+          return pairs;
+        });
+    }
 
     function startTimer() {
       startedAt = Date.now();
@@ -191,7 +277,7 @@ if (typeof document !== 'undefined') {
         matchedCount += 1;
         elMatched.textContent = matchedCount;
         resetTurn();
-        if (matchedCount === PAIRS_PER_GAME) finish();
+        if (matchedCount === totalPairs) finish();
       } else {
         setTimeout(() => {
           first.el.classList.remove('flipped');
@@ -219,8 +305,15 @@ if (typeof document !== 'undefined') {
       results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function startGame(pairs) {
-      deck = buildDeck(pickPairs(pairs, PAIRS_PER_GAME));
+    function startGame(pairs, rows, cols) {
+      lastPairs = pairs;
+      lastRows = rows;
+      lastCols = cols;
+      totalPairs = gridPairCount(rows, cols);
+
+      deck = buildDeck(pickPairs(pairs, totalPairs));
+      grid.style.setProperty('--cols', cols);
+      grid.classList.toggle('dense', cols >= 7);
       grid.innerHTML = '';
       deck.forEach((card) => grid.appendChild(renderCard(card)));
 
@@ -235,17 +328,51 @@ if (typeof document !== 'undefined') {
       elForgot.textContent = '0';
       elMatched.textContent = '0';
       elTime.textContent = '00:00';
+      matchedLabel.textContent = `of ${totalPairs} matched`;
 
       results.hidden = true;
       setup.hidden = true;
       board.hidden = false;
     }
 
-    $('start-btn').addEventListener('click', () => {
-      setupError.textContent = '';
+    const startBtn = $('start-btn');
 
-      if (!usingCustom()) {
-        startGame(DEFAULT_PAIRS);
+    function tryStart(pool) {
+      const { rows, cols } = readGrid();
+      if (!isPairableGrid(rows, cols)) {
+        setupError.textContent = `A ${rows} × ${cols} grid can't be split into pairs — make one side even.`;
+        return;
+      }
+      const need = gridPairCount(rows, cols);
+      if (pool.length < need) {
+        setupError.textContent =
+          `That list has ${pool.length} pairs — a ${rows} × ${cols} grid needs ${need}. `
+          + 'Choose a smaller grid or a longer list.';
+        return;
+      }
+      startGame(pool, rows, cols);
+    }
+
+    startBtn.addEventListener('click', () => {
+      setupError.textContent = '';
+      const src = currentSource();
+
+      if (src === 'default') {
+        tryStart(DEFAULT_PAIRS);
+        return;
+      }
+
+      if (src === 'themed') {
+        const file = themedSelect.value;
+        if (!file) {
+          setupError.textContent = 'Pick a themed set first.';
+          return;
+        }
+        startBtn.disabled = true;
+        loadThemedPairs(file)
+          .then((pairs) => tryStart(pairs))
+          .catch((err) => { setupError.textContent = `Could not load that set — ${err.message}.`; })
+          .finally(() => { startBtn.disabled = false; });
         return;
       }
 
@@ -254,17 +381,10 @@ if (typeof document !== 'undefined') {
         setupError.textContent = errors.slice(0, 3).join(' · ');
         return;
       }
-      if (pairs.length < PAIRS_PER_GAME) {
-        setupError.textContent = `Need at least ${PAIRS_PER_GAME} pairs for a 4x4 grid — found ${pairs.length}.`;
-        return;
-      }
-      startGame(pairs);
+      tryStart(pairs);
     });
 
-    $('again-btn').addEventListener('click', () => {
-      const pairs = usingCustom() ? parsePairs(customWords.value).pairs : DEFAULT_PAIRS;
-      startGame(pairs);
-    });
+    $('again-btn').addEventListener('click', () => startGame(lastPairs, lastRows, lastCols));
 
     $('change-btn').addEventListener('click', () => {
       clearInterval(ticker);
@@ -278,6 +398,7 @@ if (typeof document !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DEFAULT_PAIRS, PAIRS_PER_GAME,
+    MAX_ROWS, MAX_COLS, DEFAULT_ROWS, DEFAULT_COLS, isPairableGrid, gridPairCount,
     shuffle, pickPairs, parsePairs, buildDeck, partnerOf, isForgottenMiss, formatTime,
   };
 }

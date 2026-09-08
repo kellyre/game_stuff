@@ -1,0 +1,9 @@
+[
+  { "id": "food",         "name": "Food & drink",     "file": "vocab/food.txt" },
+  { "id": "travel",       "name": "Travel",           "file": "vocab/travel.txt" },
+  { "id": "verbs",        "name": "Common verbs",     "file": "vocab/verbs.txt" },
+  { "id": "numbers-time", "name": "Numbers & time",   "file": "vocab/numbers-time.txt" },
+  { "id": "adjectives",   "name": "Adjectives",       "file": "vocab/adjectives.txt" },
+  { "id": "family",       "name": "Family & people",  "file": "vocab/family.txt" },
+  { "id": "nature",       "name": "Nature & weather", "file": "vocab/nature.txt" }
+]

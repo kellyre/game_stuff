@@ -1,0 +1,31 @@
+# Food & drink — one pair per line, Spanish first: "spanish, english"
+manzana, apple
+plátano, banana
+naranja, orange
+fresa, strawberry
+uva, grape
+limón, lemon
+pan, bread
+queso, cheese
+huevo, egg
+leche, milk
+mantequilla, butter
+carne, meat
+pollo, chicken
+pescado, fish
+arroz, rice
+frijoles, beans
+sopa, soup
+ensalada, salad
+sal, salt
+azúcar, sugar
+miel, honey
+café, coffee
+té, tea
+agua, water
+jugo, juice
+vino, wine
+pastel, cake
+galleta, cookie
+helado, ice cream
+cebolla, onion

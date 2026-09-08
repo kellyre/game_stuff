@@ -1,0 +1,31 @@
+# Common verbs — one pair per line, Spanish first: "spanish, english"
+ser, to be
+tener, to have
+hacer, to do
+ir, to go
+venir, to come
+poder, to be able
+querer, to want
+saber, to know
+ver, to see
+dar, to give
+hablar, to speak
+comer, to eat
+beber, to drink
+vivir, to live
+escribir, to write
+leer, to read
+abrir, to open
+cerrar, to close
+comprar, to buy
+vender, to sell
+pensar, to think
+dormir, to sleep
+correr, to run
+caminar, to walk
+trabajar, to work
+jugar, to play
+llegar, to arrive
+salir, to leave
+poner, to put
+traer, to bring

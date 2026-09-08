@@ -51,6 +51,11 @@
     background: var(--bg); color: var(--ink);
     font: .9rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; resize: vertical;
   }
+  select {
+    font: inherit; margin-top: .5rem; max-width: 100%;
+    padding: .5rem .6rem; border: 1px solid var(--line);
+    border-radius: .5rem; background: var(--bg); color: var(--ink);
+  }
   button {
     font: inherit; font-weight: 600; cursor: pointer;
     border-radius: .55rem; padding: .6rem 1.15rem;
@@ -71,8 +76,23 @@
   .stat span { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
 
   .grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+    gap: clamp(.3rem, 1.4vw, .6rem);
   }
+  .grid.dense { gap: clamp(.22rem, 1vw, .4rem); }
+  .grid.dense .face { padding: .15rem; border-radius: .5rem; }
+  .grid.dense .word { font-size: clamp(.5rem, 1.9vw, .78rem); }
+  .grid.dense .tag { font-size: .5rem; }
+
+  .grid-size { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+  .grid-size label {
+    display: flex; flex-direction: column; gap: .3rem;
+    font-size: .8rem; color: var(--muted);
+  }
+  .grid-size select { margin-top: 0; }
+  #grid-note { font-size: .9rem; align-self: center; }
+  #grid-note.bad { color: var(--es); }
   .card {
     position: relative; aspect-ratio: 1; padding: 0; border: 0; background: none;
     perspective: 800px;
@@ -119,7 +139,7 @@
 <div class="wrap">
   <a class="back" href="index.html">&larr; Back to the collection</a>
   <h1>Spanish Matching Game</h1>
-  <p class="sub">Flip a card, then find its translation. Match all eight pairs.</p>
+  <p class="sub">Flip a card, then find its translation. Match every pair on the board.</p>
 
   <!-- Setup -->
   <section id="setup" class="panel">
@@ -130,6 +150,13 @@
         <span>
           <strong>Use the default words</strong>
           <span class="hint">Eight pairs picked at random from ~60 common Spanish words.</span>
+        </span>
+      </label>
+      <label class="opt" id="themed-opt" hidden>
+        <input type="radio" name="source" value="themed">
+        <span>
+          <strong>Use a themed set</strong>
+          <span class="hint">Common vocabulary grouped by topic.</span>
         </span>
       </label>
       <label class="opt">
@@ -151,10 +178,35 @@ perro, dog
 libro, book
 verde, green"></textarea>
       <p class="hint" style="color:var(--muted);font-size:.85rem;margin:.5rem 0 0">
-        At least 8 pairs. If you give more, 8 are chosen at random each round.
+        Need at least half the grid in pairs (8 for the default 4&times;4).
+        If you give more, the round's pairs are drawn from them at random.
         Separate with a comma, <code>=</code>, tab, or <code> - </code>.
       </p>
     </div>
+
+    <div id="themed-wrap" hidden>
+      <label for="themed-set" class="hint" style="display:block;color:var(--muted);font-size:.85rem;margin-bottom:.25rem">
+        Pick a topic &mdash; each round's pairs are drawn from it at random to fill the grid.
+      </label>
+      <select id="themed-set"></select>
+    </div>
+
+    <fieldset style="margin-top:1rem">
+      <legend>Grid size</legend>
+      <div class="grid-size">
+        <label>Rows
+          <select id="grid-rows"></select>
+        </label>
+        <label>Columns
+          <select id="grid-cols"></select>
+        </label>
+        <span id="grid-note" class="hint"></span>
+      </div>
+      <p class="hint" style="color:var(--muted);font-size:.85rem;margin:.5rem 0 0">
+        Up to 6 &times; 9. One side must be even so the cards pair up. Wide grids
+        get cramped on small screens.
+      </p>
+    </fieldset>
 
     <p id="setup-error" class="error"></p>
     <button id="start-btn">Start game</button>
@@ -166,7 +218,7 @@ verde, green"></textarea>
       <div class="stat"><b id="time">00:00</b><span>Time</span></div>
       <div class="stat"><b id="tries">0</b><span>Tries</span></div>
       <div class="stat"><b id="forgot">0</b><span>Forgotten</span></div>
-      <div class="stat"><b id="matched">0</b><span>of 8 matched</span></div>
+      <div class="stat"><b id="matched">0</b><span id="matched-label">of 8 matched</span></div>
     </div>
     <div id="grid" class="grid"></div>
     <p style="margin-top:1rem">
