@@ -215,11 +215,14 @@ hash from a previous build) don't linger.
 
 The site is a plain static directory served by Caddy over HTTPS. `rsync`
 (not a hand-maintained `scp` file list) so nothing added to the folder is
-ever silently left off a deploy:
+ever silently left off a deploy. `rsync` ignores `.gitignore`, so every
+non-public directory has to be excluded explicitly — note `.claude/`
+alongside `.git`:
 
 ```sh
 # The hand-authored games/tools at the site root:
-rsync -a --delete --exclude .git --exclude .gitignore --exclude tessellarium \
+rsync -a --delete \
+    --exclude .git --exclude .gitignore --exclude .claude --exclude tessellarium \
     ./ reed@funtimes.xobedistuo.com:/opt/sites/funtimes/
 
 # Tessellarium's build output, into its own subdirectory:
