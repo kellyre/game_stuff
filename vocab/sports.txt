@@ -1,0 +1,51 @@
+# Sports & games — one pair per line, Spanish first: "spanish, english"
+fútbol, soccer
+baloncesto, basketball
+béisbol, baseball
+tenis, tennis
+voleibol, volleyball
+natación, swimming
+ciclismo, cycling
+atletismo, track and field
+golf, golf
+boxeo, boxing
+gimnasia, gymnastics
+esquí, skiing
+patinaje, skating
+surf, surfing
+pelota, ball
+equipo, team
+jugador, player
+entrenador, coach
+árbitro, referee
+cancha, court
+campo de juego, playing field
+estadio, stadium
+portería, goal
+punto, point
+marcador, scoreboard
+partido, match
+campeonato, championship
+medalla, medal
+trofeo, trophy
+victoria, win
+derrota, loss
+empate, tie
+ajedrez, chess
+cartas, cards
+dados, dice
+rompecabezas, puzzle
+videojuego, video game
+correr, to run
+saltar, to jump
+nadar, to swim
+lanzar la pelota, to throw the ball
+patear el balón, to kick the ball
+anotar un gol, to score a goal
+ganar el partido, to win the match
+perder el partido, to lose the match
+hacer ejercicio, to exercise
+entrenar todos los días, to train every day
+jugar en equipo, to play as a team
+romper un récord, to break a record
+¿quién va ganando?, who's winning?

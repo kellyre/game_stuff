@@ -1,0 +1,51 @@
+# Exercise & fitness — one pair per line, Spanish first: "spanish, english"
+ejercicio, exercise
+gimnasio, gym
+entrenamiento, workout
+pesas, weights
+mancuerna, dumbbell
+cinta de correr, treadmill
+bicicleta estática, stationary bike
+estiramiento, stretching
+calentamiento, warm-up
+enfriamiento, cool-down
+abdominales, sit-ups
+flexiones, push-ups
+sentadillas, squats
+zancadas, lunges
+correr, to run
+trotar, to jog
+caminar, to walk
+nadar, to swim
+levantar pesas, to lift weights
+hacer yoga, to do yoga
+hacer cardio, to do cardio
+resistencia, endurance
+fuerza, strength
+flexibilidad, flexibility
+equilibrio, balance
+ritmo cardíaco, heart rate
+quemar calorías, to burn calories
+ganar músculo, to build muscle
+perder peso, to lose weight
+mantenerse en forma, to stay in shape
+rutina de ejercicio, workout routine
+clase de ejercicio, fitness class
+entrenador personal, personal trainer
+ropa deportiva, workout clothes
+tenis deportivos, sneakers
+botella de agua, water bottle
+toalla deportiva, gym towel
+estar en forma, to be in shape
+sudar, to sweat
+descansar entre series, to rest between sets
+hacer series de repeticiones, to do sets of reps
+ir al gimnasio, to go to the gym
+hago ejercicio tres veces por semana, I exercise three times a week
+necesito calentar primero, I need to warm up first
+estoy muy adolorido, I'm very sore
+estoy mejorando mi condición física, I'm improving my fitness
+meta de fitness, fitness goal
+plan de entrenamiento, training plan
+descanso activo, active recovery
+día de descanso, rest day

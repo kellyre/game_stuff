@@ -1,0 +1,51 @@
+# Emotions & feelings — one pair per line, Spanish first: "spanish, english"
+feliz, happy
+triste, sad
+enojado, angry
+asustado, scared
+sorprendido, surprised
+nervioso, nervous
+tranquilo, calm
+aburrido, bored
+emocionado, excited
+preocupado, worried
+confundido, confused
+celoso, jealous
+orgulloso, proud
+avergonzado, embarrassed
+agradecido, grateful
+solitario, lonely
+frustrado, frustrated
+contento, content
+deprimido, depressed
+optimista, optimistic
+pesimista, pessimistic
+curioso, curious
+cansado, tired
+relajado, relaxed
+estresado, stressed
+enamorado, in love
+decepcionado, disappointed
+culpable, guilty
+valiente, brave
+tímido, shy
+seguro de sí mismo, self-confident
+inseguro, insecure
+esperanzado, hopeful
+desesperado, desperate
+satisfecho, satisfied
+miedo, fear
+alegría, joy
+tristeza, sadness
+ira, anger
+amor, love
+odio, hate
+estoy feliz, I am happy
+estoy triste, I am sad
+me siento nervioso, I feel nervous
+tengo miedo, I'm afraid
+me encanta esto, I love this
+no me importa, I don't care
+estoy orgulloso de ti, I'm proud of you
+me siento mejor, I feel better
+todo está bien, everything is fine

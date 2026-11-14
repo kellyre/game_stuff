@@ -184,13 +184,19 @@
 
   footer { margin-top: 2rem; color: var(--muted); font-size: .8rem; }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <div class="wrap">
 
-  <a class="back" href="index.html">&larr; Games and Stuff</a>
+  <a class="back" href="index.html" data-en="&larr; Games and Stuff" data-es="&larr; Juegos y cosas">&larr; Games and Stuff</a>
+  <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="es">ES</button>
+  </div>
 
-  <p class="placard">In case of low self-esteem<span>BREAK GLASS</span></p>
+  <p class="placard" data-en="In case of low self-esteem<span>BREAK GLASS</span>" data-es="En caso de baja autoestima<span>ROMPA EL VIDRIO</span>">In case of low self-esteem<span>BREAK GLASS</span></p>
 
   <div class="case" id="case">
     <div class="rivet tl"></div>
@@ -217,11 +223,11 @@
   </div>
 
   <div class="controls">
-    <button class="reset" id="resetBtn" hidden>Reset case</button>
+    <button class="reset" id="resetBtn" hidden data-en="Reset case" data-es="Reiniciar caja">Reset case</button>
     <button class="mute" id="muteBtn" aria-pressed="false">&#128266; Sound on</button>
   </div>
 
-  <footer>No data leaves your browser. Compliments cycle before repeating.</footer>
+  <footer data-en="No data leaves your browser. Compliments cycle before repeating." data-es="Ningún dato sale de tu navegador. Los cumplidos no se repiten hasta que se agota la lista.">No data leaves your browser. Compliments cycle before repeating.</footer>
 </div>
 
 <script src="emergency-compliment.js"></script>

@@ -1,0 +1,51 @@
+# Plants & gardening — one pair per line, Spanish first: "spanish, english"
+planta, plant
+flor, flower
+árbol, tree
+hoja, leaf
+raíz, root
+tallo, stem
+semilla, seed
+rama, branch
+tronco, trunk
+corteza, bark
+pétalo, petal
+fruto, fruit
+jardín, garden
+huerto, vegetable garden
+maceta, flowerpot
+tierra, soil
+abono, fertilizer
+riego, watering
+regadera, watering can
+pala, shovel
+rastrillo, rake
+guantes de jardinería, gardening gloves
+césped, lawn
+hierba, grass
+mala hierba, weed
+cactus, cactus
+rosa, rose
+girasol, sunflower
+tulipán, tulip
+margarita, daisy
+orquídea, orchid
+helecho, fern
+musgo, moss
+bambú, bamboo
+hiedra, ivy
+invernadero, greenhouse
+vivero, plant nursery
+cosecha, harvest
+germinar, to germinate
+plantar, to plant
+sembrar, to sow
+regar las plantas, to water the plants
+cortar el césped, to mow the lawn
+podar el árbol, to prune the tree
+arrancar la mala hierba, to pull weeds
+florecer, to bloom
+crecer, to grow
+las flores están floreciendo, the flowers are blooming
+esta planta necesita sol, this plant needs sunlight
+cuido mi jardín todos los días, I tend my garden every day

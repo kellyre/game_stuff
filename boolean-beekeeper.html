@@ -146,14 +146,20 @@
   }
   @media (max-width: 620px) { .mobile-pad { display: grid; } .tile { border-width: 1px; } .wrap { width: min(100% - 12px, 1180px); } }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div>
       <a class="crumb" href="index.html">&larr; funtimes</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <h1>Boolean Beekeeper</h1>
-      <p class="lede">Rotate logic flowers, release the bees, and make the honey jars compute the right answer.</p>
+      <p class="lede" data-en="Rotate logic flowers, release the bees, and make the honey jars compute the right answer." data-es="Rota flores lógicas, libera a las abejas, y haz que los frascos de miel calculen la respuesta correcta.">Rotate logic flowers, release the bees, and make the honey jars compute the right answer.</p>
     </div>
     <div class="sound-row" aria-label="Game options">
       <button id="muteBtn" type="button">Sound: on</button>
@@ -162,15 +168,15 @@
   </header>
 
   <section id="lesson" class="lesson" aria-label="Learning mode">
-    <h2>Learning mode: three calm steps before the honey math.</h2>
+    <h2 data-en="Learning mode: three calm steps before the honey math." data-es="Modo de aprendizaje: tres pasos tranquilos antes de las matemáticas de miel.">Learning mode: three calm steps before the honey math.</h2>
     <ol>
-      <li>Move the orange beekeeper cursor with arrows or WASD.</li>
-      <li>Press Space/Z to rotate the selected lane or flower clockwise. X rotates backward.</li>
-      <li>Press Enter or the Run swarm button. Yellow bees mean 1; cloudy jars mean 0.</li>
+      <li data-en="Move the orange beekeeper cursor with arrows or WASD." data-es="Mueve el cursor naranja del apicultor con flechas o WASD.">Move the orange beekeeper cursor with arrows or WASD.</li>
+      <li data-en="Press Space/Z to rotate the selected lane or flower clockwise. X rotates backward." data-es="Presiona Espacio/Z para rotar el carril o flor seleccionada en sentido horario. X rota en sentido contrario.">Press Space/Z to rotate the selected lane or flower clockwise. X rotates backward.</li>
+      <li data-en="Press Enter or the Run swarm button. Yellow bees mean 1; cloudy jars mean 0." data-es="Presiona Enter o el botón Liberar enjambre. Las abejas amarillas significan 1; los frascos nublados significan 0.">Press Enter or the Run swarm button. Yellow bees mean 1; cloudy jars mean 0.</li>
     </ol>
     <div class="controls">
-      <button id="lessonNext" class="primary" type="button">I can rotate flowers</button>
-      <button id="skipLesson" type="button">Skip learning</button>
+      <button id="lessonNext" class="primary" type="button" data-en="I can rotate flowers" data-es="Puedo rotar flores">I can rotate flowers</button>
+      <button id="skipLesson" type="button" data-en="Skip learning" data-es="Omitir tutorial">Skip learning</button>
     </div>
   </section>
 
@@ -201,9 +207,9 @@
       </div>
       <div class="message" id="message"><strong>Welcome.</strong> Rotate the flowers so the lit bees match the target jars.</div>
       <div class="controls">
-        <button id="runBtn" class="primary" type="button">Run swarm</button>
-        <button id="undoBtn" type="button">Undo</button>
-        <button id="restartBtn" type="button">Restart</button>
+        <button id="runBtn" class="primary" type="button" data-en="Run swarm" data-es="Liberar enjambre">Run swarm</button>
+        <button id="undoBtn" type="button" data-en="Undo" data-es="Deshacer">Undo</button>
+        <button id="restartBtn" type="button" data-en="Restart" data-es="Reiniciar">Restart</button>
       </div>
       <div class="selected-help" id="selectedHelp">Select a tile to read its bee rules.</div>
     </aside>

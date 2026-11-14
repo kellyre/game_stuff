@@ -1,0 +1,51 @@
+# Insects & small creatures — one pair per line, Spanish first: "spanish, english"
+insecto, insect
+hormiga, ant
+abeja, bee
+avispa, wasp
+mosca, fly
+mosquito, mosquito
+mariposa, butterfly
+polilla, moth
+escarabajo, beetle
+grillo, cricket
+saltamontes, grasshopper
+libélula, dragonfly
+luciérnaga, firefly
+araña, spider
+telaraña, spiderweb
+ciempiés, centipede
+gusano, worm
+oruga, caterpillar
+caracol, snail
+babosa, slug
+cucaracha, cockroach
+pulga, flea
+garrapata, tick
+termita, termite
+colmena, beehive
+hormiguero, anthill
+aguijón, stinger
+ala, wing
+antena, antenna
+capullo, cocoon
+metamorfosis, metamorphosis
+picar, to sting
+volar, to fly
+arrastrarse, to crawl
+las abejas hacen miel, bees make honey
+las hormigas trabajan juntas, ants work together
+una araña tejió una telaraña, a spider spun a web
+me picó un mosquito, a mosquito bit me
+ten cuidado con las avispas, be careful with wasps
+las mariposas son hermosas, butterflies are beautiful
+miel, honey
+polinizar, to pollinate
+enjambre, swarm
+plaga, pest
+repelente de insectos, insect repellent
+especie de insecto, insect species
+ciclo de vida, life cycle
+huevo de insecto, insect egg
+larva, larva
+exoesqueleto, exoskeleton

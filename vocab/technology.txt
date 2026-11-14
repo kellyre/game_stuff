@@ -1,0 +1,51 @@
+# Technology & devices — one pair per line, Spanish first: "spanish, english"
+computadora, computer
+teléfono, phone
+celular, cellphone
+tableta, tablet
+pantalla, screen
+teclado, keyboard
+ratón, mouse
+impresora, printer
+cámara, camera
+audífonos, headphones
+altavoz, speaker
+cargador, charger
+batería, battery
+cable, cable
+internet, internet
+wifi, wifi
+contraseña, password
+correo electrónico, email
+mensaje de texto, text message
+aplicación, app
+programa, software
+archivo, file
+carpeta, folder
+descargar, to download
+subir, to upload
+guardar, to save
+borrar, to delete
+imprimir, to print
+encender, to turn on
+apagar, to turn off
+reiniciar, to restart
+conectar, to connect
+desconectar, to disconnect
+actualizar, to update
+buscar en internet, to search online
+enviar un mensaje, to send a message
+tomar una foto, to take a photo
+grabar un video, to record a video
+control remoto, remote control
+televisor, television
+robot, robot
+inteligencia artificial, artificial intelligence
+red social, social network
+navegador, browser
+sitio web, website
+nube, cloud
+copia de seguridad, backup
+mi computadora no funciona, my computer isn't working
+se me acabó la batería, my battery died
+¿tienes wifi aquí?, do you have wifi here?

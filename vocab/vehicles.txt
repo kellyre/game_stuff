@@ -1,0 +1,51 @@
+# Vehicles & transportation — one pair per line, Spanish first: "spanish, english"
+carro, car
+autobús, bus
+camión, truck
+motocicleta, motorcycle
+bicicleta, bicycle
+tren, train
+avión, airplane
+barco, ship
+bote, boat
+helicóptero, helicopter
+metro, subway
+taxi, taxi
+camioneta, van
+tractor, tractor
+ambulancia, ambulance
+patrulla, police car
+camión de bomberos, fire truck
+volante, steering wheel
+llanta, tire
+motor, engine
+freno, brake
+acelerador, gas pedal
+espejo retrovisor, rearview mirror
+cinturón de seguridad, seatbelt
+gasolina, gasoline
+estación de servicio, gas station
+carretera, highway
+calle, street
+semáforo, traffic light
+señal de tráfico, traffic sign
+intersección, intersection
+puente, bridge
+túnel, tunnel
+estacionamiento, parking lot
+licencia de conducir, driver's license
+placa, license plate
+casco, helmet
+conducir, to drive
+manejar, to drive
+estacionar, to park
+acelerar, to speed up
+frenar, to brake
+dar vuelta, to turn
+cruzar la calle, to cross the street
+tomar el autobús, to take the bus
+perder el tren, to miss the train
+¿cómo llego a la estación?, how do I get to the station?
+el tráfico está pesado, traffic is heavy
+abróchate el cinturón, buckle your seatbelt
+viajar en avión, to travel by plane

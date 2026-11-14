@@ -1,0 +1,51 @@
+# Cooking methods & flavors — one pair per line, Spanish first: "spanish, english"
+hornear, to bake
+freír, to fry
+asar, to grill
+hervir, to boil
+cocer al vapor, to steam
+saltear, to sauté
+guisar, to stew
+hervir a fuego lento, to simmer
+mezclar, to mix
+batir, to beat
+amasar, to knead
+pelar, to peel
+picar, to chop
+rebanar, to slice
+rallar, to grate
+marinar, to marinate
+sazonar, to season
+condimentar, to season food
+dulce, sweet
+salado, salty
+amargo, bitter
+ácido, sour
+picante, spicy
+suave, mild
+sabroso, tasty
+soso, bland
+crujiente, crunchy
+jugoso, juicy
+cremoso, creamy
+tierno, tender
+sal, salt
+pimienta, pepper
+azúcar, sugar
+aceite, oil
+vinagre, vinegar
+especias, spices
+hierbas aromáticas, herbs
+ajo, garlic
+cebolla, onion
+receta fácil, easy recipe
+tiempo de cocción, cooking time
+temperatura del horno, oven temperature
+este plato está delicioso, this dish is delicious
+necesita más sal, it needs more salt
+está demasiado picante, it's too spicy
+déjalo cocinar a fuego lento, let it simmer
+revuelve constantemente, stir constantly
+precalienta el horno, preheat the oven
+deja reposar la masa, let the dough rest
+sirve caliente, serve hot

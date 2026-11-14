@@ -1,0 +1,51 @@
+# Pets & farm animals — one pair per line, Spanish first: "spanish, english"
+perro, dog
+gato, cat
+pez, fish
+pájaro, bird
+hámster, hamster
+conejo, rabbit
+tortuga, turtle
+caballo, horse
+vaca, cow
+toro, bull
+cerdo, pig
+oveja, sheep
+cabra, goat
+gallina, hen
+gallo, rooster
+pollito, chick
+pavo, turkey
+pato, duck
+ganso, goose
+burro, donkey
+mula, mule
+llama, llama
+cachorro, puppy
+gatito, kitten
+establo, stable
+corral, pen
+granero, barn
+gallinero, henhouse
+jaula, cage
+collar para perro, dog collar
+correa, leash
+comida para mascotas, pet food
+veterinario, veterinarian
+lana, wool
+leche, milk
+huevo, egg
+pasto, pasture
+heno, hay
+potro, colt
+cuidar animales, to take care of animals
+alimentar a los animales, to feed the animals
+pasear al perro, to walk the dog
+ordeñar la vaca, to milk the cow
+ladrar, to bark
+maullar, to meow
+mugir, to moo
+relinchar, to neigh
+criar animales, to raise animals
+el perro ladra mucho, the dog barks a lot
+el gato duerme todo el día, the cat sleeps all day

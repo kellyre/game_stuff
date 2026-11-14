@@ -1,0 +1,51 @@
+# Business & office life — one pair per line, Spanish first: "spanish, english"
+oficina, office
+jefe, boss
+empleado, employee
+empresa, company
+reunión de trabajo, business meeting
+correo electrónico, email
+informe, report
+presentación, presentation
+proyecto, project
+plazo, deadline
+horario de trabajo, work schedule
+sueldo, salary
+contrato, contract
+entrevista de trabajo, job interview
+currículum, résumé
+renuncia, resignation
+despido, layoff
+ascenso, promotion
+colega, colleague
+cliente, client
+proveedor, supplier
+factura, invoice
+presupuesto, budget
+departamento, department
+gerente, manager
+recursos humanos, human resources
+junta directiva, board of directors
+meta, goal
+estrategia, strategy
+tarea pendiente, pending task
+firmar un contrato, to sign a contract
+programar una reunión, to schedule a meeting
+enviar un correo, to send an email
+cumplir con el plazo, to meet the deadline
+trabajar horas extra, to work overtime
+tomar un día libre, to take a day off
+renunciar al trabajo, to quit the job
+contratar personal, to hire staff
+despedir a alguien, to fire someone
+negociar un contrato, to negotiate a contract
+la reunión empieza a las nueve, the meeting starts at nine
+tengo mucho trabajo, I have a lot of work
+estoy en una llamada, I'm on a call
+necesito el informe para hoy, I need the report today
+trabajo desde casa, I work from home
+mi jefe está muy ocupado, my boss is very busy
+buen trabajo en equipo, great teamwork
+socio de negocios, business partner
+acuerdo comercial, business deal
+éxito profesional, professional success

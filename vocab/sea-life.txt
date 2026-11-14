@@ -1,0 +1,51 @@
+# Sea & ocean life — one pair per line, Spanish first: "spanish, english"
+océano, ocean
+mar, sea
+ola, wave
+playa, beach
+arena, sand
+coral, coral
+arrecife, reef
+pez, fish
+tiburón, shark
+delfín, dolphin
+ballena, whale
+pulpo, octopus
+calamar, squid
+cangrejo, crab
+langosta, lobster
+camarón, shrimp
+almeja, clam
+ostra, oyster
+estrella de mar, starfish
+medusa, jellyfish
+caballito de mar, seahorse
+tortuga marina, sea turtle
+foca, seal
+morsa, walrus
+alga marina, seaweed
+concha, shell
+corriente marina, ocean current
+marea, tide
+marea alta, high tide
+marea baja, low tide
+profundidad, depth
+buceo, diving
+snorkel, snorkeling
+submarino, submarine
+acuario, aquarium
+costa, coast
+muelle, pier
+faro, lighthouse
+isla, island
+bucear, to dive
+nadar en el mar, to swim in the sea
+pescar, to fish
+las olas son grandes hoy, the waves are big today
+el agua está fría, the water is cold
+vimos un delfín, we saw a dolphin
+la marea está subiendo, the tide is coming in
+arena mojada, wet sand
+agua salada, salt water
+criatura marina, sea creature
+vida marina, marine life

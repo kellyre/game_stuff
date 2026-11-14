@@ -1,0 +1,51 @@
+# Shopping & money — one pair per line, Spanish first: "spanish, english"
+dinero, money
+precio, price
+efectivo, cash
+tarjeta de crédito, credit card
+tarjeta de débito, debit card
+cambio, change
+recibo, receipt
+descuento, discount
+oferta, sale
+caja, cash register
+cajero, cashier
+cliente, customer
+vendedor, salesperson
+carrito de compras, shopping cart
+bolsa de compras, shopping bag
+probador, fitting room
+talla, size
+etiqueta, price tag
+factura, invoice
+presupuesto, budget
+ahorros, savings
+gratis, free
+caro, expensive
+barato, cheap
+¿cuánto cuesta?, how much does it cost?
+¿tiene esto en otra talla?, do you have this in another size?
+quiero devolver esto, I want to return this
+¿aceptan tarjeta?, do you accept cards?
+¿puedo pagar en efectivo?, can I pay in cash?
+está en oferta, it's on sale
+es muy caro, it's very expensive
+es una ganga, it's a bargain
+voy de compras, I'm going shopping
+hacer fila, to wait in line
+probarse la ropa, to try on clothes
+pedir un reembolso, to ask for a refund
+comparar precios, to compare prices
+pagar la cuenta, to pay the bill
+dejar propina, to leave a tip
+firmar el recibo, to sign the receipt
+mercado de pulgas, flea market
+centro comercial, shopping mall
+venta de garaje, garage sale
+temporada de rebajas, sale season
+cupón, coupon
+impuesto, tax
+moneda, coin
+billete, bill
+billetera, wallet
+cuenta bancaria, bank account

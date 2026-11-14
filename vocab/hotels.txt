@@ -1,0 +1,51 @@
+# Hotels & lodging — one pair per line, Spanish first: "spanish, english"
+hotel, hotel
+habitación, room
+recepción, front desk
+recepcionista, receptionist
+reservación, reservation
+huésped, guest
+llave de la habitación, room key
+tarjeta de acceso, key card
+equipaje, luggage
+maleta, suitcase
+botones, bellhop
+ascensor, elevator
+piscina, pool
+desayuno incluido, breakfast included
+servicio de habitación, room service
+aire acondicionado, air conditioning
+calefacción, heating
+toallas limpias, clean towels
+ropa de cama, bed linens
+caja fuerte, safe
+minibar, minibar
+vista al mar, ocean view
+cama matrimonial, double bed
+cama individual, single bed
+check-in, check-in
+check-out, check-out
+tarifa por noche, nightly rate
+depósito, deposit
+cancelación, cancellation
+estacionamiento, parking
+wifi gratis, free wifi
+conserje, concierge
+limpieza de habitación, housekeeping
+no molestar, do not disturb
+ruido, noise
+quejas, complaints
+reservar una habitación, to book a room
+hacer el check-in, to check in
+hacer el check-out, to check out
+pedir una habitación más tranquila, to ask for a quieter room
+¿tiene habitaciones disponibles?, do you have any rooms available?
+quisiera hacer una reservación, I would like to make a reservation
+¿a qué hora es el check-out?, what time is checkout?
+necesito toallas limpias, I need clean towels
+el aire acondicionado no funciona, the air conditioning isn't working
+¿el desayuno está incluido?, is breakfast included?
+quiero una habitación con vista, I want a room with a view
+la habitación está muy ruidosa, the room is very noisy
+gracias por su estadía, thank you for your stay
+que disfrute su viaje, enjoy your trip

@@ -205,15 +205,21 @@
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <main>
   <section class="console" id="console" aria-label="The Deliberator console">
     <div class="topline">
       <div>
-        <a class="back" href="index.html">&larr; Games and Stuff</a>
+        <a class="back" href="index.html" data-en="&larr; Games and Stuff" data-es="&larr; Juegos y cosas">&larr; Games and Stuff</a>
+        <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="es">ES</button>
+        </div>
         <h1>The Deliberator</h1>
-        <p class="tagline">State your problem. Wait for absolutely anything to happen.</p>
+        <p class="tagline" data-en="State your problem. Wait for absolutely anything to happen." data-es="Expón tu problema. Espera a que pase absolutamente cualquier cosa.">State your problem. Wait for absolutely anything to happen.</p>
       </div>
       <div class="serial" aria-hidden="true">Municipal Certainty Unit<br>Model 0.5b<br>Calibrated: roughly</div>
     </div>
@@ -236,12 +242,12 @@
         </div>
 
         <div class="dilemma">
-          <label for="dilemma">Dilemma intake aperture</label>
-          <textarea id="dilemma" placeholder="State your dilemma (optional; will be ignored)." autocomplete="off"></textarea>
+          <label for="dilemma" data-en="Dilemma intake aperture" data-es="Abertura de admisión de dilemas">Dilemma intake aperture</label>
+          <textarea id="dilemma" placeholder="State your dilemma (optional; will be ignored)." data-en-placeholder="State your dilemma (optional; will be ignored)." data-es-placeholder="Expón tu dilema (opcional; será ignorado)." autocomplete="off"></textarea>
         </div>
 
         <div class="log-card">
-          <strong>Deliberation log</strong>
+          <strong data-en="Deliberation log" data-es="Registro de deliberación">Deliberation log</strong>
           <div class="log" id="log" aria-live="polite" aria-label="Scrolling deliberation status log"><p>Awaiting a burden of choice.</p></div>
         </div>
       </div>
@@ -249,23 +255,23 @@
       <div class="right-bank">
         <div class="action-zone">
           <div>
-            <span class="warning">For use in moments of indecision only</span>
+            <span class="warning" data-en="For use in moments of indecision only" data-es="Para usar solo en momentos de indecisión">For use in moments of indecision only</span>
           </div>
           <div class="button-wrap">
-            <button class="big-button" id="deliberateBtn">Deliberate</button>
+            <button class="big-button" id="deliberateBtn" data-en="Deliberate" data-es="Deliberar">Deliberate</button>
             <button class="mute" id="muteBtn" aria-pressed="false">Sound on</button>
           </div>
         </div>
 
         <div class="receipt-area">
-          <span class="slot-label">Receipt verdict slot</span>
+          <span class="slot-label" data-en="Receipt verdict slot" data-es="Ranura del veredicto">Receipt verdict slot</span>
           <div class="slot" aria-hidden="true"></div>
           <div class="paper-well" aria-live="polite">
             <div class="receipt" id="receipt">
               <div class="paper">
                 <span class="stamp">OFFICIAL</span>
                 <p class="decision-text" id="decisionText">DECISION: Pending.</p>
-                <p class="fine-print">The Deliberator accepts no responsibility for decisions, non-decisions, snacks, staircases, or plants.</p>
+                <p class="fine-print" data-en="The Deliberator accepts no responsibility for decisions, non-decisions, snacks, staircases, or plants." data-es="El Deliberador no se responsabiliza por decisiones, no-decisiones, bocadillos, escaleras, o plantas.">The Deliberator accepts no responsibility for decisions, non-decisions, snacks, staircases, or plants.</p>
               </div>
             </div>
           </div>

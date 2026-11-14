@@ -1,0 +1,51 @@
+# Personal care & bathroom — one pair per line, Spanish first: "spanish, english"
+baño, bathroom
+ducha, shower
+bañera, bathtub
+inodoro, toilet
+lavabo, bathroom sink
+espejo, mirror
+toalla, towel
+jabón, soap
+champú, shampoo
+acondicionador, conditioner
+cepillo de dientes, toothbrush
+pasta de dientes, toothpaste
+hilo dental, dental floss
+peine, comb
+cepillo para el cabello, hairbrush
+secador de pelo, hair dryer
+maquillaje, makeup
+crema, lotion
+desodorante, deodorant
+perfume, perfume
+rasuradora, razor
+corte de uñas, nail clipper
+esmalte de uñas, nail polish
+papel higiénico, toilet paper
+bastoncillo de algodón, cotton swab
+bañarse, to bathe
+ducharse, to shower
+lavarse las manos, to wash your hands
+lavarse la cara, to wash your face
+cepillarse el pelo, to brush your hair
+cepillarse los dientes, to brush your teeth
+secarse, to dry off
+afeitarse, to shave
+maquillarse, to put on makeup
+cortarse las uñas, to cut your nails
+peinarse, to comb your hair
+ponerse perfume, to put on perfume
+lavarse el pelo, to wash your hair
+necesito una toalla limpia, I need a clean towel
+¿dónde está el jabón?, where is the soap?
+se me acabó el champú, I ran out of shampoo
+tengo la piel sensible, I have sensitive skin
+rutina de cuidado facial, skincare routine
+higiene personal, personal hygiene
+agua tibia, warm water
+agua fría, cold water
+báscula de baño, bathroom scale
+gorro de ducha, shower cap
+pantuflas, slippers
+bata de baño, bathrobe

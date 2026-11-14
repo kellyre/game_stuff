@@ -1,0 +1,51 @@
+# Greetings & small talk — one pair per line, Spanish first: "spanish, english"
+hola, hello
+adiós, goodbye
+buenos días, good morning
+buenas tardes, good afternoon
+buenas noches, good evening
+¿cómo estás?, how are you?
+estoy bien, I'm fine
+¿cómo te llamas?, what's your name?
+me llamo Ana, my name is Ana
+mucho gusto, nice to meet you
+igualmente, likewise
+por favor, please
+gracias, thank you
+de nada, you're welcome
+perdón, excuse me
+lo siento, I'm sorry
+con permiso, pardon me
+¿qué tal?, what's up?
+nos vemos, see you later
+hasta luego, see you later
+hasta mañana, see you tomorrow
+hasta pronto, see you soon
+bienvenido, welcome
+felicidades, congratulations
+buena suerte, good luck
+salud, cheers
+¿de dónde eres?, where are you from?
+soy de México, I'm from Mexico
+¿cuántos años tienes?, how old are you?
+tengo veinte años, I am twenty years old
+¿a qué te dedicas?, what do you do?
+encantado de conocerte, pleased to meet you
+¿hablas inglés?, do you speak English?
+hablo un poco de español, I speak a little Spanish
+no entiendo, I don't understand
+¿puedes repetir eso?, can you repeat that?
+más despacio por favor, slower please
+¿cómo se dice esto?, how do you say this?
+cuídate, take care
+que tengas un buen día, have a good day
+feliz cumpleaños, happy birthday
+feliz año nuevo, happy new year
+te extraño, I miss you
+te quiero, I love you
+qué alegría verte, so happy to see you
+ha pasado mucho tiempo, it's been a long time
+saludos a tu familia, greetings to your family
+estamos en contacto, let's keep in touch
+que descanses, rest well
+dulces sueños, sweet dreams

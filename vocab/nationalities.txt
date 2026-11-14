@@ -1,0 +1,51 @@
+# Nationalities & languages — one pair per line, Spanish first: "spanish, english"
+mexicano, Mexican
+español, Spanish
+estadounidense, American
+canadiense, Canadian
+británico, British
+francés, French
+alemán, German
+italiano, Italian
+portugués, Portuguese
+brasileño, Brazilian
+argentino, Argentine
+chileno, Chilean
+colombiano, Colombian
+peruano, Peruvian
+cubano, Cuban
+chino, Chinese
+japonés, Japanese
+coreano, Korean
+indio, Indian
+ruso, Russian
+árabe, Arab
+egipcio, Egyptian
+nigeriano, Nigerian
+australiano, Australian
+neozelandés, New Zealander
+griego, Greek
+turco, Turkish
+polaco, Polish
+holandés, Dutch
+sueco, Swedish
+noruego, Norwegian
+irlandés, Irish
+escocés, Scottish
+galés, Welsh
+idioma, language
+inglés, English
+bilingüe, bilingual
+multilingüe, multilingual
+políglota, polyglot
+lengua materna, native language
+segundo idioma, second language
+acento, accent
+dialecto, dialect
+traducir, to translate
+hablar con fluidez, to speak fluently
+aprender un idioma, to learn a language
+¿qué nacionalidad tienes?, what's your nationality?
+soy de nacionalidad mexicana, I am of Mexican nationality
+hablo tres idiomas, I speak three languages
+estoy aprendiendo español, I am learning Spanish

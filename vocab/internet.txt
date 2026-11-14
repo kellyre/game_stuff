@@ -1,0 +1,51 @@
+# Internet & social media — one pair per line, Spanish first: "spanish, english"
+internet, internet
+sitio web, website
+página web, web page
+enlace, link
+navegador, browser
+buscador, search engine
+correo electrónico, email
+red social, social network
+perfil, profile
+publicación, post
+comentario, comment
+me gusta, like
+compartir, to share
+seguidor, follower
+seguir a alguien, to follow someone
+mensaje directo, direct message
+historia, story
+transmisión en vivo, livestream
+video viral, viral video
+etiqueta, hashtag
+contraseña, password
+nombre de usuario, username
+iniciar sesión, to log in
+cerrar sesión, to log out
+crear una cuenta, to create an account
+conexión a internet, internet connection
+velocidad de internet, internet speed
+wifi, wifi
+datos móviles, mobile data
+descargar un archivo, to download a file
+subir una foto, to upload a photo
+navegar en internet, to browse the internet
+buscar información, to search for information
+hacer una videollamada, to make a video call
+chatear, to chat
+bloquear a alguien, to block someone
+reportar un problema, to report a problem
+comprar en línea, to shop online
+pagar en línea, to pay online
+banco en línea, online banking
+estafa en línea, online scam
+virus informático, computer virus
+seguridad en línea, online security
+privacidad, privacy
+anuncio, advertisement
+ventana emergente, pop-up
+mi internet está lento, my internet is slow
+se me cayó la conexión, my connection dropped
+no tengo señal, I don't have signal
+actualiza la página, refresh the page

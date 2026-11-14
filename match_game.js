@@ -1,6 +1,6 @@
 'use strict';
 
-/* Spanish/English matching game.
+/* Spanish/English matching game + flashcards.
    Pure helpers are exported at the bottom for node-based tests. */
 
 const DEFAULT_PAIRS = [
@@ -30,6 +30,11 @@ const MAX_ROWS = 6;
 const MAX_COLS = 9;
 const DEFAULT_ROWS = 4;
 const DEFAULT_COLS = 4;
+
+// Flashcards: how many of the last draws a card is barred from repeating in,
+// and how much more likely a missed card is to be drawn than a fresh one.
+const FLASH_NO_REPEAT_WINDOW = 5;
+const FLASH_MISSED_WEIGHT = 3;
 
 function isPairableGrid(rows, cols) {
   return Number.isInteger(rows) && Number.isInteger(cols)
@@ -111,20 +116,126 @@ function formatTime(totalSeconds) {
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
+/* Flashcards: each word pair becomes two independent cards — one direction
+   quizzes Spanish and expects the English answer, the other quizzes English
+   and expects the Spanish answer. Missing one doesn't affect the other. */
+function buildFlashItems(pairs) {
+  const items = [];
+  pairs.forEach(([es, en], pairId) => {
+    items.push({
+      key: `${pairId}-es2en`, pairId, dir: 'es2en',
+      promptLang: 'es', promptWord: es, answerLang: 'en', answerWord: en,
+    });
+    items.push({
+      key: `${pairId}-en2es`, pairId, dir: 'en2es',
+      promptLang: 'en', promptWord: en, answerLang: 'es', answerWord: es,
+    });
+  });
+  return items;
+}
+
+/* Picks the next flashcard: cards marked missed are weighted so they come up
+   more often, and a card shown in the last FLASH_NO_REPEAT_WINDOW draws is
+   excluded when the pool is big enough to allow it. Pure — the caller owns
+   `missedKeys`/`recentKeys` and updates them after the pick. */
+function pickNextFlashItem(items, missedKeys, recentKeys, rng = Math.random) {
+  const recentSet = new Set(recentKeys.slice(-FLASH_NO_REPEAT_WINDOW));
+  const candidates = items.filter((it) => !recentSet.has(it.key));
+  const pool = candidates.length ? candidates : items;
+
+  const weighted = [];
+  pool.forEach((it) => {
+    const weight = missedKeys.has(it.key) ? FLASH_MISSED_WEIGHT : 1;
+    for (let i = 0; i < weight; i += 1) weighted.push(it);
+  });
+  return weighted[Math.floor(rng() * weighted.length)];
+}
+
 /* ---------- DOM wiring (skipped under node) ---------- */
 
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const $ = (id) => document.getElementById(id);
+    const currentLang = () => (window.siteLang ? window.siteLang.get() : 'en');
+
+    /* ---------- Tabs ---------- */
+
+    const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+    const tabPanels = { match: $('tab-match'), flash: $('tab-flash') };
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', String(active));
+        });
+        Object.entries(tabPanels).forEach(([key, el]) => { el.hidden = key !== btn.dataset.tab; });
+      });
+    });
+
+    /* ---------- Shared: themed-set manifest ---------- */
+
+    const themedSelect = $('themed-set');
+    const themedOpt = $('themed-opt');
+    const fcThemedSelect = $('fc-themed-set');
+    const fcThemedOpt = $('fc-themed-opt');
+
+    let manifestEntries = [];
+
+    function relabelThemedOptions() {
+      if (!manifestEntries.length) return;
+      const byFile = new Map(manifestEntries.map((e) => [e.file, e]));
+      [themedSelect, fcThemedSelect].forEach((sel) => {
+        Array.from(sel.options).forEach((opt) => {
+          const entry = byFile.get(opt.value);
+          if (!entry) return;
+          opt.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
+        });
+      });
+    }
+
+    // Themed sets come from vocab/manifest.json, fetched at runtime. This needs the
+    // page served over http(s); opened straight from disk (file://) the fetch fails
+    // and the "themed set" option just stays hidden, leaving default + custom intact.
+    fetch('vocab/manifest.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((list) => {
+        const entries = Array.isArray(list) ? list.filter((e) => e && e.file && e.name) : [];
+        if (!entries.length) return;
+        manifestEntries = entries;
+        entries.forEach((entry) => {
+          [themedSelect, fcThemedSelect].forEach((sel) => {
+            const opt = document.createElement('option');
+            opt.value = entry.file;
+            opt.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
+            sel.appendChild(opt);
+          });
+        });
+        themedOpt.hidden = false;
+        fcThemedOpt.hidden = false;
+      })
+      .catch(() => { /* themed sets unavailable here — leave the option hidden */ });
+
+    function loadThemedPairs(file) {
+      return fetch(file, { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
+        .then((text) => {
+          const { pairs, errors } = parsePairs(text);
+          if (errors.length) throw new Error(errors[0]);
+          if (!pairs.length) throw new Error('that set is empty');
+          return pairs;
+        });
+    }
+
+    /* ---------- Matching game ---------- */
+
     const setup = $('setup');
     const board = $('board');
     const grid = $('grid');
     const results = $('results');
     const customWrap = $('custom-wrap');
     const customWords = $('custom-words');
-    const themedOpt = $('themed-opt');
     const themedWrap = $('themed-wrap');
-    const themedSelect = $('themed-set');
     const setupError = $('setup-error');
     const elTries = $('tries');
     const elForgot = $('forgot');
@@ -186,35 +297,6 @@ if (typeof document !== 'undefined') {
       setupError.textContent = '';
     }));
     refreshGridNote();
-
-    // Themed sets come from vocab/manifest.json, fetched at runtime. This needs the
-    // page served over http(s); opened straight from disk (file://) the fetch fails
-    // and the "themed set" option just stays hidden, leaving default + custom intact.
-    fetch('vocab/manifest.json', { cache: 'no-cache' })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((list) => {
-        const entries = Array.isArray(list) ? list.filter((e) => e && e.file && e.name) : [];
-        if (!entries.length) return;
-        entries.forEach((entry) => {
-          const opt = document.createElement('option');
-          opt.value = entry.file;
-          opt.textContent = entry.name;
-          themedSelect.appendChild(opt);
-        });
-        themedOpt.hidden = false;
-      })
-      .catch(() => { /* themed sets unavailable here — leave the option hidden */ });
-
-    function loadThemedPairs(file) {
-      return fetch(file, { cache: 'no-cache' })
-        .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
-        .then((text) => {
-          const { pairs, errors } = parsePairs(text);
-          if (errors.length) throw new Error(errors[0]);
-          if (!pairs.length) throw new Error('that set is empty');
-          return pairs;
-        });
-    }
 
     function startTimer() {
       startedAt = Date.now();
@@ -328,7 +410,8 @@ if (typeof document !== 'undefined') {
       elForgot.textContent = '0';
       elMatched.textContent = '0';
       elTime.textContent = '00:00';
-      matchedLabel.textContent = `of ${totalPairs} matched`;
+      matchedLabel.textContent = currentLang() === 'es'
+        ? `de ${totalPairs} encontrados` : `of ${totalPairs} matched`;
 
       results.hidden = true;
       setup.hidden = true;
@@ -392,6 +475,180 @@ if (typeof document !== 'undefined') {
       results.hidden = true;
       setup.hidden = false;
     });
+
+    /* ---------- Flashcards ---------- */
+
+    const fcSetup = $('fc-setup');
+    const fcBoard = $('fc-board');
+    const fcCustomWrap = $('fc-custom-wrap');
+    const fcCustomWords = $('fc-custom-words');
+    const fcThemedWrap = $('fc-themed-wrap');
+    const fcSetupError = $('fc-setup-error');
+    const fcStartBtn = $('fc-start-btn');
+    const fcChangeBtn = $('fc-change-btn');
+
+    const flashCard = $('flash-card');
+    const flashBackFace = $('flash-back-face');
+    const flashFrontFace = $('flash-front-face');
+    const flashPromptWord = $('flash-prompt-word');
+    const flashPromptTag = $('flash-prompt-tag');
+    const flashAnswerWord = $('flash-answer-word');
+    const flashAnswerTag = $('flash-answer-tag');
+    const flashDirection = $('flash-direction');
+    const gotBtn = $('flash-got-btn');
+    const missedBtn = $('flash-missed-btn');
+    const elFcCorrect = $('fc-correct');
+    const elFcMissed = $('fc-missed');
+    const elFcReview = $('fc-review');
+
+    let flashItems = [];
+    const flashMissed = new Set();
+    let flashRecent = [];
+    let flashCurrent = null;
+    let flashFlipped = false;
+    let flashCorrect = 0;
+    let flashMissedCount = 0;
+
+    const fcCurrentSource = () => document.querySelector('input[name="fc-source"]:checked').value;
+
+    document.querySelectorAll('input[name="fc-source"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        const src = fcCurrentSource();
+        fcCustomWrap.hidden = src !== 'custom';
+        fcThemedWrap.hidden = src !== 'themed';
+        fcSetupError.textContent = '';
+      });
+    });
+
+    function updateFlashStats() {
+      elFcCorrect.textContent = flashCorrect;
+      elFcMissed.textContent = flashMissedCount;
+      elFcReview.textContent = flashMissed.size;
+    }
+
+    function nextFlashCard() {
+      flashCurrent = pickNextFlashItem(flashItems, flashMissed, flashRecent);
+      flashRecent.push(flashCurrent.key);
+      if (flashRecent.length > FLASH_NO_REPEAT_WINDOW) flashRecent.shift();
+      flashFlipped = false;
+
+      // Snap back to the prompt face instantly (no flip animation) while the
+      // words underneath change, then restore the transition for the next flip.
+      flashCard.classList.add('no-anim');
+      flashCard.classList.remove('flipped');
+
+      flashBackFace.className = `face back ${flashCurrent.promptLang}`;
+      flashFrontFace.className = `face front ${flashCurrent.answerLang}`;
+      flashPromptWord.textContent = flashCurrent.promptWord;
+      flashPromptTag.textContent = flashCurrent.promptLang === 'es' ? 'ES' : 'EN';
+      flashAnswerWord.textContent = flashCurrent.answerWord;
+      flashAnswerTag.textContent = flashCurrent.answerLang === 'es' ? 'ES' : 'EN';
+      flashDirection.textContent = flashCurrent.promptLang === 'es'
+        ? (currentLang() === 'es' ? 'Español → Inglés' : 'Spanish → English')
+        : (currentLang() === 'es' ? 'Inglés → Español' : 'English → Spanish');
+      flashCard.setAttribute('aria-label', `Flashcard: ${flashCurrent.promptWord}. Click to reveal the translation.`);
+
+      gotBtn.disabled = true;
+      missedBtn.disabled = true;
+
+      requestAnimationFrame(() => flashCard.classList.remove('no-anim'));
+    }
+
+    function flipFlashCard() {
+      if (flashFlipped || !flashCurrent) return;
+      flashFlipped = true;
+      flashCard.classList.add('flipped');
+      flashCard.setAttribute('aria-label', `${flashCurrent.promptWord} = ${flashCurrent.answerWord}`);
+      gotBtn.disabled = false;
+      missedBtn.disabled = false;
+    }
+
+    function gradeFlashCard(correct) {
+      if (!flashFlipped || !flashCurrent) return;
+      if (correct) {
+        flashCorrect += 1;
+        flashMissed.delete(flashCurrent.key);
+      } else {
+        flashMissedCount += 1;
+        flashMissed.add(flashCurrent.key);
+      }
+      updateFlashStats();
+      nextFlashCard();
+    }
+
+    flashCard.addEventListener('click', flipFlashCard);
+    gotBtn.addEventListener('click', () => gradeFlashCard(true));
+    missedBtn.addEventListener('click', () => gradeFlashCard(false));
+
+    function startFlashcards(pairs) {
+      flashItems = buildFlashItems(pairs);
+      flashMissed.clear();
+      flashRecent = [];
+      flashCorrect = 0;
+      flashMissedCount = 0;
+      updateFlashStats();
+
+      fcSetup.hidden = true;
+      fcBoard.hidden = false;
+      nextFlashCard();
+    }
+
+    function fcTryStart(pool) {
+      if (!pool.length) {
+        fcSetupError.textContent = 'That list has no pairs.';
+        return;
+      }
+      startFlashcards(pool);
+    }
+
+    fcStartBtn.addEventListener('click', () => {
+      fcSetupError.textContent = '';
+      const src = fcCurrentSource();
+
+      if (src === 'default') {
+        fcTryStart(DEFAULT_PAIRS);
+        return;
+      }
+
+      if (src === 'themed') {
+        const file = fcThemedSelect.value;
+        if (!file) {
+          fcSetupError.textContent = 'Pick a themed set first.';
+          return;
+        }
+        fcStartBtn.disabled = true;
+        loadThemedPairs(file)
+          .then((pairs) => fcTryStart(pairs))
+          .catch((err) => { fcSetupError.textContent = `Could not load that set — ${err.message}.`; })
+          .finally(() => { fcStartBtn.disabled = false; });
+        return;
+      }
+
+      const { pairs, errors } = parsePairs(fcCustomWords.value);
+      if (errors.length) {
+        fcSetupError.textContent = errors.slice(0, 3).join(' · ');
+        return;
+      }
+      fcTryStart(pairs);
+    });
+
+    fcChangeBtn.addEventListener('click', () => {
+      fcBoard.hidden = true;
+      fcSetup.hidden = false;
+    });
+
+    document.addEventListener('sitelangchange', () => {
+      relabelThemedOptions();
+      if (!board.hidden) {
+        matchedLabel.textContent = currentLang() === 'es'
+          ? `de ${totalPairs} encontrados` : `of ${totalPairs} matched`;
+      }
+      if (!fcBoard.hidden && flashCurrent) {
+        flashDirection.textContent = flashCurrent.promptLang === 'es'
+          ? (currentLang() === 'es' ? 'Español → Inglés' : 'Spanish → English')
+          : (currentLang() === 'es' ? 'Inglés → Español' : 'English → Spanish');
+      }
+    });
   });
 }
 
@@ -399,6 +656,8 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     DEFAULT_PAIRS, PAIRS_PER_GAME,
     MAX_ROWS, MAX_COLS, DEFAULT_ROWS, DEFAULT_COLS, isPairableGrid, gridPairCount,
+    FLASH_NO_REPEAT_WINDOW, FLASH_MISSED_WEIGHT,
     shuffle, pickPairs, parsePairs, buildDeck, partnerOf, isForgottenMiss, formatTime,
+    buildFlashItems, pickNextFlashItem,
   };
 }

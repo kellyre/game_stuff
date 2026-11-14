@@ -313,16 +313,22 @@
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <main class="page">
   <header>
     <div>
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <div class="eyebrow">municipal meteorological property room</div>
       <h1>Lost &amp; Found Weather</h1>
-      <p class="tagline">Choose two or three misplaced things. File the weather they brought with them.</p>
+      <p class="tagline" data-en="Choose two or three misplaced things. File the weather they brought with them." data-es="Elige dos o tres cosas extraviadas. Archiva el clima que trajeron consigo.">Choose two or three misplaced things. File the weather they brought with them.</p>
     </div>
-    <a class="back" href="index.html">← All funtimes</a>
+    <a class="back" href="index.html" data-en="← All funtimes" data-es="← Todo funtimes">← All funtimes</a>
   </header>
 
   <div class="layout">
@@ -333,13 +339,13 @@
 
     <aside class="counter" id="counter" aria-labelledby="counterTitle">
       <div class="counter-top">
-        <p class="counter-title" id="counterTitle">Today's claimed weather</p>
+        <p class="counter-title" id="counterTitle" data-en="Today's claimed weather" data-es="Clima reclamado hoy">Today's claimed weather</p>
         <span class="stamp">FORM W-RAIN</span>
       </div>
       <div class="slots" id="slots" aria-label="Forecast slots"></div>
       <div class="actions">
-        <button type="button" id="fileButton" disabled>File forecast</button>
-        <button type="button" id="clearButton">Clear counter</button>
+        <button type="button" id="fileButton" disabled data-en="File forecast" data-es="Archivar pronóstico">File forecast</button>
+        <button type="button" id="clearButton" data-en="Clear counter" data-es="Vaciar mostrador">Clear counter</button>
       </div>
       <p class="note" id="note" aria-live="polite">Two items minimum. Three if the weather looks evasive.</p>
       <section class="report" id="report" aria-live="polite" aria-label="Printed forecast">

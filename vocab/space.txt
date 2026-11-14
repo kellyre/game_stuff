@@ -1,0 +1,51 @@
+# Space & astronomy — one pair per line, Spanish first: "spanish, english"
+espacio, space
+universo, universe
+galaxia, galaxy
+planeta, planet
+sol, sun
+luna, moon
+estrella, star
+cometa, comet
+asteroide, asteroid
+meteorito, meteorite
+constelación, constellation
+vía láctea, Milky Way
+agujero negro, black hole
+órbita, orbit
+gravedad, gravity
+cohete, rocket
+nave espacial, spaceship
+astronauta, astronaut
+telescopio, telescope
+observatorio, observatory
+satélite, satellite
+estación espacial, space station
+tierra, Earth
+marte, Mars
+venus, Venus
+júpiter, Jupiter
+saturno, Saturn
+mercurio, Mercury
+urano, Uranus
+neptuno, Neptune
+eclipse, eclipse
+eclipse solar, solar eclipse
+eclipse lunar, lunar eclipse
+cráter, crater
+atmósfera, atmosphere
+gravedad cero, zero gravity
+lanzamiento, launch
+aterrizaje, landing
+explorar el espacio, to explore space
+lanzar un cohete, to launch a rocket
+orbitar la tierra, to orbit the Earth
+mirar las estrellas, to look at the stars
+es un planeta rojo, it's a red planet
+la luna brilla esta noche, the moon is bright tonight
+hay vida en otros planetas, there's life on other planets
+científico espacial, space scientist
+misión espacial, space mission
+traje espacial, spacesuit
+ingravidez, weightlessness
+big bang, big bang

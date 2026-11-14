@@ -1,0 +1,51 @@
+# Clothing & accessories — one pair per line, Spanish first: "spanish, english"
+camisa, shirt
+pantalones, pants
+vestido, dress
+falda, skirt
+abrigo, coat
+chaqueta, jacket
+suéter, sweater
+zapatos, shoes
+botas, boots
+sandalias, sandals
+sombrero, hat
+gorra, cap
+guantes, gloves
+bufanda, scarf
+cinturón, belt
+corbata, tie
+calcetines, socks
+ropa interior, underwear
+pijama, pajamas
+traje de baño, swimsuit
+gafas, glasses
+gafas de sol, sunglasses
+reloj, watch
+collar, necklace
+aretes, earrings
+anillo, ring
+pulsera, bracelet
+bolsa, bag
+mochila, backpack
+billetera, wallet
+paraguas, umbrella
+botones, buttons
+cierre, zipper
+bolsillo, pocket
+manga, sleeve
+cuello de camisa, shirt collar
+talla, size
+¿qué talla usas?, what size do you wear?
+me queda bien, it fits me well
+me queda grande, it's too big on me
+me queda pequeño, it's too small on me
+¿cuánto cuesta esto?, how much is this?
+está de moda, it's in style
+ropa de invierno, winter clothing
+ropa de verano, summer clothing
+traje, suit
+blusa, blouse
+shorts, shorts
+capucha, hood
+impermeable, raincoat

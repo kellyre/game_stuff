@@ -112,19 +112,25 @@
     .tap-actions button { min-height: 3.65rem; }
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body class="playing">
 <main class="page">
   <header>
     <div>
-      <a class="back" href="index.html">← Games and Stuff</a>
+      <a class="back" href="index.html" data-en="← Games and Stuff" data-es="← Juegos y cosas">← Games and Stuff</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <div class="eyebrow">porch-light livestock event</div>
       <h1>Lamp Moth Rodeo</h1>
-      <p class="tagline">Steal the glow. Do not become the dust.</p>
+      <p class="tagline" data-en="Steal the glow. Do not become the dust." data-es="Roba el brillo. No te conviertas en polvo.">Steal the glow. Do not become the dust.</p>
     </div>
     <div class="actions">
       <button id="mute" type="button" aria-pressed="false">Sound on</button>
-      <button id="restart" type="button">Restart run</button>
+      <button id="restart" type="button" data-en="Restart run" data-es="Reiniciar carrera">Restart run</button>
     </div>
   </header>
 
@@ -151,11 +157,11 @@
       </div>
     </div>
     <div class="footer">
-      <span><span class="kbd">WASD / arrows</span> steer · <span class="kbd">Space</span> dash · <span class="kbd">Shift/Z</span> brake · <span class="kbd">R</span> restart</span>
-      <span>Blue pollen cools you down and forgives dash paperwork.</span>
+      <span data-en="<span class=&quot;kbd&quot;>WASD / arrows</span> steer · <span class=&quot;kbd&quot;>Space</span> dash · <span class=&quot;kbd&quot;>Shift/Z</span> brake · <span class=&quot;kbd&quot;>R</span> restart" data-es="<span class=&quot;kbd&quot;>WASD / flechas</span> dirigir · <span class=&quot;kbd&quot;>Espacio</span> impulso · <span class=&quot;kbd&quot;>Shift/Z</span> frenar · <span class=&quot;kbd&quot;>R</span> reiniciar"><span class="kbd">WASD / arrows</span> steer · <span class="kbd">Space</span> dash · <span class="kbd">Shift/Z</span> brake · <span class="kbd">R</span> restart</span>
+      <span data-en="Blue pollen cools you down and forgives dash paperwork." data-es="El polen azul te enfría y perdona el papeleo del impulso.">Blue pollen cools you down and forgives dash paperwork.</span>
     </div>
   </section>
-  <p class="tip">Score by grazing the bright rings, closer to the bulb for greedier points. Back off when the heat meter yells, and avoid webs, spiders, swatter shadows, and the extremely persuasive lamp core.</p>
+  <p class="tip" data-en="Score by grazing the bright rings, closer to the bulb for greedier points. Back off when the heat meter yells, and avoid webs, spiders, swatter shadows, and the extremely persuasive lamp core." data-es="Puntúa rozando los anillos brillantes, más cerca del foco para puntos más ambiciosos. Retírate cuando el medidor de calor grite, y evita telarañas, arañas, sombras de matamoscas, y el núcleo de la lámpara extremadamente persuasivo.">Score by grazing the bright rings, closer to the bulb for greedier points. Back off when the heat meter yells, and avoid webs, spiders, swatter shadows, and the extremely persuasive lamp core.</p>
 </main>
 <script src="lamp-moth-rodeo.js"></script>
 </body>

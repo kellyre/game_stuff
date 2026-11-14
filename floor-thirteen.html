@@ -264,17 +264,23 @@
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <main class="elevator" id="app">
   <section class="panel" id="panel" aria-label="Elevator control panel">
-    <a class="back" href="index.html">&larr; Games and Stuff</a>
+    <a class="back" href="index.html" data-en="&larr; Games and Stuff" data-es="&larr; Juegos y cosas">&larr; Games and Stuff</a>
+    <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="es">ES</button>
+    </div>
     <div>
       <h1>Floor 13</h1>
-      <p class="tagline">There's no button for it. That doesn't mean it isn't there.</p>
+      <p class="tagline" data-en="There's no button for it. That doesn't mean it isn't there." data-es="No hay botón para eso. Eso no significa que no esté ahí.">There's no button for it. That doesn't mean it isn't there.</p>
     </div>
     <div class="status-card" aria-live="polite">
-      <strong>Car status</strong>
+      <strong data-en="Car status" data-es="Estado del carro">Car status</strong>
       <span id="statusText">Doors closed. Choose a floor.</span>
     </div>
     <div class="button-grid" id="buttonGrid">
@@ -290,12 +296,12 @@
       <button class="floor-btn" data-floor="3">3</button>
       <button class="floor-btn" data-floor="2">2</button>
       <button class="floor-btn" data-floor="1">1</button>
-      <button class="service-btn" data-service="alarm">ALARM</button>
+      <button class="service-btn" data-service="alarm" data-en="ALARM" data-es="ALARMA">ALARM</button>
       <button class="floor-btn" data-floor="B">B</button>
-      <button class="service-btn" data-service="phone">PHONE</button>
-      <button class="service-btn" data-service="open">OPEN</button>
+      <button class="service-btn" data-service="phone" data-en="PHONE" data-es="TELÉFONO">PHONE</button>
+      <button class="service-btn" data-service="open" data-en="OPEN" data-es="ABRIR">OPEN</button>
       <button class="floor-btn secret" data-floor="13" id="secretBtn" hidden>13</button>
-      <button class="service-btn" data-service="close">CLOSE</button>
+      <button class="service-btn" data-service="close" data-en="CLOSE" data-es="CERRAR">CLOSE</button>
     </div>
     <button class="mute" id="muteBtn" aria-pressed="false">Sound on</button>
   </section>
@@ -317,7 +323,7 @@
       <div class="door left" aria-hidden="true"></div>
       <div class="door right" aria-hidden="true"></div>
     </div>
-    <div class="threshold">Input is ignored while the car is moving. This is for everyone's comfort.</div>
+    <div class="threshold" data-en="Input is ignored while the car is moving. This is for everyone's comfort." data-es="La entrada se ignora mientras el carro está en movimiento. Esto es por la comodidad de todos.">Input is ignored while the car is moving. This is for everyone's comfort.</div>
   </section>
 </main>
 <script src="floor-thirteen.js"></script>

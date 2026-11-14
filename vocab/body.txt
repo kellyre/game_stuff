@@ -1,0 +1,51 @@
+# Body parts — one pair per line, Spanish first: "spanish, english"
+cabeza, head
+pelo, hair
+cara, face
+frente, forehead
+ojos, eyes
+cejas, eyebrows
+pestañas, eyelashes
+nariz, nose
+boca, mouth
+labios, lips
+dientes, teeth
+lengua, tongue
+barbilla, chin
+mejillas, cheeks
+orejas, ears
+cuello, neck
+hombro, shoulder
+brazo, arm
+codo, elbow
+muñeca, wrist
+mano, hand
+dedos, fingers
+uña, fingernail
+pecho, chest
+espalda, back
+estómago, stomach
+cintura, waist
+cadera, hip
+pierna, leg
+rodilla, knee
+tobillo, ankle
+pie, foot
+dedos del pie, toes
+corazón, heart
+pulmón, lung
+cerebro, brain
+piel, skin
+hueso, bone
+músculo, muscle
+sangre, blood
+me duele la cabeza, my head hurts
+me duele el estómago, my stomach hurts
+tengo frío, I'm cold
+tengo calor, I'm hot
+estoy cansado, I'm tired
+estoy enfermo, I'm sick
+puño, fist
+garganta, throat
+ombligo, belly button
+barba, beard

@@ -1,0 +1,51 @@
+# House & furniture — one pair per line, Spanish first: "spanish, english"
+casa, house
+apartamento, apartment
+sala, living room
+dormitorio, bedroom
+baño, bathroom
+comedor, dining room
+jardín, garden
+garaje, garage
+sótano, basement
+ático, attic
+escalera, staircase
+puerta, door
+ventana, window
+techo, ceiling
+piso, floor
+pared, wall
+sofá, couch
+silla, chair
+mesa, table
+cama, bed
+armario, closet
+cómoda, dresser
+espejo, mirror
+lámpara, lamp
+alfombra, rug
+cortinas, curtains
+almohada, pillow
+manta, blanket
+sábana, sheet
+estante, shelf
+chimenea, fireplace
+patio, patio
+cerca, fence
+buzón, mailbox
+timbre, doorbell
+llave, key
+cerradura, lock
+interruptor, light switch
+enchufe, outlet
+bombilla, light bulb
+subir las escaleras, to go upstairs
+bajar las escaleras, to go downstairs
+abrir la puerta, to open the door
+cerrar la ventana, to close the window
+limpiar la casa, to clean the house
+mudarse de casa, to move house
+vecino, neighbor
+propietario, landlord
+alquiler, rent
+hipoteca, mortgage

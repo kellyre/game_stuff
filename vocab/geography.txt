@@ -1,0 +1,51 @@
+# Geography & countries — one pair per line, Spanish first: "spanish, english"
+país, country
+continente, continent
+capital, capital city
+frontera, border
+mapa, map
+mapamundi, world map
+montaña, mountain
+cordillera, mountain range
+valle, valley
+desierto, desert
+selva, jungle
+isla, island
+península, peninsula
+costa, coast
+océano, ocean
+lago, lake
+río, river
+hemisferio, hemisphere
+ecuador, equator
+latitud, latitude
+longitud, longitude
+clima, climate
+población, population
+idioma oficial, official language
+bandera, flag
+moneda nacional, national currency
+región, region
+provincia, province
+estado, state
+territorio, territory
+frontera nacional, national border
+zona horaria, time zone
+hemisferio norte, northern hemisphere
+hemisferio sur, southern hemisphere
+trópico, tropic
+meseta, plateau
+llanura, plain
+volcán, volcano
+glaciar, glacier
+estrecho, strait
+golfo, gulf
+bahía, bay
+archipiélago, archipelago
+¿de qué país eres?, what country are you from?
+soy de España, I'm from Spain
+visité muchos países, I've visited many countries
+me gustaría viajar a Japón, I'd like to travel to Japan
+es un país muy grande, it's a very large country
+cuál es la capital de, what is the capital of
+habitante, inhabitant

@@ -1,0 +1,51 @@
+# Restaurant & dining — one pair per line, Spanish first: "spanish, english"
+restaurante, restaurant
+menú, menu
+mesero, waiter
+mesera, waitress
+mesa, table
+reservación, reservation
+entrada, appetizer
+plato principal, main course
+postre, dessert
+bebida, drink
+cuenta, bill
+propina, tip
+servilleta, napkin
+cubiertos, cutlery
+mantel, tablecloth
+carta de vinos, wine list
+especialidad de la casa, house specialty
+plato del día, dish of the day
+para llevar, to go
+para comer aquí, for here
+reservar una mesa, to reserve a table
+pedir la comida, to order food
+¿qué me recomienda?, what do you recommend?
+quisiera el menú, I would like the menu
+estoy listo para pedir, I'm ready to order
+la cuenta por favor, the check please
+¿está incluida la propina?, is the tip included?
+todo estuvo delicioso, everything was delicious
+tengo una reservación, I have a reservation
+¿tiene una mesa para dos?, do you have a table for two?
+soy vegetariano, I'm vegetarian
+soy alérgico a los mariscos, I'm allergic to shellfish
+sin gluten, gluten-free
+buen provecho, enjoy your meal
+salud, cheers
+¿puedo ver el menú?, can I see the menu?
+agua con gas, sparkling water
+agua sin gas, still water
+comida para llevar, takeout food
+servicio a domicilio, delivery service
+propina incluida, tip included
+cocina abierta, open kitchen
+terraza, patio seating
+sección de fumadores, smoking section
+sección de no fumadores, non-smoking section
+chef, chef
+ayudante de camarero, busser
+anfitrión del restaurante, host
+lista de espera, waitlist
+recomendación del chef, chef's recommendation

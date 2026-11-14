@@ -7,6 +7,7 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const {
   DEFAULT_PAIRS, parsePairs, isPairableGrid, gridPairCount, MAX_ROWS, MAX_COLS,
+  buildFlashItems, pickNextFlashItem, FLASH_NO_REPEAT_WINDOW,
 } = require('../match_game.js');
 
 const js = fs.readFileSync(path.join(root, 'match_game.js'), 'utf8');
@@ -60,5 +61,61 @@ manifest.forEach((entry) => {
     `${entry.file} has ${pairs.length} pairs; the ${MAX_ROWS}x${MAX_COLS} grid needs ${biggest}`,
   );
 });
+
+// Tabs + flashcard markup must exist.
+assert.match(html, /data-tab=["']match["']/, 'match tab button must exist');
+assert.match(html, /data-tab=["']flash["']/, 'flash tab button must exist');
+assert.match(html, /id=["']flash-card["']/, 'flash-card element must exist');
+assert.match(html, /id=["']flash-got-btn["']/, 'Got it button must exist');
+assert.match(html, /id=["']flash-missed-btn["']/, 'Missed button must exist');
+assert.match(html, /id=["']fc-start-btn["']/, 'flashcards start button must exist');
+assert.match(html, /id=["']fc-themed-set["']/, 'flashcards themed-set select must exist');
+assert.match(html, /id=["']fc-change-btn["']/, 'flashcards change-word-list button must exist');
+
+// Flashcard items: each pair becomes two independent directional cards.
+{
+  const items = buildFlashItems([['hola', 'hello'], ['agua', 'water']]);
+  assert.equal(items.length, 4, 'two pairs make four flashcard items (both directions)');
+  assert.deepEqual(
+    items.map((i) => i.key).sort(),
+    ['0-en2es', '0-es2en', '1-en2es', '1-es2en'].sort(),
+  );
+  assert.ok(items.every((i) => i.promptWord && i.answerWord && i.promptLang !== i.answerLang));
+}
+
+// pickNextFlashItem: never repeats a card shown in the last N draws when the pool allows it.
+{
+  const items = buildFlashItems([
+    ['a', '1'], ['b', '2'], ['c', '3'], ['d', '4'], ['e', '5'], ['f', '6'],
+  ]); // 12 items — plenty of room to dodge the last FLASH_NO_REPEAT_WINDOW
+  const missed = new Set();
+  let recent = [];
+  for (let i = 0; i < 200; i += 1) {
+    const pick = pickNextFlashItem(items, missed, recent);
+    assert.ok(
+      !recent.slice(-FLASH_NO_REPEAT_WINDOW).includes(pick.key),
+      `picked a card shown in the last ${FLASH_NO_REPEAT_WINDOW} tries: ${pick.key}`,
+    );
+    recent.push(pick.key);
+    if (recent.length > FLASH_NO_REPEAT_WINDOW) recent.shift();
+  }
+}
+
+// pickNextFlashItem: a missed card should come up well above its fair share until cleared.
+{
+  const items = buildFlashItems([['a', '1'], ['b', '2'], ['c', '3'], ['d', '4']]); // 8 items
+  const missedKey = items[0].key;
+  const missed = new Set([missedKey]);
+  let hits = 0;
+  const trials = 2000;
+  for (let i = 0; i < trials; i += 1) {
+    if (pickNextFlashItem(items, missed, []).key === missedKey) hits += 1;
+  }
+  const fairShare = trials / items.length;
+  assert.ok(
+    hits > fairShare * 1.5,
+    `missed item should be drawn well above its fair share (${hits} vs ~${fairShare})`,
+  );
+}
 
 console.log(`match-game smoke tests passed (${manifest.length} themed sets, grids up to ${MAX_ROWS}x${MAX_COLS})`);

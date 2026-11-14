@@ -1,0 +1,51 @@
+# Tools & hardware — one pair per line, Spanish first: "spanish, english"
+martillo, hammer
+destornillador, screwdriver
+llave inglesa, wrench
+alicates, pliers
+taladro, drill
+sierra, saw
+clavo, nail
+tornillo, screw
+tuerca, nut
+arandela, washer
+cinta métrica, tape measure
+nivel, level
+escalera de mano, ladder
+cubeta, bucket
+brocha, paintbrush
+lija, sandpaper
+pegamento, glue
+cinta adhesiva, tape
+cuerda, rope
+cadena, chain
+candado, padlock
+llave, key
+caja de herramientas, toolbox
+guantes de trabajo, work gloves
+casco de seguridad, hard hat
+gafas de seguridad, safety goggles
+tabla de madera, wooden board
+tubo, pipe
+manguera, hose
+soldadura, welding
+tornillo de banco, vise
+destornillar, to unscrew
+atornillar, to screw in
+clavar, to hammer in
+cortar, to cut
+medir, to measure
+taladrar, to drill
+lijar, to sand
+pintar la pared, to paint the wall
+reparar algo, to fix something
+armar un mueble, to assemble furniture
+arreglar la cañería, to fix the plumbing
+necesito un martillo, I need a hammer
+¿tienes un destornillador?, do you have a screwdriver?
+esto está roto, this is broken
+lo voy a arreglar, I'm going to fix it
+ferretería, hardware store
+herramienta eléctrica, power tool
+equipo de seguridad, safety equipment
+manual de instrucciones, instruction manual

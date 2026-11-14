@@ -67,9 +67,16 @@
     color: var(--muted); font-size: .85rem;
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <div class="wrap">
+
+  <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="es">ES</button>
+  </div>
 
   <header>
     <div class="mark">
@@ -82,7 +89,7 @@
       funtimes
     </div>
     <h1>Games and Stuff</h1>
-    <p class="lede">Here is a collection of games and other stuff for your enjoyment.</p>
+    <p class="lede" data-en="Here is a collection of games and other stuff for your enjoyment." data-es="Aquí tienes una colección de juegos y otras cosas para tu disfrute.">Here is a collection of games and other stuff for your enjoyment.</p>
   </header>
 
   <main class="cards">
@@ -97,13 +104,14 @@
               font-size="13" font-weight="700" fill="var(--accent2)">hello</text>
       </svg>
       <h2>Spanish Matching Game</h2>
-      <p>
+      <p data-en="Flip a card, then hunt for its translation. Pick a grid from 4&times;4 up to 6&times;9 and a word source &mdash; ~60 common words, a themed set (food, travel, verbs&hellip;), or your own pasted list. You&rsquo;re scored on time, tries, and how many matches you forgot."
+         data-es="Voltea una carta y busca su traducción. Elige una cuadrícula de 4&times;4 hasta 6&times;9 y una fuente de palabras &mdash; ~60 palabras comunes, un conjunto temático (comida, viajes, verbos&hellip;), o tu propia lista pegada. Te calificamos por tiempo, intentos, y cuántas parejas olvidaste.">
         Flip a card, then hunt for its translation. Pick a grid from 4&times;4 up to
         6&times;9 and a word source &mdash; ~60 common words, a themed set (food,
         travel, verbs&hellip;), or your own pasted list. You&rsquo;re scored on time,
         tries, and how many matches you forgot.
       </p>
-      <span class="go">Play &rarr;</span>
+      <span class="go" data-en="Play &rarr;" data-es="Jugar &rarr;">Play &rarr;</span>
     </a>
 
     <a class="card" href="emergency-compliment.html">
@@ -115,12 +123,13 @@
         <circle cx="44" cy="8" r="2" fill="#ffb020"/>
       </svg>
       <h2>Emergency Compliment</h2>
-      <p>
+      <p data-en="In case of low self-esteem, break glass. A wall-mounted case with a hammer and a single, weirdly specific compliment behind the pane &mdash; break it, get told something nice, reset, repeat."
+         data-es="En caso de baja autoestima, rompe el vidrio. Una caja de pared con un martillo y un único cumplido extrañamente específico detrás del panel &mdash; rómpelo, recibe algo bonito, reinicia, repite.">
         In case of low self-esteem, break glass. A wall-mounted case with a
         hammer and a single, weirdly specific compliment behind the pane
         &mdash; break it, get told something nice, reset, repeat.
       </p>
-      <span class="go">Break glass &rarr;</span>
+      <span class="go" data-en="Break glass &rarr;" data-es="Romper vidrio &rarr;">Break glass &rarr;</span>
     </a>
 
     <a class="card" href="floor-thirteen.html">
@@ -137,11 +146,12 @@
         <circle cx="78" cy="42" r="3" fill="var(--line)"/>
       </svg>
       <h2>Floor 13</h2>
-      <p>
+      <p data-en="Ride a deadpan office-building elevator through odd little floor vignettes. The panel skips 13, naturally, unless you ask it the wrong way for long enough."
+         data-es="Viaja en un ascensor de oficina de humor seco por extrañas viñetas de piso. El panel se salta el 13, por supuesto, a menos que lo pidas mal el tiempo suficiente.">
         Ride a deadpan office-building elevator through odd little floor vignettes.
         The panel skips 13, naturally, unless you ask it the wrong way for long enough.
       </p>
-      <span class="go">Call elevator &rarr;</span>
+      <span class="go" data-en="Call elevator &rarr;" data-es="Llamar ascensor &rarr;">Call elevator &rarr;</span>
     </a>
 
     <a class="card" href="the-deliberator.html">
@@ -155,12 +165,13 @@
         <rect x="61" y="37" width="13" height="17" fill="#fff8df" stroke="var(--line)"/>
       </svg>
       <h2>The Deliberator</h2>
-      <p>
+      <p data-en="Feed a grave dilemma into a stern console, press the big red button, and wait through twitching gauges and bureaucratic status updates for a completely mundane printed decision."
+         data-es="Introduce un dilema grave en una consola severa, presiona el gran botón rojo, y espera entre medidores temblorosos y actualizaciones burocráticas para una decisión impresa completamente mundana.">
         Feed a grave dilemma into a stern console, press the big red button, and
         wait through twitching gauges and bureaucratic status updates for a
         completely mundane printed decision.
       </p>
-      <span class="go">Overthink it &rarr;</span>
+      <span class="go" data-en="Overthink it &rarr;" data-es="Piénsalo de más &rarr;">Overthink it &rarr;</span>
     </a>
 
     <a class="card" href="chess-chase.html">
@@ -175,12 +186,13 @@
         <text x="69" y="52" text-anchor="middle" font-size="15" fill="var(--ink)">♛</text>
       </svg>
       <h2>Chess Chase</h2>
-      <p>
+      <p data-en="A Pac-Man-style maze chase where the ghosts are chess pieces &mdash; each moves by its own rules. Grab the dots, drop bombs in their path, and blast them with a short-range zap while the rook and queen come sliding."
+         data-es="Una persecución estilo Pac-Man donde los fantasmas son piezas de ajedrez &mdash; cada una se mueve según sus propias reglas. Recoge los puntos, coloca bombas en su camino, y elimínalas con un rayo de corto alcance mientras la torre y la reina se deslizan.">
         A Pac-Man-style maze chase where the ghosts are chess pieces &mdash; each
         moves by its own rules. Grab the dots, drop bombs in their path, and
         blast them with a short-range zap while the rook and queen come sliding.
       </p>
-      <span class="go">Give chase &rarr;</span>
+      <span class="go" data-en="Give chase &rarr;" data-es="Dar caza &rarr;">Give chase &rarr;</span>
     </a>
 
     <a class="card" href="tide-pool-radio.html">
@@ -193,12 +205,13 @@
         <circle cx="46" cy="31" r="18" stroke="var(--line)" stroke-width="2" fill="none" opacity=".7"/>
       </svg>
       <h2>Tide Pool Radio</h2>
-      <p>
+      <p data-en="Drop pebbles into a moonlit tide pool to tune hermit crabs, limpets, anemones, bottle caps, and other tiny stations. Overlapping ripples can cross the frequencies into briny interference."
+         data-es="Deja caer piedritas en una poza de marea iluminada por la luna para sintonizar cangrejos ermitaños, lapas, anémonas, tapas de botella, y otras pequeñas estaciones. Las ondas superpuestas pueden cruzar las frecuencias en interferencia salobre.">
         Drop pebbles into a moonlit tide pool to tune hermit crabs, limpets,
         anemones, bottle caps, and other tiny stations. Overlapping ripples can
         cross the frequencies into briny interference.
       </p>
-      <span class="go">Tune the barnacles &rarr;</span>
+      <span class="go" data-en="Tune the barnacles &rarr;" data-es="Sintoniza los percebes &rarr;">Tune the barnacles &rarr;</span>
     </a>
 
     <a class="card" href="parcel-panic.html">
@@ -209,11 +222,12 @@
         <circle cx="44" cy="40" r="9" fill="var(--accent2)"/><path d="M49 40h13" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
       </svg>
       <h2>Parcel Panic</h2>
-      <p>
+      <p data-en="Sort a late-night flood of color-coded packages before they cross the deadline line. Aim a route stamp, build combos, and dash through the drones."
+         data-es="Clasifica una oleada nocturna de paquetes codificados por color antes de que crucen la línea límite. Apunta un sello de ruta, construye combos, y atraviesa los drones a toda velocidad.">
         Sort a late-night flood of color-coded packages before they cross the deadline
         line. Aim a route stamp, build combos, and dash through the drones.
       </p>
-      <span class="go">Start shift &rarr;</span>
+      <span class="go" data-en="Start shift &rarr;" data-es="Empezar turno &rarr;">Start shift &rarr;</span>
     </a>
 
     <a class="card" href="lamp-moth-rodeo.html">
@@ -228,11 +242,12 @@
         <path d="M65 14c8 8 8 24 0 32" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity=".75"/>
       </svg>
       <h2>Lamp Moth Rodeo</h2>
-      <p>
+      <p data-en="Drift a fuzzy moth around porch lamps to steal glow, push your heat luck, dodge spiders and swatters, and dash away before becoming dust."
+         data-es="Desliza una polilla peluda alrededor de lámparas de porche para robar brillo, prueba tu suerte con el calor, esquiva arañas y matamoscas, y escapa antes de convertirte en polvo.">
         Drift a fuzzy moth around porch lamps to steal glow, push your heat luck,
         dodge spiders and swatters, and dash away before becoming dust.
       </p>
-      <span class="go">Steal glow &rarr;</span>
+      <span class="go" data-en="Steal glow &rarr;" data-es="Robar brillo &rarr;">Steal glow &rarr;</span>
     </a>
 
     <a class="card" href="lost-and-found-weather.html">
@@ -245,11 +260,12 @@
         <circle cx="22" cy="45" r="4" fill="var(--accent)" opacity=".75"/>
       </svg>
       <h2>Lost &amp; Found Weather</h2>
-      <p>
+      <p data-en="Sort umbrellas, pocket moons, receipt clouds, and other misplaced things into a three-slot counter, then file the tiny surreal forecast they brought in."
+         data-es="Clasifica paraguas, lunas de bolsillo, nubes de recibos, y otras cosas extraviadas en un mostrador de tres espacios, luego archiva el pequeño pronóstico surrealista que trajeron.">
         Sort umbrellas, pocket moons, receipt clouds, and other misplaced things
         into a three-slot counter, then file the tiny surreal forecast they brought in.
       </p>
-      <span class="go">File weather &rarr;</span>
+      <span class="go" data-en="File weather &rarr;" data-es="Archivar clima &rarr;">File weather &rarr;</span>
     </a>
 
 
@@ -265,11 +281,12 @@
         <path d="M44 20 C51 42 40 50 30 40" stroke="var(--accent2)" stroke-width="3" fill="none" stroke-linecap="round"/>
       </svg>
       <h2>Switchboard Sprint</h2>
-      <p>
+      <p data-en="Dash across a tiny municipal switchboard, connect polite urgent callers to the right desks, tap hold when panic blinks, and keep the cords from sparking."
+         data-es="Corre por una pequeña central telefónica municipal, conecta a quienes llaman corteses y urgentes con los escritorios correctos, pon en espera cuando parpadee el pánico, y evita que los cables chispeen.">
         Dash across a tiny municipal switchboard, connect polite urgent callers
         to the right desks, tap hold when panic blinks, and keep the cords from sparking.
       </p>
-      <span class="go">Take calls &rarr;</span>
+      <span class="go" data-en="Take calls &rarr;" data-es="Atender llamadas &rarr;">Take calls &rarr;</span>
     </a>
     <a class="card" href="bellhop-bounce.html">
       <svg class="art" width="88" height="60" viewBox="0 0 88 60" fill="none" aria-hidden="true">
@@ -283,11 +300,12 @@
         <circle cx="31" cy="52" r="4" fill="var(--ink)"/><circle cx="57" cy="52" r="4" fill="var(--ink)"/>
       </svg>
       <h2>Bellhop Bounce</h2>
-      <p>
+      <p data-en="Catch impossible luggage on a springy cart, tilt each rebound toward the right elevator, rotate the floor labels, and stop the socks from taking the lobby."
+         data-es="Atrapa equipaje imposible en un carrito elástico, inclina cada rebote hacia el ascensor correcto, rota las etiquetas de piso, y evita que los calcetines tomen el vestíbulo.">
         Catch impossible luggage on a springy cart, tilt each rebound toward the
         right elevator, rotate the floor labels, and stop the socks from taking the lobby.
       </p>
-      <span class="go">Bounce bags &rarr;</span>
+      <span class="go" data-en="Bounce bags &rarr;" data-es="Rebotar maletas &rarr;">Bounce bags &rarr;</span>
     </a>
 
     <a class="card" href="trash-moon-tugboat.html">
@@ -301,11 +319,12 @@
         <path d="M58 44h24" stroke="var(--ink)" stroke-width="2"/>
       </svg>
       <h2>Trash Moon Tugboat</h2>
-      <p>
+      <p data-en="Grapple moon garbage with a floaty tugboat, reel the cable tight, and sling sofas, satellites, and suspicious statues into the chomping compactor."
+         data-es="Engancha basura lunar con un remolcador flotante, tensa el cable, y lanza sofás, satélites, y estatuas sospechosas al compactador masticador.">
         Grapple moon garbage with a floaty tugboat, reel the cable tight, and sling
         sofas, satellites, and suspicious statues into the chomping compactor.
       </p>
-      <span class="go">Start towing &rarr;</span>
+      <span class="go" data-en="Start towing &rarr;" data-es="Empezar remolque &rarr;">Start towing &rarr;</span>
     </a>
 
     <a class="card" href="pancake-seismograph.html">
@@ -321,11 +340,12 @@
         <rect x="34" y="7" width="15" height="8" rx="2" fill="#f2b642"/>
       </svg>
       <h2>Pancake Seismograph</h2>
-      <p>
+      <p data-en="Slide a heroic plate under a wobbling pancake tower while tiny breakfast earthquakes, syrup, butter, and bad decisions try to turn brunch into geology."
+         data-es="Desliza un plato heroico bajo una torre de panqueques tambaleante mientras pequeños terremotos de desayuno, jarabe, mantequilla, y malas decisiones intentan convertir el brunch en geología.">
         Slide a heroic plate under a wobbling pancake tower while tiny breakfast
         earthquakes, syrup, butter, and bad decisions try to turn brunch into geology.
       </p>
-      <span class="go">Balance breakfast &rarr;</span>
+      <span class="go" data-en="Balance breakfast &rarr;" data-es="Equilibrar desayuno &rarr;">Balance breakfast &rarr;</span>
     </a>
 
     <a class="card" href="duckling-crossing-guard.html">
@@ -339,11 +359,12 @@
         <rect x="6" y="8" width="12" height="8" rx="2" fill="var(--accent)"/><text x="12" y="15" text-anchor="middle" font-size="5" font-weight="900" fill="#fff">STOP</text>
       </svg>
       <h2>Duckling Crossing Guard</h2>
-      <p>
+      <p data-en="Raise the stop sign, whistle the wobbly parade back into formation, and escort every tiny pedestrian across a street with opinions."
+         data-es="Levanta la señal de alto, silba para que el desfile tambaleante vuelva a su formación, y escolta a cada pequeño peatón a través de una calle con opiniones.">
         Raise the stop sign, whistle the wobbly parade back into formation, and
         escort every tiny pedestrian across a street with opinions.
       </p>
-      <span class="go">Guard the crosswalk &rarr;</span>
+      <span class="go" data-en="Guard the crosswalk &rarr;" data-es="Vigilar el cruce &rarr;">Guard the crosswalk &rarr;</span>
     </a>
 
     <a class="card" href="grocery-cart-downhill.html">
@@ -357,11 +378,12 @@
         <circle cx="71" cy="37" r="5" fill="#e7b52b"/>
       </svg>
       <h2>Grocery Cart Downhill</h2>
-      <p>
+      <p data-en="Ride a runaway cart through midnight aisles, drift past bananas, honk at coupon hazards, and hit checkout before the store notices."
+         data-es="Monta un carrito desbocado por pasillos de medianoche, derrapa junto a plátanos, toca el claxon ante peligros de cupones, y llega a la caja antes de que la tienda se dé cuenta.">
         Ride a runaway cart through midnight aisles, drift past bananas, honk at
         coupon hazards, and hit checkout before the store notices.
       </p>
-      <span class="go">Bomb downhill &rarr;</span>
+      <span class="go" data-en="Bomb downhill &rarr;" data-es="Bajar a toda velocidad &rarr;">Bomb downhill &rarr;</span>
     </a>
 
     <a class="card" href="boolean-beekeeper.html">
@@ -374,11 +396,12 @@
         <circle cx="18" cy="25" r="5" fill="#e7b52b"/><path d="M18 25h12" stroke="var(--ink)" stroke-width="2"/>
       </svg>
       <h2>Boolean Beekeeper</h2>
-      <p>
+      <p data-en="Rotate logic flowers, release the bees, and make honey jars compute the right 0/1 pattern through AND, OR, XOR, NOT, and splitter puzzles."
+         data-es="Rota flores lógicas, libera a las abejas, y haz que los frascos de miel calculen el patrón correcto de 0/1 mediante acertijos de AND, OR, XOR, NOT, y divisores.">
         Rotate logic flowers, release the bees, and make honey jars compute the
         right 0/1 pattern through AND, OR, XOR, NOT, and splitter puzzles.
       </p>
-      <span class="go">Keep bees &rarr;</span>
+      <span class="go" data-en="Keep bees &rarr;" data-es="Cuidar abejas &rarr;">Keep bees &rarr;</span>
     </a>
 
     <a class="card" href="gear-garden-almanac.html">
@@ -391,11 +414,12 @@
         <path d="M64 16c5-8 13-8 17 0" stroke="var(--accent2)" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
       <h2>Gear Garden Almanac</h2>
-      <p>
+      <p data-en="Place brass gears, crank the greenhouse, and make clockwork flowers bloom at the exact right ratio across handcrafted mechanical puzzles."
+         data-es="Coloca engranajes de bronce, da cuerda al invernadero, y haz que las flores de relojería florezcan en la proporción exacta a través de acertijos mecánicos hechos a mano.">
         Place brass gears, crank the greenhouse, and make clockwork flowers bloom
         at the exact right ratio across handcrafted mechanical puzzles.
       </p>
-      <span class="go">Crank greenhouse &rarr;</span>
+      <span class="go" data-en="Crank greenhouse &rarr;" data-es="Dar cuerda al invernadero &rarr;">Crank greenhouse &rarr;</span>
     </a>
 
     <a class="card" href="tessellarium/">
@@ -406,12 +430,13 @@
         <circle cx="38" cy="34" r="3" fill="var(--ink)"/>
       </svg>
       <h2>Tessellarium</h2>
-      <p>
+      <p data-en="A precise tiling design tool. Drag squares, triangles, Penrose kites and darts, or Einstein aperiodic monotiles onto a big pannable canvas &mdash; edges snap together exactly, never a fraction of a degree off."
+         data-es="Una herramienta precisa de diseño de teselados. Arrastra cuadrados, triángulos, cometas y flechas de Penrose, o monotejas aperiódicas de Einstein a un gran lienzo desplazable &mdash; los bordes encajan exactamente, nunca a una fracción de grado de distancia.">
         A precise tiling design tool. Drag squares, triangles, Penrose kites and
         darts, or Einstein aperiodic monotiles onto a big pannable canvas &mdash;
         edges snap together exactly, never a fraction of a degree off.
       </p>
-      <span class="go">Lay tiles &rarr;</span>
+      <span class="go" data-en="Lay tiles &rarr;" data-es="Colocar teselas &rarr;">Lay tiles &rarr;</span>
     </a>
 
     <div class="card soon">
@@ -420,14 +445,14 @@
         <circle cx="44" cy="30" r="12" stroke="var(--line)" stroke-width="2"/>
         <circle cx="72" cy="30" r="6" stroke="var(--line)" stroke-width="2"/>
       </svg>
-      <h2>More to come</h2>
-      <p>This is a static site &mdash; anything dropped into the folder shows up here.</p>
-      <span class="go">Watch this space</span>
+      <h2 data-en="More to come" data-es="Más por venir">More to come</h2>
+      <p data-en="This is a static site &mdash; anything dropped into the folder shows up here." data-es="Este es un sitio estático &mdash; cualquier cosa que se coloque en la carpeta aparece aquí.">This is a static site &mdash; anything dropped into the folder shows up here.</p>
+      <span class="go" data-en="Watch this space" data-es="Mantente atento">Watch this space</span>
     </div>
 
   </main>
 
-  <footer>
+  <footer data-en="Served over HTTPS by Caddy on funtimes.xobedistuo.com." data-es="Servido por HTTPS con Caddy en funtimes.xobedistuo.com.">
     Served over HTTPS by Caddy on funtimes.xobedistuo.com.
   </footer>
 

@@ -1,0 +1,51 @@
+# Household chores — one pair per line, Spanish first: "spanish, english"
+limpiar, to clean
+barrer, to sweep
+trapear, to mop
+aspirar, to vacuum
+sacudir el polvo, to dust
+lavar los platos, to wash the dishes
+secar los platos, to dry the dishes
+lavar la ropa, to do laundry
+doblar la ropa, to fold the clothes
+planchar, to iron
+tender la ropa, to hang the laundry
+hacer la cama, to make the bed
+sacar la basura, to take out the trash
+reciclar, to recycle
+regar las plantas, to water the plants
+cortar el césped, to mow the lawn
+organizar, to organize
+ordenar el cuarto, to tidy the room
+limpiar las ventanas, to clean the windows
+lavar el carro, to wash the car
+pasar la aspiradora, to run the vacuum
+desempolvar, to dust off
+fregar el piso, to scrub the floor
+coser un botón, to sew on a button
+cambiar las sábanas, to change the sheets
+vaciar el lavaplatos, to empty the dishwasher
+limpiar el refrigerador, to clean the fridge
+guardar la compra, to put away groceries
+escoba, broom
+trapeador, mop
+aspiradora, vacuum cleaner
+plancha, iron
+tabla de planchar, ironing board
+detergente, detergent
+cubeta, bucket
+basurero, trash can
+lista de tareas, chore list
+tengo muchas tareas del hogar, I have a lot of chores
+ya hice la cama, I already made the bed
+te toca lavar los platos, it's your turn to do dishes
+¿puedes ayudarme a limpiar?, can you help me clean?
+la casa está muy sucia, the house is very dirty
+ya está todo limpio, everything is clean now
+tiramos la basura los lunes, we take out trash on Mondays
+divide las tareas, split up the chores
+quehaceres, chores
+desorden, mess
+orden, tidiness
+limpieza profunda, deep cleaning
+rutina de limpieza, cleaning routine

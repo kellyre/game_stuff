@@ -104,14 +104,20 @@
   @media (max-width: 900px) { header { display: block; } .top-actions { justify-content: flex-start; margin-top: 12px; } .game { grid-template-columns: 1fr; } .hud { order: -1; } }
   @media (max-width: 560px) { .wrap { width: min(100% - 12px, 1200px); } .gear { width: 74%; } .target-tag, .result-tag { font-size: .5rem; } .tray-gear { width: 68px; min-height: 68px; } }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div>
       <a class="crumb" href="index.html">&larr; funtimes</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <h1>Gear Garden Almanac</h1>
-      <p class="lede">Place brass gears, crank the greenhouse, and make clockwork flowers bloom at the exact right ratio.</p>
+      <p class="lede" data-en="Place brass gears, crank the greenhouse, and make clockwork flowers bloom at the exact right ratio." data-es="Coloca engranajes de bronce, da cuerda al invernadero, y haz que las flores de relojería florezcan en la proporción exacta.">Place brass gears, crank the greenhouse, and make clockwork flowers bloom at the exact right ratio.</p>
     </div>
     <div class="top-actions" aria-label="Game options">
       <button id="soundBtn" type="button">Sound: on</button>
@@ -120,15 +126,15 @@
   </header>
 
   <section id="lesson" class="lesson" aria-label="Learning mode">
-    <h2>Learning mode: a gentle tour of the greenhouse.</h2>
+    <h2 data-en="Learning mode: a gentle tour of the greenhouse." data-es="Modo de aprendizaje: un recorrido suave por el invernadero.">Learning mode: a gentle tour of the greenhouse.</h2>
     <ol>
-      <li>Move the brass cursor with arrows or WASD. It visits pegs first, then the gear tray.</li>
-      <li>Press Z or Enter to pick up a gear, place it on a peg, or swap with a placed gear.</li>
-      <li>Press Space or the Test crank button. Meshed gears turn slowly; every flower reports what it got.</li>
+      <li data-en="Move the brass cursor with arrows or WASD. It visits pegs first, then the gear tray." data-es="Mueve el cursor de bronce con flechas o WASD. Primero visita los postes, luego la bandeja de engranajes.">Move the brass cursor with arrows or WASD. It visits pegs first, then the gear tray.</li>
+      <li data-en="Press Z or Enter to pick up a gear, place it on a peg, or swap with a placed gear." data-es="Presiona Z o Enter para recoger un engranaje, colocarlo en un poste, o intercambiarlo con uno ya colocado.">Press Z or Enter to pick up a gear, place it on a peg, or swap with a placed gear.</li>
+      <li data-en="Press Space or the Test crank button. Meshed gears turn slowly; every flower reports what it got." data-es="Presiona Espacio o el botón Probar manivela. Los engranajes engranados giran lentamente; cada flor reporta lo que obtuvo.">Press Space or the Test crank button. Meshed gears turn slowly; every flower reports what it got.</li>
     </ol>
     <div class="controls">
-      <button id="lessonNext" type="button" class="primary">I know the controls</button>
-      <button id="skipLesson" type="button">Skip learning</button>
+      <button id="lessonNext" type="button" class="primary" data-en="I know the controls" data-es="Conozco los controles">I know the controls</button>
+      <button id="skipLesson" type="button" data-en="Skip learning" data-es="Omitir tutorial">Skip learning</button>
     </div>
   </section>
 
@@ -142,7 +148,7 @@
         <div id="board" class="board" role="grid" aria-label="Gear peg grid"></div>
       </div>
       <section class="tray" aria-label="Gear tray">
-        <h2>Gear tray</h2>
+        <h2 data-en="Gear tray" data-es="Bandeja de engranajes">Gear tray</h2>
         <div id="tray" class="tray-row"></div>
       </section>
     </section>
@@ -158,9 +164,9 @@
       </div>
       <div id="message" class="message"><strong>Welcome.</strong> Start by placing an idler between the crank and the first flower.</div>
       <div class="controls">
-        <button id="testBtn" type="button" class="primary">Test crank</button>
-        <button id="undoBtn" type="button">Undo</button>
-        <button id="restartBtn" type="button">Restart</button>
+        <button id="testBtn" type="button" class="primary" data-en="Test crank" data-es="Probar manivela">Test crank</button>
+        <button id="undoBtn" type="button" data-en="Undo" data-es="Deshacer">Undo</button>
+        <button id="restartBtn" type="button" data-en="Restart" data-es="Reiniciar">Restart</button>
       </div>
       <div id="help" class="help">Select a tray gear or peg to read its almanac note.</div>
     </aside>

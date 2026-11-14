@@ -1,0 +1,51 @@
+# Directions & location — one pair per line, Spanish first: "spanish, english"
+izquierda, left
+derecha, right
+arriba, up
+abajo, down
+adelante, forward
+atrás, backward
+cerca, near
+lejos, far
+dentro, inside
+fuera, outside
+entre, between
+detrás, behind
+delante, in front
+encima, on top
+debajo, underneath
+al lado, next to
+frente a, across from
+norte, north
+sur, south
+este, east
+oeste, west
+esquina, corner
+cuadra, block
+mapa, map
+dirección, address
+ubicación, location
+ruta, route
+siga derecho, go straight
+doble a la izquierda, turn left
+doble a la derecha, turn right
+cruce la calle, cross the street
+camine dos cuadras, walk two blocks
+está en la esquina, it's on the corner
+está enfrente, it's across the street
+está muy cerca, it's very close
+está muy lejos, it's very far
+¿cómo llego ahí?, how do I get there?
+estoy perdido, I'm lost
+¿me puede indicar el camino?, can you show me the way?
+gire en la próxima calle, turn at the next street
+siga las señales, follow the signs
+vaya hacia el norte, head north
+está al otro lado, it's on the other side
+a mitad de camino, halfway there
+por aquí, this way
+por allá, that way
+en medio de, in the middle of
+alrededor de, around
+hacia arriba, upward
+hacia abajo, downward

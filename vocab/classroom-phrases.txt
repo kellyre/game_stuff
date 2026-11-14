@@ -1,0 +1,51 @@
+# Classroom phrases — one pair per line, Spanish first: "spanish, english"
+¿puedo ir al baño?, may I go to the bathroom?
+¿puede repetir la pregunta?, can you repeat the question?
+no entiendo la pregunta, I don't understand the question
+¿cómo se escribe esto?, how do you spell this?
+abran sus libros, open your books
+cierren sus libros, close your books
+saquen una hoja de papel, take out a sheet of paper
+guarden sus cosas, put your things away
+formen grupos de dos, get into pairs
+levanten la mano, raise your hands
+siéntense, sit down
+pónganse de pie, stand up
+presten atención, pay attention
+en silencio por favor, quiet please
+escriban su nombre, write your name
+entreguen la tarea, hand in your homework
+¿terminaron?, are you finished?
+todavía no termino, I'm not finished yet
+¿puedo tomar prestado un lápiz?, can I borrow a pencil?
+no tengo tarea, I don't have homework
+se me olvidó el libro, I forgot my book
+¿qué página es?, what page is it?
+página veinte, page twenty
+trabajen en parejas, work in pairs
+trabajen solos, work alone
+revisemos las respuestas, let's check the answers
+está correcto, that's correct
+está incorrecto, that's incorrect
+inténtalo otra vez, try again
+buen trabajo, good job
+muy bien hecho, well done
+necesito ayuda, I need help
+¿puede explicar eso otra vez?, can you explain that again?
+no sé la respuesta, I don't know the answer
+¿puedo hacer una pregunta?, may I ask a question?
+hagan silencio, be quiet
+pongan su nombre arriba, put your name at the top
+subrayen la palabra, underline the word
+encierren en un círculo, circle the answer
+copien esto en su cuaderno, copy this in your notebook
+estudien para el examen, study for the test
+se acabó el tiempo, time is up
+empiecen ahora, begin now
+dejen de escribir, stop writing
+¿alguna pregunta?, any questions?
+no hay preguntas, no questions
+fórmense en una fila, line up
+sigan las instrucciones, follow the instructions
+corrijan sus errores, correct your mistakes
+gracias por su atención, thank you for your attention

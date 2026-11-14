@@ -1,0 +1,51 @@
+# Kitchen & cookware — one pair per line, Spanish first: "spanish, english"
+estufa, stove
+horno, oven
+refrigerador, refrigerator
+microondas, microwave
+olla, pot
+sartén, frying pan
+cuchillo, knife
+tenedor, fork
+cuchara, spoon
+plato, plate
+tazón, bowl
+taza, cup
+vaso, glass
+jarra, pitcher
+tabla de cortar, cutting board
+colador, strainer
+rallador, grater
+abrelatas, can opener
+sacacorchos, corkscrew
+licuadora, blender
+batidora, mixer
+tostadora, toaster
+cafetera, coffee maker
+fregadero, sink
+esponja, sponge
+delantal, apron
+mantel, tablecloth
+servilleta, napkin
+bandeja, tray
+molde, baking pan
+rodillo, rolling pin
+pinzas de cocina, kitchen tongs
+batidor, whisk
+guante de cocina, oven mitt
+olla a presión, pressure cooker
+congelador, freezer
+despensa, pantry
+gabinete, cabinet
+fogón, burner
+cocina, kitchen
+lavar los platos, to wash the dishes
+poner la mesa, to set the table
+calentar la comida, to heat up the food
+cortar en pedazos, to cut into pieces
+hervir el agua, to boil the water
+freír en aceite, to fry in oil
+receta, recipe
+ingrediente, ingredient
+medir la harina, to measure the flour
+revolver la sopa, to stir the soup

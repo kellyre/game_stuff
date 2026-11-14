@@ -1,0 +1,51 @@
+# Jobs & professions — one pair per line, Spanish first: "spanish, english"
+médico, doctor
+enfermero, nurse
+maestro, teacher
+abogado, lawyer
+ingeniero, engineer
+arquitecto, architect
+cocinero, cook
+camarero, waiter
+policía, police officer
+bombero, firefighter
+piloto, pilot
+conductor, driver
+granjero, farmer
+pescador, fisherman
+carpintero, carpenter
+electricista, electrician
+plomero, plumber
+mecánico, mechanic
+peluquero, hairdresser
+artista, artist
+músico, musician
+escritor, writer
+periodista, journalist
+fotógrafo, photographer
+científico, scientist
+programador, programmer
+contador, accountant
+vendedor, salesperson
+gerente, manager
+secretario, secretary
+soldado, soldier
+juez, judge
+dentista, dentist
+veterinario, veterinarian
+farmacéutico, pharmacist
+actor, actor
+actriz, actress
+cantante, singer
+deportista, athlete
+jardinero, gardener
+niñera, babysitter
+panadero, baker
+carnicero, butcher
+sastre, tailor
+guía turístico, tour guide
+traductor, translator
+¿en qué trabajas?, what do you do for work?
+trabajo en una oficina, I work in an office
+busco empleo, I'm looking for a job
+estoy jubilado, I am retired

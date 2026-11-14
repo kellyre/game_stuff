@@ -1,0 +1,51 @@
+# Measurements & quantities — one pair per line, Spanish first: "spanish, english"
+metro, meter
+centímetro, centimeter
+kilómetro, kilometer
+pulgada, inch
+pie, foot
+milla, mile
+litro, liter
+mililitro, milliliter
+galón, gallon
+kilogramo, kilogram
+gramo, gram
+libra, pound
+onza, ounce
+tonelada, ton
+grado, degree
+temperatura, temperature
+peso, weight
+altura, height
+ancho, width
+largo, length
+profundidad, depth
+volumen, volume
+área, area
+mitad, half
+tercio, third
+cuarto, quarter
+docena, dozen
+par, pair
+unidad, unit
+cantidad, quantity
+mucho, a lot
+poco, a little
+más, more
+menos, less
+igual, equal
+doble, double
+mitad de precio, half price
+¿cuánto pesa esto?, how much does this weigh?
+¿cuánto mide esto?, how long is this?
+mide dos metros, it measures two meters
+pesa tres kilos, it weighs three kilos
+medir la distancia, to measure the distance
+pesar los ingredientes, to weigh the ingredients
+convertir unidades, to convert units
+una taza de harina, a cup of flour
+media cucharadita, half a teaspoon
+un puñado de, a handful of
+aproximadamente, approximately
+exactamente, exactly
+balanza, scale

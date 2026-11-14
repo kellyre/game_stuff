@@ -1,0 +1,51 @@
+# Health & the doctor — one pair per line, Spanish first: "spanish, english"
+salud, health
+enfermedad, illness
+dolor, pain
+fiebre, fever
+tos, cough
+gripe, flu
+resfriado, cold
+alergia, allergy
+dolor de cabeza, headache
+dolor de estómago, stomachache
+receta médica, prescription
+medicina, medicine
+pastilla, pill
+jarabe, syrup
+vendaje, bandage
+inyección, injection
+termómetro, thermometer
+presión arterial, blood pressure
+pulso, pulse
+cita médica, doctor's appointment
+sala de espera, waiting room
+sala de emergencias, emergency room
+ambulancia, ambulance
+enfermero, nurse
+clínica, clinic
+hospital, hospital
+seguro médico, health insurance
+síntoma, symptom
+diagnóstico, diagnosis
+tratamiento, treatment
+operación, surgery
+vacuna, vaccine
+radiografía, x-ray
+análisis de sangre, blood test
+embarazo, pregnancy
+dieta, diet
+ejercicio, exercise
+descanso, rest
+me siento mal, I feel bad
+me duele aquí, it hurts here
+tengo fiebre, I have a fever
+necesito un médico, I need a doctor
+¿qué síntomas tiene?, what symptoms do you have?
+tome esta medicina, take this medicine
+llame a una ambulancia, call an ambulance
+estoy mejorando, I am getting better
+estoy mareado, I feel dizzy
+me torcí el tobillo, I twisted my ankle
+tengo una cita con el médico, I have a doctor's appointment
+cuídate mucho, take good care of yourself

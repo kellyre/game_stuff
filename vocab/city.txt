@@ -1,0 +1,51 @@
+# City & places in town — one pair per line, Spanish first: "spanish, english"
+ciudad, city
+pueblo, town
+calle, street
+avenida, avenue
+plaza, square
+parque, park
+banco, bank
+hospital, hospital
+farmacia, pharmacy
+supermercado, supermarket
+mercado, market
+tienda, store
+panadería, bakery
+carnicería, butcher shop
+restaurante, restaurant
+café, café
+museo, museum
+teatro, theater
+cine, movie theater
+biblioteca, library
+iglesia, church
+ayuntamiento, city hall
+estación de policía, police station
+estación de bomberos, fire station
+correo, post office
+aeropuerto, airport
+estación de tren, train station
+parada de autobús, bus stop
+gasolinera, gas station
+gimnasio, gym
+piscina, swimming pool
+zoológico, zoo
+acera, sidewalk
+esquina, corner
+edificio, building
+rascacielos, skyscraper
+barrio, neighborhood
+centro comercial, shopping mall
+lavandería, laundromat
+peluquería, hair salon
+¿dónde queda el banco?, where is the bank?
+está a la vuelta de la esquina, it's around the corner
+siga derecho, go straight ahead
+doble a la izquierda, turn left
+doble a la derecha, turn right
+queda cerca de aquí, it's close by
+queda lejos de aquí, it's far from here
+estoy perdido, I'm lost
+¿puede ayudarme?, can you help me?
+la ciudad está muy concurrida, the city is very crowded

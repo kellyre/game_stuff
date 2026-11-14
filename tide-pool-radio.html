@@ -400,19 +400,25 @@
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <main class="page">
   <header>
     <div>
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <div class="eyebrow">moonband 88.3</div>
       <h1>Tide Pool Radio</h1>
-      <p class="tagline">Drop a pebble. Tune the barnacles.</p>
+      <p class="tagline" data-en="Drop a pebble. Tune the barnacles." data-es="Deja caer una piedrita. Sintoniza los percebes.">Drop a pebble. Tune the barnacles.</p>
     </div>
     <div class="top-actions">
       <button class="pill-button" type="button" id="tideButton" aria-pressed="false">Low tide</button>
       <button class="pill-button" type="button" id="muteButton" aria-pressed="false">Sound on</button>
-      <a class="pill-button" href="index.html">All funtimes</a>
+      <a class="pill-button" href="index.html" data-en="All funtimes" data-es="Todo funtimes">All funtimes</a>
     </div>
   </header>
 
@@ -426,12 +432,12 @@
 
     <aside class="radio" aria-live="polite" aria-label="Radio transcript">
       <div class="radio-top">
-        <p class="radio-title">Tide transcript</p>
+        <p class="radio-title" data-en="Tide transcript" data-es="Transcripción de marea">Tide transcript</p>
         <div class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
       <div class="dial" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       <div class="transcript" id="transcript"></div>
-      <p class="help">Hint: tap around the pool, or tab to a creature and press Enter. Low tide reveals archived objects; rapid ripples may cross the frequencies.</p>
+      <p class="help" data-en="Hint: tap around the pool, or tab to a creature and press Enter. Low tide reveals archived objects; rapid ripples may cross the frequencies." data-es="Pista: toca alrededor de la poza, o usa tab para llegar a una criatura y presiona Enter. La marea baja revela objetos archivados; las ondas rápidas pueden cruzar las frecuencias.">Hint: tap around the pool, or tab to a creature and press Enter. Low tide reveals archived objects; rapid ripples may cross the frequencies.</p>
     </aside>
   </div>
 </main>

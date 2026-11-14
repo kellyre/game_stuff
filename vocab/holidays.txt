@@ -1,0 +1,51 @@
+# Holidays & celebrations — one pair per line, Spanish first: "spanish, english"
+fiesta, party
+celebración, celebration
+cumpleaños, birthday
+navidad, Christmas
+año nuevo, New Year
+pascua, Easter
+día de acción de gracias, Thanksgiving
+halloween, Halloween
+día de los muertos, Day of the Dead
+día de la madre, Mother's Day
+día del padre, Father's Day
+aniversario, anniversary
+boda, wedding
+quinceañera, fifteenth birthday celebration
+graduación, graduation
+regalo, gift
+tarjeta de felicitación, greeting card
+decoraciones, decorations
+globos, balloons
+pastel, cake
+velas, candles
+fuegos artificiales, fireworks
+desfile, parade
+disfraz, costume
+invitación, invitation
+anfitrión, host
+invitado, guest
+brindis, toast
+villancico, Christmas carol
+árbol de navidad, Christmas tree
+luces de navidad, Christmas lights
+santa claus, Santa Claus
+feliz navidad, Merry Christmas
+próspero año nuevo, happy new year
+celebrar, to celebrate
+festejar, to celebrate
+invitar, to invite
+decorar, to decorate
+soplar las velas, to blow out the candles
+abrir los regalos, to open the presents
+hacer un brindis, to make a toast
+organizar una fiesta, to throw a party
+reunirse con la familia, to gather with family
+disfrutar la fiesta, to enjoy the party
+feliz cumpleaños, happy birthday
+que cumplas muchos más, many happy returns
+tradición, tradition
+costumbre, custom
+calendario festivo, holiday calendar
+día festivo, holiday

@@ -1,0 +1,51 @@
+# School & classroom — one pair per line, Spanish first: "spanish, english"
+escuela, school
+salón de clases, classroom
+maestro, teacher
+estudiante, student
+libro, book
+cuaderno, notebook
+lápiz, pencil
+bolígrafo, pen
+borrador, eraser
+sacapuntas, pencil sharpener
+regla, ruler
+mochila, backpack
+pizarra, whiteboard
+tiza, chalk
+escritorio, desk
+silla, chair
+tarea, homework
+examen, test
+nota, grade
+biblioteca, library
+recreo, recess
+horario, schedule
+materia, subject
+matemáticas, math
+ciencias, science
+historia, history
+geografía, geography
+arte, art
+educación física, physical education
+idioma, language
+pregunta, question
+respuesta, answer
+lección, lesson
+proyecto, project
+calificación, score
+aula, lecture hall
+director, principal
+compañero de clase, classmate
+uniforme, uniform
+campana, bell
+levantar la mano, to raise your hand
+hacer la tarea, to do homework
+estudiar para el examen, to study for the test
+prestar atención, to pay attention
+aprobar el examen, to pass the test
+reprobar el examen, to fail the test
+ir a la escuela, to go to school
+graduarse, to graduate
+matricularse, to enroll
+tomar apuntes, to take notes

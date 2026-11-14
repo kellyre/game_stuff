@@ -88,13 +88,19 @@
   #overlay-btn:hover, #overlay-skip:hover { filter: brightness(1.05); }
   #overlay-skip { margin-left: .6rem; background: var(--btn); color: var(--ink); border: 1px solid var(--line); }
 </style>
+<link rel="stylesheet" href="lang.css">
+<script src="lang.js" defer></script>
 </head>
 <body>
 
 <canvas id="game"></canvas>
 
 <div id="hud">
-  <a class="back" href="index.html">&larr; Games</a>
+  <a class="back" href="index.html" data-en="&larr; Games" data-es="&larr; Juegos">&larr; Games</a>
+  <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="es">ES</button>
+  </div>
   <div id="stats"></div>
   <span class="spacer"></span>
   <button id="mute" title="Mute (M)">🔊</button>
@@ -119,15 +125,15 @@
     <div class="pieces">🙂 ♟ ♞ ♜ ♝ ♛ ♚</div>
     <p id="overlay-text">Collect the dots, dodge the chess pieces.</p>
     <div class="keys">
-      <span><kbd>← ↑ → ↓</kbd> / <kbd>WASD</kbd></span><span>Move (hold two for a zig-zag)</span>
-      <span><kbd>Space</kbd></span><span>Short-range weapon</span>
-      <span><kbd>B</kbd> / <kbd>Shift</kbd></span><span>Drop a bomb in their path</span>
-      <span><kbd>M</kbd></span><span>Mute</span>
-      <span>♜ ♝ ♛</span><span>Slide fast in straight lines &amp; diagonals</span>
-      <span>♞</span><span>Slow, but corners at a gallop</span>
-      <span>♚</span><span>Slowest — blocks his pieces &amp; defuses bombs</span>
+      <span><kbd>← ↑ → ↓</kbd> / <kbd>WASD</kbd></span><span data-en="Move (hold two for a zig-zag)" data-es="Mover (mantén dos para zig-zag)">Move (hold two for a zig-zag)</span>
+      <span><kbd>Space</kbd></span><span data-en="Short-range weapon" data-es="Arma de corto alcance">Short-range weapon</span>
+      <span><kbd>B</kbd> / <kbd>Shift</kbd></span><span data-en="Drop a bomb in their path" data-es="Coloca una bomba en su camino">Drop a bomb in their path</span>
+      <span><kbd>M</kbd></span><span data-en="Mute" data-es="Silenciar">Mute</span>
+      <span>♜ ♝ ♛</span><span data-en="Slide fast in straight lines &amp; diagonals" data-es="Se deslizan rápido en líneas rectas y diagonales">Slide fast in straight lines &amp; diagonals</span>
+      <span>♞</span><span data-en="Slow, but corners at a gallop" data-es="Lento, pero toma las esquinas al galope">Slow, but corners at a gallop</span>
+      <span>♚</span><span data-en="Slowest — blocks his pieces &amp; defuses bombs" data-es="El más lento — bloquea sus propias piezas y desactiva bombas">Slowest — blocks his pieces &amp; defuses bombs</span>
     </div>
-    <button id="overlay-btn">Start</button><button id="overlay-skip">Skip learning</button>
+    <button id="overlay-btn">Start</button><button id="overlay-skip" data-en="Skip learning" data-es="Omitir tutorial">Skip learning</button>
   </div>
 </div>
 

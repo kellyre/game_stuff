@@ -1,0 +1,51 @@
+# Music & instruments — one pair per line, Spanish first: "spanish, english"
+música, music
+canción, song
+guitarra, guitar
+piano, piano
+violín, violin
+batería, drums
+flauta, flute
+trompeta, trumpet
+saxofón, saxophone
+tambor, drum
+arpa, harp
+acordeón, accordion
+cello, cello
+clarinete, clarinet
+micrófono, microphone
+altavoz, speaker
+banda, band
+orquesta, orchestra
+coro, choir
+cantante, singer
+compositor, composer
+ritmo, rhythm
+melodía, melody
+letra, lyrics
+nota musical, musical note
+acorde, chord
+volumen, volume
+concierto, concert
+ensayo, rehearsal
+álbum, album
+género musical, music genre
+rock, rock
+jazz, jazz
+clásica, classical
+pop, pop
+cantar, to sing
+tocar la guitarra, to play the guitar
+escuchar música, to listen to music
+bailar, to dance
+afinar un instrumento, to tune an instrument
+componer una canción, to compose a song
+subir el volumen, to turn up the volume
+bajar el volumen, to turn down the volume
+dar un concierto, to give a concert
+aprender a tocar, to learn to play
+me encanta esta canción, I love this song
+¿qué tipo de música te gusta?, what kind of music do you like?
+tiene buen ritmo, it has a good beat
+canta muy bien, sings very well
+la banda está practicando, the band is practicing

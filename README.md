@@ -16,10 +16,10 @@ Pairs are drawn at random from ~60 common Spanish words, or you can paste in you
 list (one pair per line, Spanish first, separated by a comma, `=`, tab, or ` - `).
 Enough pairs to fill the grid are picked at random from whatever list is in play.
 
-You can also pick a **themed set** — topic word lists (food & drink, travel, common
-verbs, numbers & time, adjectives, family & people, nature & weather), 30 pairs
-each, kept in `vocab/`. Each set is registered in `vocab/manifest.json`; to add
-one, append an entry there and drop a matching `vocab/<name>.txt` in the same
+You can also pick a **themed set** — 50 topic word lists (food & drink, travel, common
+verbs, clothing, the body, emotions, idioms, slang, and many more — see
+`vocab/manifest.json` for the full list), ~30-50 pairs each, kept in `vocab/`. To add
+one, append an entry to the manifest and drop a matching `vocab/<name>.txt` in the same
 one-pair-per-line format (`#` starts a comment line). The sets are fetched at
 runtime, so they need the page served over http(s) — opened straight from disk
 (`file://`) the fetch fails, the "themed set" option hides itself, and the default
@@ -27,7 +27,7 @@ and paste-your-own lists still work.
 
 The **grid size** is adjustable: any rows × columns from 2×2 up to 6×9, as long as
 one side is even so the cells split into pairs. The largest board, 6×9, is 27
-pairs — every themed set (30 pairs) and the default list (~60) can fill it; a
+pairs — every themed set (30+ pairs) and the default list (~60) can fill it; a
 short paste-your-own list is rejected with a message rather than dealt an
 incomplete board.
 

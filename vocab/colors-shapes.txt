@@ -1,0 +1,51 @@
+# Colors & shapes — one pair per line, Spanish first: "spanish, english"
+rojo, red
+azul, blue
+amarillo, yellow
+verde, green
+naranja, orange
+morado, purple
+rosa, pink
+negro, black
+blanco, white
+gris, gray
+marrón, brown
+dorado, gold
+plateado, silver
+turquesa, turquoise
+beige, beige
+círculo, circle
+cuadrado, square
+triángulo, triangle
+rectángulo, rectangle
+óvalo, oval
+estrella, star
+corazón, heart
+diamante, diamond
+hexágono, hexagon
+cubo, cube
+esfera, sphere
+cilindro, cylinder
+pirámide, pyramid
+línea, line
+punto, point
+ángulo, angle
+curva, curve
+claro, light
+oscuro, dark
+brillante, bright
+de color vivo, brightly colored
+de un solo color, solid-colored
+a rayas, striped
+a cuadros, checkered
+de lunares, polka-dotted
+¿de qué color es?, what color is it?
+mi color favorito es el azul, my favorite color is blue
+forma redonda, round shape
+forma cuadrada, square shape
+simétrico, symmetric
+transparente, transparent
+multicolor, multicolored
+pastel, pastel
+neón, neon
+metálico, metallic
