@@ -102,6 +102,28 @@
   .grid-size select { margin-top: 0; }
   #grid-note { font-size: .9rem; align-self: center; }
   #grid-note.bad { color: var(--es); }
+
+  dialog.picker {
+    border: 1px solid var(--line); border-radius: .9rem; padding: 1.1rem;
+    background: var(--panel); color: var(--ink); box-shadow: var(--shadow);
+    max-width: 30rem; width: calc(100% - 2rem);
+  }
+  dialog.picker::backdrop { background: rgba(0,0,0,.45); }
+  .dialog-head { font-weight: 600; margin-bottom: .6rem; }
+  .dialog-actions-top { display: flex; gap: .5rem; margin-bottom: .5rem; }
+  .dialog-actions-top button { font-size: .8rem; padding: .4rem .75rem; }
+  .checklist {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 0 .75rem; max-height: 50vh; overflow-y: auto;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: .4rem 0; margin: 0;
+  }
+  .check-opt {
+    display: flex; align-items: center; gap: .5rem;
+    padding: .3rem 0; font-size: .9rem; cursor: pointer;
+  }
+  .check-opt input { margin: 0; flex-shrink: 0; }
+  .dialog-actions { display: flex; justify-content: flex-end; margin-top: .75rem; }
   .card {
     position: relative; aspect-ratio: 1; padding: 0; border: 0; background: none;
     perspective: 800px;
@@ -224,12 +246,23 @@ verde, green"></textarea>
       </div>
 
       <div id="themed-wrap" hidden>
-        <label for="themed-set" class="hint" style="display:block;color:var(--muted);font-size:.85rem;margin-bottom:.25rem"
-          data-en="Pick a topic &mdash; each round's pairs are drawn from it at random to fill the grid."
-          data-es="Elige un tema &mdash; los pares de cada ronda se eligen al azar de él para llenar la cuadrícula.">
-          Pick a topic &mdash; each round's pairs are drawn from it at random to fill the grid.
+        <label class="hint" style="display:block;color:var(--muted);font-size:.85rem;margin-bottom:.25rem"
+          data-en="Pick one or more topics &mdash; each round's pairs are drawn from all of them at random to fill the grid."
+          data-es="Elige uno o más temas &mdash; los pares de cada ronda se eligen al azar entre todos ellos para llenar la cuadrícula.">
+          Pick one or more topics &mdash; each round's pairs are drawn from all of them at random to fill the grid.
         </label>
-        <select id="themed-set"></select>
+        <button type="button" id="themed-set-btn" class="ghost" aria-haspopup="dialog"></button>
+        <dialog id="themed-dialog" class="picker">
+          <div class="dialog-head" data-en="Choose topics" data-es="Elegir temas">Choose topics</div>
+          <div class="dialog-actions-top">
+            <button type="button" id="themed-select-all" class="ghost" data-en="Select all" data-es="Seleccionar todo">Select all</button>
+            <button type="button" id="themed-select-none" class="ghost" data-en="Clear" data-es="Borrar">Clear</button>
+          </div>
+          <div id="themed-checklist" class="checklist"></div>
+          <div class="dialog-actions">
+            <button type="button" id="themed-dialog-done" data-en="Done" data-es="Listo">Done</button>
+          </div>
+        </dialog>
       </div>
 
       <fieldset style="margin-top:1rem">
@@ -332,11 +365,22 @@ agua, water"></textarea>
       </div>
 
       <div id="fc-themed-wrap" hidden>
-        <label for="fc-themed-set" class="hint" style="display:block;color:var(--muted);font-size:.85rem;margin-bottom:.25rem"
-          data-en="Pick a topic to drill." data-es="Elige un tema para practicar.">
-          Pick a topic to drill.
+        <label class="hint" style="display:block;color:var(--muted);font-size:.85rem;margin-bottom:.25rem"
+          data-en="Pick one or more topics to drill." data-es="Elige uno o más temas para practicar.">
+          Pick one or more topics to drill.
         </label>
-        <select id="fc-themed-set"></select>
+        <button type="button" id="fc-themed-set-btn" class="ghost" aria-haspopup="dialog"></button>
+        <dialog id="fc-themed-dialog" class="picker">
+          <div class="dialog-head" data-en="Choose topics" data-es="Elegir temas">Choose topics</div>
+          <div class="dialog-actions-top">
+            <button type="button" id="fc-themed-select-all" class="ghost" data-en="Select all" data-es="Seleccionar todo">Select all</button>
+            <button type="button" id="fc-themed-select-none" class="ghost" data-en="Clear" data-es="Borrar">Clear</button>
+          </div>
+          <div id="fc-themed-checklist" class="checklist"></div>
+          <div class="dialog-actions">
+            <button type="button" id="fc-themed-dialog-done" data-en="Done" data-es="Listo">Done</button>
+          </div>
+        </dialog>
       </div>
 
       <p id="fc-setup-error" class="error"></p>

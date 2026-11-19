@@ -175,24 +175,65 @@ if (typeof document !== 'undefined') {
 
     /* ---------- Shared: themed-set manifest ---------- */
 
-    const themedSelect = $('themed-set');
     const themedOpt = $('themed-opt');
-    const fcThemedSelect = $('fc-themed-set');
+    const themedBtn = $('themed-set-btn');
+    const themedDialog = $('themed-dialog');
+    const themedChecklist = $('themed-checklist');
     const fcThemedOpt = $('fc-themed-opt');
+    const fcThemedBtn = $('fc-themed-set-btn');
+    const fcThemedDialog = $('fc-themed-dialog');
+    const fcThemedChecklist = $('fc-themed-checklist');
 
     let manifestEntries = [];
 
-    function relabelThemedOptions() {
-      if (!manifestEntries.length) return;
-      const byFile = new Map(manifestEntries.map((e) => [e.file, e]));
-      [themedSelect, fcThemedSelect].forEach((sel) => {
-        Array.from(sel.options).forEach((opt) => {
-          const entry = byFile.get(opt.value);
-          if (!entry) return;
-          opt.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
-        });
+    function getSelectedThemedFiles(listEl) {
+      return Array.from(listEl.querySelectorAll('input:checked')).map((input) => input.value);
+    }
+
+    function themedButtonLabel(count) {
+      const base = currentLang() === 'es' ? 'Elegir temas' : 'Choose topics';
+      return count ? `${base} (${count})` : `${base}…`;
+    }
+
+    function updateThemedButton(listEl, btnEl) {
+      btnEl.textContent = themedButtonLabel(getSelectedThemedFiles(listEl).length);
+    }
+
+    function relabelThemedChecklist(listEl) {
+      const byId = new Map(manifestEntries.map((e) => [e.id, e]));
+      Array.from(listEl.querySelectorAll('input')).forEach((input) => {
+        const entry = byId.get(input.dataset.id);
+        if (!entry) return;
+        const span = input.nextElementSibling;
+        if (span) span.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
       });
     }
+
+    function relabelThemedOptions() {
+      if (!manifestEntries.length) return;
+      relabelThemedChecklist(themedChecklist);
+      relabelThemedChecklist(fcThemedChecklist);
+      updateThemedButton(themedChecklist, themedBtn);
+      updateThemedButton(fcThemedChecklist, fcThemedBtn);
+    }
+
+    function wireThemedDialog(btnEl, dialogEl, listEl, selectAllBtn, selectNoneBtn, doneBtn) {
+      btnEl.addEventListener('click', () => dialogEl.showModal());
+      selectAllBtn.addEventListener('click', () => {
+        listEl.querySelectorAll('input').forEach((input) => { input.checked = true; });
+        updateThemedButton(listEl, btnEl);
+      });
+      selectNoneBtn.addEventListener('click', () => {
+        listEl.querySelectorAll('input').forEach((input) => { input.checked = false; });
+        updateThemedButton(listEl, btnEl);
+      });
+      doneBtn.addEventListener('click', () => dialogEl.close());
+    }
+
+    wireThemedDialog(themedBtn, themedDialog, themedChecklist,
+      $('themed-select-all'), $('themed-select-none'), $('themed-dialog-done'));
+    wireThemedDialog(fcThemedBtn, fcThemedDialog, fcThemedChecklist,
+      $('fc-themed-select-all'), $('fc-themed-select-none'), $('fc-themed-dialog-done'));
 
     // Themed sets come from vocab/manifest.json, fetched at runtime. This needs the
     // page served over http(s); opened straight from disk (file://) the fetch fails
@@ -203,13 +244,21 @@ if (typeof document !== 'undefined') {
         const entries = Array.isArray(list) ? list.filter((e) => e && e.file && e.name) : [];
         if (!entries.length) return;
         manifestEntries = entries;
-        entries.forEach((entry) => {
-          [themedSelect, fcThemedSelect].forEach((sel) => {
-            const opt = document.createElement('option');
-            opt.value = entry.file;
-            opt.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
-            sel.appendChild(opt);
+        [[themedChecklist, themedBtn], [fcThemedChecklist, fcThemedBtn]].forEach(([listEl, btnEl]) => {
+          entries.forEach((entry) => {
+            const label = document.createElement('label');
+            label.className = 'check-opt';
+            const input = document.createElement('input');
+            input.type = 'checkbox';
+            input.value = entry.file;
+            input.dataset.id = entry.id;
+            input.addEventListener('change', () => updateThemedButton(listEl, btnEl));
+            const span = document.createElement('span');
+            span.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
+            label.append(input, span);
+            listEl.appendChild(label);
           });
+          updateThemedButton(listEl, btnEl);
         });
         themedOpt.hidden = false;
         fcThemedOpt.hidden = false;
@@ -225,6 +274,10 @@ if (typeof document !== 'undefined') {
           if (!pairs.length) throw new Error('that set is empty');
           return pairs;
         });
+    }
+
+    function loadThemedPairsCombined(files) {
+      return Promise.all(files.map(loadThemedPairs)).then((lists) => lists.flat());
     }
 
     /* ---------- Matching game ---------- */
@@ -446,13 +499,13 @@ if (typeof document !== 'undefined') {
       }
 
       if (src === 'themed') {
-        const file = themedSelect.value;
-        if (!file) {
-          setupError.textContent = 'Pick a themed set first.';
+        const files = getSelectedThemedFiles(themedChecklist);
+        if (!files.length) {
+          setupError.textContent = 'Pick at least one topic first.';
           return;
         }
         startBtn.disabled = true;
-        loadThemedPairs(file)
+        loadThemedPairsCombined(files)
           .then((pairs) => tryStart(pairs))
           .catch((err) => { setupError.textContent = `Could not load that set — ${err.message}.`; })
           .finally(() => { startBtn.disabled = false; });
@@ -611,13 +664,13 @@ if (typeof document !== 'undefined') {
       }
 
       if (src === 'themed') {
-        const file = fcThemedSelect.value;
-        if (!file) {
-          fcSetupError.textContent = 'Pick a themed set first.';
+        const files = getSelectedThemedFiles(fcThemedChecklist);
+        if (!files.length) {
+          fcSetupError.textContent = 'Pick at least one topic first.';
           return;
         }
         fcStartBtn.disabled = true;
-        loadThemedPairs(file)
+        loadThemedPairsCombined(files)
           .then((pairs) => fcTryStart(pairs))
           .catch((err) => { fcSetupError.textContent = `Could not load that set — ${err.message}.`; })
           .finally(() => { fcStartBtn.disabled = false; });

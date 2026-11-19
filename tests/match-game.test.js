@@ -15,7 +15,8 @@ const html = fs.readFileSync(path.join(root, 'match_game.html'), 'utf8');
 
 // The game must fetch the manifest and expose the themed-set + grid controls.
 assert.match(js, /fetch\('vocab\/manifest\.json'/, 'game must fetch the vocab manifest');
-assert.match(html, /id=["']themed-set["']/, 'themed-set <select> must exist');
+assert.match(html, /id=["']themed-set-btn["']/, 'themed-set-btn popup trigger must exist');
+assert.match(html, /id=["']themed-checklist["']/, 'themed-checklist must exist');
 assert.match(html, /value=["']themed["']/, 'a "themed" source radio must exist');
 assert.match(html, /id=["']grid-rows["']/, 'grid-rows <select> must exist');
 assert.match(html, /id=["']grid-cols["']/, 'grid-cols <select> must exist');
@@ -69,7 +70,8 @@ assert.match(html, /id=["']flash-card["']/, 'flash-card element must exist');
 assert.match(html, /id=["']flash-got-btn["']/, 'Got it button must exist');
 assert.match(html, /id=["']flash-missed-btn["']/, 'Missed button must exist');
 assert.match(html, /id=["']fc-start-btn["']/, 'flashcards start button must exist');
-assert.match(html, /id=["']fc-themed-set["']/, 'flashcards themed-set select must exist');
+assert.match(html, /id=["']fc-themed-set-btn["']/, 'flashcards themed-set-btn popup trigger must exist');
+assert.match(html, /id=["']fc-themed-checklist["']/, 'flashcards themed-checklist must exist');
 assert.match(html, /id=["']fc-change-btn["']/, 'flashcards change-word-list button must exist');
 
 // Flashcard items: each pair becomes two independent directional cards.
