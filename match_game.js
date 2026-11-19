@@ -186,8 +186,15 @@ if (typeof document !== 'undefined') {
 
     let manifestEntries = [];
 
-    function getSelectedThemedFiles(listEl) {
-      return Array.from(listEl.querySelectorAll('input:checked')).map((input) => input.value);
+    // Topic selection is shared between the matching game and the flashcards tab —
+    // picking topics in one defaults them for the other. `themedInputs` maps each
+    // file to its two checkbox elements (one per checklist) so a change in either
+    // can be mirrored onto the other without re-dispatching `change` events.
+    const selectedThemedFiles = new Set();
+    const themedInputs = new Map();
+
+    function getSelectedThemedFiles() {
+      return Array.from(selectedThemedFiles);
     }
 
     function themedButtonLabel(count) {
@@ -195,8 +202,17 @@ if (typeof document !== 'undefined') {
       return count ? `${base} (${count})` : `${base}…`;
     }
 
-    function updateThemedButton(listEl, btnEl) {
-      btnEl.textContent = themedButtonLabel(getSelectedThemedFiles(listEl).length);
+    function updateThemedButtons() {
+      const label = themedButtonLabel(selectedThemedFiles.size);
+      themedBtn.textContent = label;
+      fcThemedBtn.textContent = label;
+    }
+
+    function setThemedSelected(file, checked) {
+      if (checked) selectedThemedFiles.add(file);
+      else selectedThemedFiles.delete(file);
+      (themedInputs.get(file) || []).forEach((input) => { input.checked = checked; });
+      updateThemedButtons();
     }
 
     function relabelThemedChecklist(listEl) {
@@ -213,26 +229,23 @@ if (typeof document !== 'undefined') {
       if (!manifestEntries.length) return;
       relabelThemedChecklist(themedChecklist);
       relabelThemedChecklist(fcThemedChecklist);
-      updateThemedButton(themedChecklist, themedBtn);
-      updateThemedButton(fcThemedChecklist, fcThemedBtn);
+      updateThemedButtons();
     }
 
-    function wireThemedDialog(btnEl, dialogEl, listEl, selectAllBtn, selectNoneBtn, doneBtn) {
+    function wireThemedDialog(btnEl, dialogEl, selectAllBtn, selectNoneBtn, doneBtn) {
       btnEl.addEventListener('click', () => dialogEl.showModal());
       selectAllBtn.addEventListener('click', () => {
-        listEl.querySelectorAll('input').forEach((input) => { input.checked = true; });
-        updateThemedButton(listEl, btnEl);
+        manifestEntries.forEach((entry) => setThemedSelected(entry.file, true));
       });
       selectNoneBtn.addEventListener('click', () => {
-        listEl.querySelectorAll('input').forEach((input) => { input.checked = false; });
-        updateThemedButton(listEl, btnEl);
+        manifestEntries.forEach((entry) => setThemedSelected(entry.file, false));
       });
       doneBtn.addEventListener('click', () => dialogEl.close());
     }
 
-    wireThemedDialog(themedBtn, themedDialog, themedChecklist,
+    wireThemedDialog(themedBtn, themedDialog,
       $('themed-select-all'), $('themed-select-none'), $('themed-dialog-done'));
-    wireThemedDialog(fcThemedBtn, fcThemedDialog, fcThemedChecklist,
+    wireThemedDialog(fcThemedBtn, fcThemedDialog,
       $('fc-themed-select-all'), $('fc-themed-select-none'), $('fc-themed-dialog-done'));
 
     // Themed sets come from vocab/manifest.json, fetched at runtime. This needs the
@@ -244,22 +257,25 @@ if (typeof document !== 'undefined') {
         const entries = Array.isArray(list) ? list.filter((e) => e && e.file && e.name) : [];
         if (!entries.length) return;
         manifestEntries = entries;
-        [[themedChecklist, themedBtn], [fcThemedChecklist, fcThemedBtn]].forEach(([listEl, btnEl]) => {
-          entries.forEach((entry) => {
+        entries.forEach((entry) => {
+          const inputs = [];
+          [themedChecklist, fcThemedChecklist].forEach((listEl) => {
             const label = document.createElement('label');
             label.className = 'check-opt';
             const input = document.createElement('input');
             input.type = 'checkbox';
             input.value = entry.file;
             input.dataset.id = entry.id;
-            input.addEventListener('change', () => updateThemedButton(listEl, btnEl));
+            input.addEventListener('change', () => setThemedSelected(entry.file, input.checked));
+            inputs.push(input);
             const span = document.createElement('span');
             span.textContent = currentLang() === 'es' && entry.nameEs ? entry.nameEs : entry.name;
             label.append(input, span);
             listEl.appendChild(label);
           });
-          updateThemedButton(listEl, btnEl);
+          themedInputs.set(entry.file, inputs);
         });
+        updateThemedButtons();
         themedOpt.hidden = false;
         fcThemedOpt.hidden = false;
       })
@@ -499,7 +515,7 @@ if (typeof document !== 'undefined') {
       }
 
       if (src === 'themed') {
-        const files = getSelectedThemedFiles(themedChecklist);
+        const files = getSelectedThemedFiles();
         if (!files.length) {
           setupError.textContent = 'Pick at least one topic first.';
           return;
@@ -664,7 +680,7 @@ if (typeof document !== 'undefined') {
       }
 
       if (src === 'themed') {
-        const files = getSelectedThemedFiles(fcThemedChecklist);
+        const files = getSelectedThemedFiles();
         if (!files.length) {
           fcSetupError.textContent = 'Pick at least one topic first.';
           return;
